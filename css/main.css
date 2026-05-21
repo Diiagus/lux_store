@@ -1,0 +1,154 @@
+/* ================================================
+   HERO — La sección principal al entrar a la página
+   Estilo Apple: imagen a la derecha, texto a la izquierda
+   ================================================ */
+
+.hero {
+  min-height: 100vh;
+  /* ↑ Ocupa toda la pantalla de alto */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* ↑ Dos columnas iguales: texto | imagen */
+
+  align-items: center;
+  padding: 80px 5% 60px;
+  /* ↑ Espacio arriba para que no tape el nav */
+
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 60px;
+}
+
+/* COLUMNA IZQUIERDA: El texto */
+.hero-text {}
+
+.hero-eyebrow {
+  /* El texto pequeño de arriba, como Apple pone "iPhone 16 Pro" */
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6e6e73;
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  /* El titular grande */
+  font-size: clamp(40px, 5vw, 72px);
+  /* ↑ clamp = mínimo 40px, ideal 5% del ancho, máximo 72px */
+  /* Se ajusta solo según el tamaño de pantalla */
+
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #1d1d1f;
+  margin-bottom: 20px;
+}
+
+.hero-title em {
+  /* La parte en cursiva del título */
+  font-style: italic;
+  font-weight: 300;
+}
+
+.hero-subtitle {
+  font-size: 17px;
+  font-weight: 400;
+  color: #6e6e73;
+  line-height: 1.6;
+  margin-bottom: 36px;
+  max-width: 400px;
+}
+
+/* BOTONES */
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.btn-primary {
+  /* Botón principal — negro como Apple */
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  background: #1d1d1f;
+  padding: 12px 24px;
+  border-radius: 980px;
+  /* ↑ 980px = píldora perfecta, el truco de Apple */
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #515154;
+}
+
+.btn-secondary {
+  /* Botón secundario — solo texto con flecha */
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0066cc;
+  /* ↑ El azul de Apple */
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.btn-secondary:hover {
+  opacity: 0.7;
+}
+
+/* COLUMNA DERECHA: La imagen */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-img-box {
+  /* El cuadro gris que contiene la imagen del producto */
+  width: 100%;
+  aspect-ratio: 1;
+  /* ↑ Siempre cuadrado, sin importar el ancho */
+  background: #f5f5f7;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-img-box img {
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+  /* ↑ La imagen se ajusta sin recortarse */
+}
+
+.hero-badge {
+  /* La etiqueta que aparece encima de la imagen */
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.hero-badge span {
+  /* El texto pequeño encima del badge */
+  display: block;
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
