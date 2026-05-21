@@ -1,0 +1,149 @@
+/* ================================================
+   VARIABLES GLOBALES
+   Cambia un valor aquí = cambia en toda la página
+   ================================================ */
+:root {
+  /* La fuente de Apple. El navegador usa SF Pro si está disponible,
+     si no, cae al siguiente en la lista */
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+          "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+
+  --color-dark:  #1d1d1f; /* Negro de Apple (no es negro puro) */
+  --color-muted: #6e6e73; /* Gris de Apple */
+  --color-bg:    #ffffff;
+}
+
+/* RESET: Borra márgenes y paddings que el navegador pone solo */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--color-bg);
+  color: var(--color-dark);
+  -webkit-font-smoothing: antialiased;
+  /* ↑ Hace el texto más suave, igual que Apple */
+}
+
+/* ================================================
+   NAV — Contenedor principal
+   ================================================ */
+.nav {
+  position: sticky;  /* Se pega arriba al hacer scroll */
+  top: 0;
+  z-index: 999;      /* Siempre visible encima de todo */
+  height: 70px;      /* Apple usa exactamente 48px */
+
+  /* Efecto vidrio esmerilado de Apple */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* INNER: Centra el contenido y pone límite de ancho */
+.nav-inner {
+  max-width: 1200px;   /* No se estira más de 1200px */
+  margin: 0 auto;      /* Se centra en pantallas grandes */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+/* ================================================
+   LOGO
+   ================================================ */
+.nav-logo img {
+  height: 80px;   /* Altura del logo */
+  display: block;
+  /* El logo negro se verá bien sobre el fondo blanco */
+}
+
+/* ================================================
+   LINKS CENTRALES
+   ================================================ */
+.nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;  /* Quita los puntos de la lista */
+  gap: 0;
+}
+
+.nav-links a {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-dark);
+  text-decoration: none;
+  padding: 0 7px;
+  white-space: nowrap; /* El texto no se parte en dos líneas */
+  transition: color 0.15s ease;
+}
+
+.nav-links a:hover {
+  color: var(--color-muted);
+}
+
+/* COLORS: Link especial con animación de color */
+.nav-colors {
+  font-weight: 500 !important;
+  background: linear-gradient(
+    90deg, #e85d5d, #e8a835, #4caf7d, #5b8fe8, #a855f7
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: colorsShift 3s linear infinite;
+}
+
+@keyframes colorsShift {
+  to { background-position: 200% center; }
+}
+
+/* DISEÑALO TÚ MISMO: Píldora negra como el CTA de Apple */
+.nav-cta {
+  background: var(--color-dark) !important;
+  color: white !important;
+  padding: 5px 14px !important;
+  border-radius: 20px;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  margin-left: 6px;
+  transition: background 0.15s ease !important;
+}
+
+.nav-cta:hover {
+  background: #515154 !important;
+  color: white !important;
+}
+
+/* ================================================
+   ÍCONOS DE LA DERECHA (login y carrito)
+   ================================================ */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-dark);
+  border-radius: 50%;
+  transition: background 0.15s ease;
+}
+
+.nav-icon:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
