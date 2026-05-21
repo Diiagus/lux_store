@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mueble de Baño — Lux Concept</title>
+
+  <!-- ../ significa "sube una carpeta" — porque estamos dentro de pages/ -->
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/products.css">
+</head>
+<body>
+
+  <!-- NAV: Igual que index.html pero todas las rutas llevan ../ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/logos/logo-black.png" alt="Lux Concept">
+      </a>
+      <ul class="nav-links">
+        <li><a href="bano.html">Muebles de Baño</a></li>
+        <li><a href="cocinas.html">Cocinas</a></li>
+        <li><a href="#">Cortinas</a></li>
+        <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
+        <li><a href="#">NUUR</a></li>
+        <li><a href="colors.html" class="nav-colors">COLORS</a></li>
+        <li><a href="disenalo.html" class="nav-cta">Diseñalo tú mismo</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="nav-icon" aria-label="Mi cuenta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+        <a href="#" class="nav-icon" aria-label="Carrito">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB: Le dice al cliente dónde está -->
+  <div class="breadcrumb">
+    <a href="../index.html">Inicio</a>
+    <span>/</span>
+    <span>Muebles de Baño</span>
+  </div>
+
+  <!-- ============================================
+       SECCIÓN PRINCIPAL DEL PRODUCTO
+       Grid de dos columnas: visor | información
+       ============================================ -->
+  <section class="product-section">
+
+    <!-- IZQUIERDA: El visor interactivo (el sandwich) -->
+    <div class="product-viewer">
+
+      <p class="viewer-hint">Toca cada pieza para ver su precio</p>
+
+      <!-- El sandwich: ovalín arriba, mueble abajo -->
+      <div class="sandwich-wrapper">
+
+        <!-- OVALÍN — clic llama a selectPiece('ovalin') -->
+        <div class="piece piece-ovalin"
+             id="piece-ovalin"
+             onclick="selectPiece('ovalin')">
+          <img src="../assets/products/bano/ovalin.png"
+               alt="Ovalín Bowl 32cm">
+          <div class="piece-label">Ovalín Bowl</div>
+        </div>
+
+        <!-- MUEBLE — clic llama a selectPiece('vanity') -->
+        <div class="piece piece-vanity"
+             id="piece-vanity"
+             onclick="selectPiece('vanity')">
+          <img src="../assets/products/bano/gabinete.jpeg"
+               alt="Gabinete Blanco Frosty">
+          <div class="piece-label">Mueble de Baño</div>
+        </div>
+
+      </div>
+
+      <!-- Los 3 botones debajo del sandwich -->
+      <div class="view-toggle">
+        <button class="toggle-btn" id="btn-conjunto"
+                onclick="selectPiece('conjunto')">Conjunto</button>
+        <button class="toggle-btn" id="btn-vanity"
+                onclick="selectPiece('vanity')">Solo mueble</button>
+        <button class="toggle-btn" id="btn-ovalin"
+                onclick="selectPiece('ovalin')">Solo ovalín</button>
+      </div>
+
+    </div>
+
+    <!-- DERECHA: Panel de información (cambia según selección) -->
+    <div class="product-info">
+
+      <p class="product-cat">Muebles de Baño</p>
+
+      <!-- El título cambia según lo que el cliente seleccione -->
+      <h1 class="product-title" id="product-title">
+        Conjunto Mueble + Ovalín
+      </h1>
+
+      <p class="product-desc" id="product-desc">
+        Mueble colgante con ovalín Bowl incluido. Listo para instalar.
+      </p>
+
+      <!-- El precio cambia según selección -->
+      <div class="price-block">
+        <p class="price-label">Precio</p>
+        <p class="price-amount" id="price-amount">
+          $2,069 <span>MXN</span>
+        </p>
+        <p class="price-note" id="price-note">
+          IVA incluido · Entrega en Puebla
+        </p>
+      </div>
+
+      <!-- Las características cambian según selección -->
+      <div class="specs-block">
+        <p class="specs-title">Características</p>
+        <ul class="specs-list" id="specs-list">
+          <!-- El JS llena esto automáticamente -->
+        </ul>
+      </div>
+
+      <!-- Opción de sobre medida -->
+      <div class="custom-option">
+        <p>¿Necesitas otra medida?</p>
+        <a href="disenalo.html">Diseñarlo a tu medida →</a>
+      </div>
+
+      <!-- Botón de carrito -->
+      <button class="btn-cart">Agregar al carrito</button>
+
+    </div>
+  </section>
+
+  <!-- El JS va al final del body — así el HTML carga primero -->
+  <script src="../js/product-viewer.js"></script>
+
+</body>
+</html>
