@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- Le dice al navegador: "esto es una página web moderna" -->
+
+<html lang="es">
+<!-- lang="es" = el idioma es español. Ayuda a lectores de pantalla y a Google -->
+
+<head>
+  <!-- El HEAD no se ve en pantalla, pero configura todo -->
+
+  <meta charset="UTF-8">
+  <!-- Permite usar acentos, ñ y caracteres especiales sin problemas -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Sin esta línea, en celular la página se vería diminuta -->
+
+  <title>Lux Concept — Muebles · Puebla</title>
+  <!-- Lo que aparece en la pestaña del navegador -->
+
+  <link rel="stylesheet" href="css/main.css">
+  <!-- Le dice: "carga los estilos del archivo main.css" -->
+
+  <link rel="stylesheet" href="css/nav.css"> <link rel="stylesheet" href="css/main.css">
+  <!-- Le dice: "carga los estilos del menú" -->
+
+</head>
+
+<body>
+  <!-- Todo lo que el cliente VE está aquí adentro -->
+
+  <!-- ============================================
+       NAV: El menú superior estilo Apple
+       ============================================ -->
+  <nav class="nav">
+    <div class="nav-inner">
+
+      <!-- LOGO: Imagen del logo, click lleva al inicio -->
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logos/logo-black.png" alt="Lux Concept">
+      </a>
+
+      <!-- LINKS CENTRALES: Los apartados de la tienda -->
+      <ul class="nav-links">
+        <li><a href="pages/bano.html">Muebles de Baño</a></li>
+        <li><a href="pages/cocinas.html">Cocinas</a></li>
+        <li><a href="#">Cortinas</a></li>
+        <li><a href="pages/mesas-piedra.html">Mesas de Piedra</a></li>
+        <li><a href="#">NUUR</a></li>
+        <li><a href="pages/colors.html" class="nav-colors">COLORS</a></li>
+        <li><a href="pages/disenalo.html" class="nav-cta">Diseñalo tú mismo</a></li>
+      </ul>
+
+      <!-- ICONOS DERECHA: Login y carrito -->
+      <div class="nav-actions">
+        <a href="#" class="nav-icon" aria-label="Mi cuenta">
+          <!-- Ícono de persona (SVG inline, no depende de ninguna librería) -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+        <a href="#" class="nav-icon" aria-label="Carrito">
+          <!-- Ícono de bolsa de compras -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ============================================
+     HERO: Sección principal
+     ============================================ -->
+<section class="hero">
+
+  <!-- IZQUIERDA: El texto -->
+  <div class="hero-text">
+
+    <!-- Texto pequeño de arriba -->
+    <p class="hero-eyebrow">Muebles · Entrega en Puebla</p>
+
+    <!-- Título principal -->
+    <h1 class="hero-title">
+      Diseño real.<br>
+      <em>Precio honesto.</em>
+    </h1>
+
+    <!-- Descripción -->
+    <p class="hero-subtitle">
+      Muebles fabricados con materiales de primera,
+      entregados listos para armar. Sin intermediarios,
+      directo a tu hogar en Puebla.
+    </p>
+
+    <!-- Botones -->
+    <div class="hero-actions">
+      <a href="pages/bano.html" class="btn-primary">
+        Ver catálogo
+      </a>
+      <a href="pages/disenalo.html" class="btn-secondary">
+        Diseñalo a tu medida →
+      </a>
+    </div>
+
+  </div>
+
+  <!-- DERECHA: La imagen del producto -->
+  <div class="hero-visual">
+    <div class="hero-img-box">
+
+      <!-- El render del mueble de baño -->
+      <img src="assets/products/bano/gabinete.jpeg"
+           alt="Mueble de baño Lux Concept — Blanco Frosty">
+
+      <!-- Badge encima de la imagen -->
+      <div class="hero-badge">
+        <span>Disponible ahora</span>
+        Mueble de Baño · Blanco Frosty
+      </div>
+
+    </div>
+  </div>
+
+</section>
+</body>
+</html> 
