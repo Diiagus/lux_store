@@ -2,6 +2,12 @@
    HERO — La sección principal al entrar a la página
    Estilo Apple: imagen a la derecha, texto a la izquierda
    ================================================ */
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+               "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .hero {
   min-height: 100vh;
