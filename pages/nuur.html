@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NUUR — Lux Concept</title>
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .nuur-hero {
+      text-align: center;
+      padding: 60px 5% 40px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .nuur-hero h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+      margin-bottom: 12px;
+    }
+    .nuur-hero p {
+      font-size: 17px;
+      color: #6e6e73;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* CATEGORÍAS */
+    .cat-tabs {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      padding: 0 5%;
+      border-bottom: 1px solid #f0f0f0;
+      position: sticky;
+      top: 70px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      z-index: 50;
+    }
+    .cat-tab {
+      padding: 14px 20px;
+      font-size: 14px;
+      color: #6e6e73;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      white-space: nowrap;
+      transition: all .15s;
+      font-family: -apple-system, sans-serif;
+    }
+    .cat-tab:hover { color: #1d1d1f; }
+    .cat-tab.on {
+      color: #1d1d1f;
+      border-bottom-color: #1d1d1f;
+      font-weight: 500;
+    }
+
+    /* GRID */
+    .nuur-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 5% 80px;
+      display: none;
+    }
+    .nuur-section.on { display: block; }
+    .nuur-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    /* TARJETA */
+    .nuur-card {
+      border: 1px solid #e8e8e8;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      transition: transform .2s;
+    }
+    .nuur-card:hover { transform: translateY(-4px); }
+    .nuur-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #f5f5f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+    .nuur-card-body { padding: 16px 18px 20px; }
+    .nuur-card-cat {
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #6e6e73;
+      margin-bottom: 6px;
+    }
+    .nuur-card-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1d1d1f;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .nuur-card-desc {
+      font-size: 13px;
+      color: #6e6e73;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .btn-whatsapp {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      background: #1d1d1f;
+      color: white;
+      border: none;
+      border-radius: 980px;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .2s;
+      font-family: -apple-system, sans-serif;
+    }
+    .btn-whatsapp:hover { background: #515154; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/logos/logo-black.png" alt="Lux Concept">
+      </a>
+      <ul class="nav-links">
+        <li><a href="bano.html">Muebles de Baño</a></li>
+        <li><a href="cocinas.html">Cocinas</a></li>
+        <li><a href="#">Cortinas</a></li>
+        <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
+        <li><a href="pages/nuur.html">NUUR</a></li>
+        <li><a href="colors.html" class="nav-colors">COLORS</a></li>
+        <li>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
+             target="_blank" class="nav-cta">Cotiza a tu medida</a>
+        </li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="nav-icon" aria-label="Mi cuenta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <a href="#" class="nav-icon" aria-label="Carrito">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="nuur-hero">
+    <h1>NUUR</h1>
+    <p>El estándar de lujo para hogar y cocina. Todos los productos bajo pedido — contáctanos para precio y disponibilidad.</p>
+  </div>
+
+  <!-- TABS -->
+  <div class="cat-tabs">
+    <button class="cat-tab on" onclick="showCat('cocina')">Cocina</button>
+    <button class="cat-tab" onclick="showCat('hogar')">Hogar</button>
+    <button class="cat-tab" onclick="showCat('bar')">Bar</button>
+  </div>
+
+  <!-- ══════════════ COCINA ══════════════ -->
+  <div class="nuur-section on" id="cat-cocina">
+    <div class="nuur-grid">
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">🔥</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Parrillas de gas</p>
+          <p class="nuur-card-name">Parrilla de Gas 5 Quemadores</p>
+          <p class="nuur-card-desc">76cm · Perillas LED · Vidrio templado negro mate 8mm · Hasta 5 años de garantía</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20la%20Parrilla%20de%20Gas%20NUUR%205%20quemadores.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">⚡</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Parrillas de inducción</p>
+          <p class="nuur-card-name">Parrilla de Inducción</p>
+          <p class="nuur-card-desc">Tecnología de inducción · Superficie de vidrio · Zona flexible · Control táctil</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20la%20Parrilla%20de%20Inducci%C3%B3n%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">🍕</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Hornos eléctricos</p>
+          <p class="nuur-card-name">Horno Eléctrico Empotrable</p>
+          <p class="nuur-card-desc">Múltiples funciones · Convección · Pantalla digital · Acabado acero inoxidable</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20el%20Horno%20El%C3%A9ctrico%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">🌬️</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Campanas extractoras</p>
+          <p class="nuur-card-name">Campana de Pared</p>
+          <p class="nuur-card-desc">Diseño contemporáneo · Alta potencia de extracción · Iluminación LED · Silenciosa</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20la%20Campana%20Extractora%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">📡</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Campanas ocultas</p>
+          <p class="nuur-card-name">Campana Oculta Integrable</p>
+          <p class="nuur-card-desc">Se integra al mueble · Ideal para cocinas minimalistas · Control táctil</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20la%20Campana%20Oculta%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">📻</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Microondas</p>
+          <p class="nuur-card-name">Microondas Empotrable</p>
+          <p class="nuur-card-desc">Integrable a mueble de cocina · Múltiples potencias · Panel táctil · Acabado negro</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20el%20Microondas%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════ HOGAR ══════════════ -->
+  <div class="nuur-section" id="cat-hogar">
+    <div class="nuur-grid">
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">🚿</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Calentadores de agua</p>
+          <p class="nuur-card-name">Calentador de Agua a Gas</p>
+          <p class="nuur-card-desc">Encendido electrónico · Alta eficiencia · Múltiples capacidades disponibles</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20el%20Calentador%20de%20Agua%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">💧</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Presurizadores</p>
+          <p class="nuur-card-name">Presurizador de Agua</p>
+          <p class="nuur-card-desc">Aumenta la presión del agua · Silencioso · Instalación sencilla · Bajo consumo</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20el%20Presurizador%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">🔐</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Cerraduras inteligentes</p>
+          <p class="nuur-card-name">Cerradura Inteligente</p>
+          <p class="nuur-card-desc">Huella digital · Código · Tarjeta · App móvil · Compatible con hogar inteligente</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20la%20Cerradura%20Inteligente%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">❄️</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Climatización</p>
+          <p class="nuur-card-name">Ventilador de Torre</p>
+          <p class="nuur-card-desc">Diseño minimalista · Control remoto · 3 velocidades · Oscilación automática</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20el%20Ventilador%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════ BAR ══════════════ -->
+  <div class="nuur-section" id="cat-bar">
+    <div class="nuur-grid">
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">🍷</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Cavas enfriadoras</p>
+          <p class="nuur-card-name">Cava Enfriadora de Vino</p>
+          <p class="nuur-card-desc">Temperatura controlada · Luz LED interior · Compresor silencioso · Diseño elegante</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20la%20Cava%20Enfriadora%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">🧊</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Frigobares</p>
+          <p class="nuur-card-name">Frigobar</p>
+          <p class="nuur-card-desc">Compacto · Silencioso · Puerta reversible · Ideal para recámara u oficina</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20el%20Frigobar%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+      <div class="nuur-card">
+        <div class="nuur-card-img">🧊</div>
+        <div class="nuur-card-body">
+          <p class="nuur-card-cat">Máquinas de hielo</p>
+          <p class="nuur-card-name">Máquina de Hielo</p>
+          <p class="nuur-card-desc">Producción rápida · Hielo en cubos o bullet · Capacidad hasta 12kg/día · Portátil</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20la%20M%C3%A1quina%20de%20Hielo%20NUUR.%20%C2%BFPodr%C3%ADan%20darme%20precio%3F" target="_blank" class="btn-whatsapp">Solicitar precio</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function showCat(cat) {
+      // Tabs
+      document.querySelectorAll('.cat-tab').forEach((t, i) => {
+        t.classList.toggle('on', ['cocina','hogar','bar'][i] === cat);
+      });
+      // Sections
+      document.querySelectorAll('.nuur-section').forEach(s => s.classList.remove('on'));
+      document.getElementById('cat-' + cat).classList.add('on');
+    }
+  </script>
+
+</body>
+</html>
