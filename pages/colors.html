@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COLORS — Lux Concept</title>
+<link rel="stylesheet" href="../css/nav.css">
+<style>
+/* ── COLORS PAGE ─────────────────────────────── */
+.colors-hero{text-align:center;padding:60px 5% 40px;border-bottom:1px solid #f0f0f0}
+.colors-word{display:inline-flex;font-size:clamp(60px,10vw,110px);font-weight:600;letter-spacing:-.02em;line-height:1;margin-bottom:16px}
+.colors-word span{display:inline-block;animation:colorShift 4s infinite;color:#1d1d1f}
+.colors-word span:nth-child(1){animation-delay:0s}
+.colors-word span:nth-child(2){animation-delay:.3s}
+.colors-word span:nth-child(3){animation-delay:.6s}
+.colors-word span:nth-child(4){animation-delay:.9s}
+.colors-word span:nth-child(5){animation-delay:1.2s}
+.colors-word span:nth-child(6){animation-delay:1.5s}
+@keyframes colorShift{
+  0%,35%{color:#1d1d1f}
+  42%{color:#E85D5D}50%{color:#E8A835}
+  58%{color:#4CAF7D}66%{color:#5B8FE8}
+  74%{color:#A855F7}82%{color:#E85DA0}
+  90%,100%{color:#1d1d1f}
+}
+.colors-sub{font-size:15px;color:#6e6e73;max-width:500px;margin:0 auto}
+
+/* ── BRAND TABS ──────────────────────────────── */
+.brand-tabs{display:flex;gap:0;overflow-x:auto;padding:0 5%;border-bottom:1px solid #f0f0f0;background:#fff;position:sticky;top:48px;z-index:50}
+.brand-tab{padding:14px 20px;font-size:13px;font-weight:400;color:#6e6e73;border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .15s;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+.brand-tab:hover{color:#1d1d1f}
+.brand-tab.on{color:#1d1d1f;border-bottom-color:#1d1d1f;font-weight:500}
+
+/* ── CATALOG AREA ────────────────────────────── */
+.catalog-area{max-width:1200px;margin:0 auto;padding:32px 5% 80px}
+.brand-panel{display:none}
+.brand-panel.on{display:block}
+.brand-header{margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid #f0f0f0}
+.brand-header h2{font-size:22px;font-weight:600;margin:0 0 4px}
+.brand-header p{font-size:13px;color:#6e6e73;margin:0}
+
+/* ── SHARED FILTER + GRID ─────────────────────── */
+.cf{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px}
+.cfb{padding:5px 13px;font-size:12px;border:1px solid #d2d2d7;border-radius:20px;background:transparent;color:#6e6e73;cursor:pointer;font-family:-apple-system,sans-serif;transition:all .12s}
+.cfb.on{background:#1d1d1f;color:#fff;border-color:#1d1d1f}
+.col-section{margin-bottom:20px}
+.col-section-title{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#999;font-weight:500;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #f0f0f0}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+.cc{border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color .12s;background:#fff;position:relative}
+.cc:hover{border-color:#adadad}
+.cc.sel{border-color:#1d1d1f;border-width:1.5px}
+.csw{height:64px;width:100%;border-bottom:1px solid #f0f0f0}
+.cn{font-size:11px;font-weight:500;color:#1d1d1f;margin:0;padding:5px 7px 2px;line-height:1.3}
+.chx{font-size:9px;color:#999;margin:0;padding:0 7px 5px;font-family:monospace}
+.nuevo-badge{position:absolute;top:4px;right:4px;background:rgba(255,255,255,.9);color:#1d1d1f;font-size:7px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 4px;border-radius:3px}
+
+/* ── DETAIL PANEL ─────────────────────────────── */
+.dpane{background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:1rem 1.25rem;display:none;margin-bottom:16px}
+.dpane.on{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.dsw{width:80px;height:80px;border-radius:10px;border:1px solid #e8e8e8;flex-shrink:0}
+.dl{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;font-size:12px}
+.dk{color:#6e6e73}.dv{color:#1d1d1f;font-weight:500}
+.rbox{margin-top:8px;padding:7px 11px;background:#f5f5f7;border-radius:8px;display:flex;align-items:center;gap:8px}
+.rtext{font-size:11px;font-family:monospace;color:#1d1d1f;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.copybtn{padding:4px 10px;font-size:11px;border:1px solid #d2d2d7;border-radius:8px;background:transparent;cursor:pointer;color:#6e6e73;white-space:nowrap;flex-shrink:0;font-family:-apple-system,sans-serif}
+.copybtn:hover{background:#f5f5f7}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/logos/logo-black.png" alt="Lux Concept">
+    </a>
+    <ul class="nav-links">
+      <li><a href="bano.html">Muebles de Baño</a></li>
+      <li><a href="cocinas.html">Cocinas</a></li>
+      <li><a href="#">Cortinas</a></li>
+      <li><a href="#">Hogar</a></li>
+      <li><a href="#">Decoración</a></li>
+      <li><a href="#">Oficina</a></li>
+      <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
+      <li><a href="#">NUUR</a></li>
+      <li><a href="colors.html" class="nav-colors">COLORS</a></li>
+      <li><a href="disenalo.html" class="nav-cta">Diseñalo tú mismo</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="nav-icon" aria-label="Mi cuenta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <a href="#" class="nav-icon" aria-label="Carrito">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="colors-hero">
+  <div class="colors-word">
+    <span>C</span><span>O</span><span>L</span><span>O</span><span>R</span><span>S</span>
+  </div>
+  <p class="colors-sub">Explora los materiales disponibles para fabricación. Selecciona un color, consulta sus características y copia la referencia exacta para Corte Cloud.</p>
+</div>
+
+<!-- BRAND TABS -->
+<div class="brand-tabs">
+  <button class="brand-tab on" onclick="showBrand('decorlux')">Decorlux</button>
+  <button class="brand-tab" onclick="showBrand('crystal')">Crystal</button>
+  <button class="brand-tab" onclick="showBrand('laminova')">Laminova</button>
+  <button class="brand-tab" onclick="showBrand('tmatt')">Tmatt</button>
+  <button class="brand-tab" onclick="showBrand('navetta')">Navetta</button>
+  <button class="brand-tab" onclick="showBrand('pelik')">Pelík</button>
+</div>
+
+<!-- CATALOG AREA -->
+<div class="catalog-area">
+
+  <!-- ═══════════════════════════════════════════
+       DECORLUX
+  ════════════════════════════════════════════ -->
+  <div class="brand-panel on" id="brand-decorlux">
+    <div class="brand-header">
+      <h2>Decorlux 2025</h2>
+      <p>MDF Premium · 18mm · Alto brillo, mate, metalizados, texturas · 102 colores</p>
+    </div>
+    <div class="cf" id="cf-decorlux">
+      <button class="cfb on" onclick="fc('decorlux','all')">Todos</button>
+      <button class="cfb" onclick="fc('decorlux','alto-brillo')">Alto brillo</button>
+      <button class="cfb" onclick="fc('decorlux','mate')">Mate</button>
+      <button class="cfb" onclick="fc('decorlux','metalizado')">Metalizado</button>
+      <button class="cfb" onclick="fc('decorlux','textura')">Texturas</button>
+    </div>
+    <div class="dpane" id="dp-decorlux"><div class="dsw" id="ds-decorlux"></div><div style="flex:1;min-width:0"><p style="font-size:14px;font-weight:500;margin:0 0 6px" id="dn-decorlux"></p><div class="dl" id="dt-decorlux"></div><div class="rbox"><span class="rtext" id="dr-decorlux"></span><button class="copybtn" onclick="cr('decorlux')" id="cb-decorlux">Copiar ↗</button></div></div></div>
+    <div id="cg-decorlux"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CRYSTAL
+  ════════════════════════════════════════════ -->
+  <div class="brand-panel" id="brand-crystal">
+    <div class="brand-header">
+      <h2>Crystal by Transformad 2026</h2>
+      <p>MDF · Lacado UV 3 capas · Ultra alto brillo · Anti-rayaduras · 13 colores</p>
+    </div>
+    <div id="cg-crystal" style="margin-top:8px"></div>
+    <div class="dpane" id="dp-crystal"><div class="dsw" id="ds-crystal"></div><div style="flex:1;min-width:0"><p style="font-size:14px;font-weight:500;margin:0 0 6px" id="dn-crystal"></p><div class="dl" id="dt-crystal"></div><div class="rbox"><span class="rtext" id="dr-crystal"></span><button class="copybtn" onclick="cr('crystal')" id="cb-crystal">Copiar ↗</button></div></div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       LAMINOVA
+  ════════════════════════════════════════════ -->
+  <div class="brand-panel" id="brand-laminova">
+    <div class="brand-header">
+      <h2>Laminova 2026</h2>
+      <p>Tablero melamínico MDF · 15mm y 18mm · Acabado Liso y Tree · 37 referencias</p>
+    </div>
+    <div class="cf" id="cf-laminova">
+      <button class="cfb on" onclick="fc('laminova','all')">Todos</button>
+      <button class="cfb" onclick="fc('laminova','solido')">Sólidos</button>
+      <button class="cfb" onclick="fc('laminova','madera-clara')">Maderas claras</button>
+      <button class="cfb" onclick="fc('laminova','madera-media')">Maderas medias</button>
+      <button class="cfb" onclick="fc('laminova','madera-oscura')">Maderas oscuras</button>
+      <button class="cfb" onclick="fc('laminova','gris')">Grises</button>
+      <button class="cfb" onclick="fc('laminova','patron')">Patrones</button>
+    </div>
+    <div class="dpane" id="dp-laminova"><div class="dsw" id="ds-laminova"></div><div style="flex:1;min-width:0"><p style="font-size:14px;font-weight:500;margin:0 0 6px" id="dn-laminova"></p><div class="dl" id="dt-laminova"></div><div class="rbox"><span class="rtext" id="dr-laminova"></span><button class="copybtn" onclick="cr('laminova')" id="cb-laminova">Copiar ↗</button></div></div></div>
+    <div id="cg-laminova"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       TMATT
+  ════════════════════════════════════════════ -->
+  <div class="brand-panel" id="brand-tmatt">
+    <div class="brand-header">
+      <h2>Tmatt by Transformad 2026</h2>
+      <p>Supermate lacado · Anti-huella · Auto-regenerativo · CARB2 · Grado 5 EN 438-2 · 15 colores</p>
+    </div>
+    <div class="cf" id="cf-tmatt">
+      <button class="cfb on" onclick="fc('tmatt','all')">Todos</button>
+      <button class="cfb" onclick="fc('tmatt','soft')">Soft</button>
+      <button class="cfb" onclick="fc('tmatt','intense')">Intense</button>
+      <button class="cfb" onclick="fc('tmatt','woods')">Woods</button>
+    </div>
+    <div class="dpane" id="dp-tmatt"><div class="dsw" id="ds-tmatt"></div><div style="flex:1;min-width:0"><p style="font-size:14px;font-weight:500;margin:0 0 6px" id="dn-tmatt"></p><div class="dl" id="dt-tmatt"></div><div class="rbox"><span class="rtext" id="dr-tmatt"></span><button class="copybtn" onclick="cr('tmatt')" id="cb-tmatt">Copiar ↗</button></div></div></div>
+    <div id="cg-tmatt"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       NAVETTA
+  ════════════════════════════════════════════ -->
+  <div class="brand-panel" id="brand-navetta">
+    <div class="brand-header">
+      <h2>Navetta · Cubiertas y Herrajes 2026</h2>
+      <p>MDF · Densidad 690 kg/m³ · Acabados exclusivos, maderas y sólidos · 24 acabados</p>
+    </div>
+    <div class="cf" id="cf-navetta">
+      <button class="cfb on" onclick="fc('navetta','all')">Todos</button>
+      <button class="cfb" onclick="fc('navetta','exclusivo')">Exclusivos</button>
+      <button class="cfb" onclick="fc('navetta','madera')">Maderas</button>
+      <button class="cfb" onclick="fc('navetta','solido')">Sólidos</button>
+    </div>
+    <div class="dpane" id="dp-navetta"><div class="dsw" id="ds-navetta"></div><div style="flex:1;min-width:0"><p style="font-size:14px;font-weight:500;margin:0 0 6px" id="dn-navetta"></p><div class="dl" id="dt-navetta"></div><div class="rbox"><span class="rtext" id="dr-navetta"></span><button class="copybtn" onclick="cr('navetta')" id="cb-navetta">Copiar ↗</button></div></div></div>
+    <div id="cg-navetta"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PELÍK
+  ════════════════════════════════════════════ -->
+  <div class="brand-panel" id="brand-pelik">
+    <div class="brand-header">
+      <h2>Pelík · Colección 2026</h2>
+      <p>Tableros melamínicos · Bosques sustentables · Synchro, Mate, Poro, Cuero, Metal, Roble · 48 colores</p>
+    </div>
+    <div class="cf" id="cf-pelik">
+      <button class="cfb on" onclick="fc('pelik','all')">Todos</button>
+      <button class="cfb" onclick="fc('pelik','synchro')">Synchro</button>
+      <button class="cfb" onclick="fc('pelik','mate')">Mate</button>
+      <button class="cfb" onclick="fc('pelik','poro')">Poro</button>
+      <button class="cfb" onclick="fc('pelik','cuero')">Cuero</button>
+      <button class="cfb" onclick="fc('pelik','metal')">Metal</button>
+      <button class="cfb" onclick="fc('pelik','roble')">Roble</button>
+      <button class="cfb" onclick="fc('pelik','fantasia')">Fantasía</button>
+      <button class="cfb" onclick="fc('pelik','madereado')">Madereado</button>
+      <button class="cfb" onclick="fc('pelik','nuevo')">⭐ Nuevos</button>
+    </div>
+    <div class="dpane" id="dp-pelik"><div class="dsw" id="ds-pelik"></div><div style="flex:1;min-width:0"><p style="font-size:14px;font-weight:500;margin:0 0 6px" id="dn-pelik"></p><div class="dl" id="dt-pelik"></div><div class="rbox"><span class="rtext" id="dr-pelik"></span><button class="copybtn" onclick="cr('pelik')" id="cb-pelik">Copiar ↗</button></div></div></div>
+    <div id="cg-pelik"></div>
+  </div>
+
+</div><!-- /catalog-area -->
+
+<script>
+// ════════════════════════════════════════════════
+// DATOS — 6 MARCAS
+// ════════════════════════════════════════════════
+
+const DATA = {
+
+  decorlux: {
+    filters: ['all','alto-brillo','mate','metalizado','textura'],
+    colors: [
+      {id:1,name:'White AFX',sec:'HPL AFX Anti-Huella',f:'alto-brillo',hex:'#F5F5F5',tipo:'Liso anti-huella'},
+      {id:2,name:'Eden Grey AFX',sec:'HPL AFX Anti-Huella',f:'alto-brillo',hex:'#9E9D95',tipo:'Liso anti-huella'},
+      {id:3,name:'Antracite AFX',sec:'HPL AFX Anti-Huella',f:'alto-brillo',hex:'#5A5A60',tipo:'Liso anti-huella'},
+      {id:4,name:'Black AFX',sec:'HPL AFX Anti-Huella',f:'alto-brillo',hex:'#2E2E35',tipo:'Liso anti-huella'},
+      {id:5,name:'Dove AFX',sec:'HPL AFX Anti-Huella',f:'alto-brillo',hex:'#C8C5BE',tipo:'Liso anti-huella'},
+      {id:6,name:'Basalt Grey AFX',sec:'HPL AFX Anti-Huella',f:'alto-brillo',hex:'#7A7875',tipo:'Liso anti-huella'},
+      {id:7,name:'Twilight Blue AFX',sec:'HPL AFX Anti-Huella',f:'alto-brillo',hex:'#2A2D38',tipo:'Liso anti-huella'},
+      {id:8,name:'Sea Weed Green AFX',sec:'HPL AFX Anti-Huella',f:'alto-brillo',hex:'#484845',tipo:'Liso anti-huella'},
+      {id:9,name:'Blanco',sec:'High Gloss 1800',f:'alto-brillo',hex:'#FFFFFF',tipo:'Alto brillo'},
+      {id:10,name:'Blanco Antiguo',sec:'High Gloss 1800',f:'alto-brillo',hex:'#F5F0E8',tipo:'Alto brillo'},
+      {id:11,name:'Beige',sec:'High Gloss 1800',f:'alto-brillo',hex:'#E8E0D0',tipo:'Alto brillo'},
+      {id:12,name:'Rojo',sec:'High Gloss 1800',f:'alto-brillo',hex:'#8B1A1A',tipo:'Alto brillo'},
+      {id:13,name:'Grey',sec:'High Gloss 1800',f:'alto-brillo',hex:'#A8A5A0',tipo:'Alto brillo'},
+      {id:14,name:'Dark Grey',sec:'High Gloss 1800',f:'alto-brillo',hex:'#3A3A3A',tipo:'Alto brillo'},
+      {id:15,name:'Black',sec:'High Gloss 1800',f:'alto-brillo',hex:'#0A0A0A',tipo:'Alto brillo'},
+      {id:16,name:'Silver Metallic',sec:'High Gloss 1800',f:'metalizado',hex:'#C8C8C8',tipo:'Metalizado'},
+      {id:17,name:'Negro Metalizado',sec:'High Gloss 1800',f:'metalizado',hex:'#1A1A1A',tipo:'Metalizado'},
+      {id:18,name:'Beige Metallic',sec:'High Gloss 1800',f:'metalizado',hex:'#D8D0C0',tipo:'Metalizado'},
+      {id:19,name:'Acryl Glass VPTOPX',sec:'Acryl Glass',f:'alto-brillo',hex:'#F0F0F0',tipo:'Acrílico 2mm'},
+      {id:20,name:'Ibiza Marble',sec:'Platinum 1800 Alto Brillo',f:'textura',hex:'#F0EDE8',tipo:'Mármol'},
+      {id:21,name:'Picasso Marble',sec:'Platinum 1800 Alto Brillo',f:'textura',hex:'#EDE8E0',tipo:'Mármol'},
+      {id:22,name:'Concret',sec:'Platinum 1800 Alto Brillo',f:'textura',hex:'#9A9A95',tipo:'Concreto'},
+      {id:23,name:'Textile',sec:'Platinum 1800 Alto Brillo',f:'textura',hex:'#8A8A85',tipo:'Textil'},
+      {id:24,name:'Kipe',sec:'Platinum 1800 Alto Brillo',f:'textura',hex:'#9A7858',tipo:'Madera'},
+      {id:25,name:'Fedha',sec:'Platinum 1800 Alto Brillo',f:'textura',hex:'#5A5A58',tipo:'Madera'},
+      {id:26,name:'Black Mont',sec:'Platinum 1800 Alto Brillo',f:'textura',hex:'#2A2A28',tipo:'Madera'},
+      {id:27,name:'Ibiza Marble',sec:'Platinum PET Mate',f:'textura',hex:'#EDE8E2',tipo:'Mármol mate'},
+      {id:28,name:'Picasso Marble',sec:'Platinum PET Mate',f:'textura',hex:'#EAE5DC',tipo:'Mármol mate'},
+      {id:29,name:'Concret',sec:'Platinum PET Mate',f:'textura',hex:'#989893',tipo:'Concreto mate'},
+      {id:30,name:'Textile',sec:'Platinum PET Mate',f:'textura',hex:'#888883',tipo:'Textil mate'},
+      {id:31,name:'Kipe',sec:'Platinum PET Mate',f:'textura',hex:'#987558',tipo:'Madera mate'},
+      {id:32,name:'Fedha',sec:'Platinum PET Mate',f:'textura',hex:'#585856',tipo:'Madera mate'},
+      {id:33,name:'Black Mont',sec:'Platinum PET Mate',f:'textura',hex:'#282826',tipo:'Madera mate'},
+      {id:34,name:'Top Matt White',sec:'Top Matt 1800 Mate',f:'mate',hex:'#F8F7F2',tipo:'Mate'},
+      {id:35,name:'Top Matt Beige',sec:'Top Matt 1800 Mate',f:'mate',hex:'#F0EBE0',tipo:'Mate'},
+      {id:36,name:'Top Matt Grey',sec:'Top Matt 1800 Mate',f:'mate',hex:'#A5A09A',tipo:'Mate'},
+      {id:37,name:'Top Matt Dark Grey',sec:'Top Matt 1800 Mate',f:'mate',hex:'#555550',tipo:'Mate'},
+      {id:38,name:'Top Matt Black',sec:'Top Matt 1800 Mate',f:'mate',hex:'#2A2A28',tipo:'Mate'},
+      {id:39,name:'Top Matt Beige Metallic',sec:'Top Matt 1800 Mate',f:'metalizado',hex:'#D0C8B8',tipo:'Metalizado mate'},
+      {id:40,name:'Top Matt Grey Metallic',sec:'Top Matt 1800 Mate',f:'metalizado',hex:'#9898A0',tipo:'Metalizado mate'},
+      {id:41,name:'Blanco',sec:'Acrílico ST Alto Brillo',f:'alto-brillo',hex:'#FFFFFF',tipo:'Acrílico'},
+      {id:42,name:'Gris',sec:'Acrílico ST Alto Brillo',f:'alto-brillo',hex:'#B8B5B0',tipo:'Acrílico'},
+      {id:43,name:'Crema',sec:'Acrílico ST Alto Brillo',f:'alto-brillo',hex:'#E8E0D0',tipo:'Acrílico'},
+      {id:44,name:'Capuchino',sec:'Acrílico ST Alto Brillo',f:'alto-brillo',hex:'#D4B8A8',tipo:'Acrílico'},
+      {id:45,name:'Indigo',sec:'Acrílico ST Alto Brillo',f:'alto-brillo',hex:'#1A1E30',tipo:'Acrílico'},
+      {id:46,name:'Rojo',sec:'Acrílico ST Alto Brillo',f:'alto-brillo',hex:'#B01818',tipo:'Acrílico'},
+      {id:47,name:'Burdeos',sec:'Acrílico ST Alto Brillo',f:'alto-brillo',hex:'#6A0F0F',tipo:'Acrílico'},
+      {id:48,name:'Graphite',sec:'Acrílico ST Alto Brillo',f:'alto-brillo',hex:'#454540',tipo:'Acrílico'},
+      {id:49,name:'Onix Grey',sec:'Acrílico ST Alto Brillo',f:'alto-brillo',hex:'#383835',tipo:'Acrílico'},
+      {id:50,name:'Negro',sec:'Acrílico ST Alto Brillo',f:'alto-brillo',hex:'#080808',tipo:'Acrílico'},
+      {id:51,name:'Signal White',sec:'PET Alto Brillo',f:'alto-brillo',hex:'#F8F8F5',tipo:'PET'},
+      {id:52,name:'Alaska White',sec:'PET Alto Brillo',f:'alto-brillo',hex:'#F0EEE8',tipo:'PET'},
+      {id:53,name:'Sand',sec:'PET Alto Brillo',f:'alto-brillo',hex:'#E0D8C8',tipo:'PET'},
+      {id:54,name:'Ocean Blue',sec:'PET Alto Brillo',f:'alto-brillo',hex:'#5A6070',tipo:'PET'},
+      {id:55,name:'Latte',sec:'PET Alto Brillo',f:'alto-brillo',hex:'#C0B0A0',tipo:'PET'},
+      {id:56,name:'Rojo Ferrari',sec:'PET Alto Brillo',f:'alto-brillo',hex:'#C01010',tipo:'PET'},
+      {id:57,name:'Stone Grey',sec:'PET Alto Brillo',f:'alto-brillo',hex:'#8A8885',tipo:'PET'},
+      {id:58,name:'Wolfram Grey',sec:'PET Alto Brillo',f:'alto-brillo',hex:'#686660',tipo:'PET'},
+      {id:59,name:'Charcoal Grey',sec:'PET Alto Brillo',f:'alto-brillo',hex:'#484540',tipo:'PET'},
+      {id:60,name:'Vulkan Black',sec:'PET Alto Brillo',f:'alto-brillo',hex:'#181816',tipo:'PET'},
+      {id:61,name:'Lichen Green',sec:'PET Alto Brillo',f:'alto-brillo',hex:'#8A9888',tipo:'PET'},
+      {id:62,name:'Alaska White Mate',sec:'PET Mate',f:'mate',hex:'#EEECEA',tipo:'PET mate'},
+      {id:63,name:'Sand Mate',sec:'PET Mate',f:'mate',hex:'#E5DDD0',tipo:'PET mate'},
+      {id:64,name:'Beige Mate',sec:'PET Mate',f:'mate',hex:'#DDD5C5',tipo:'PET mate'},
+      {id:65,name:'Latte Mate',sec:'PET Mate',f:'mate',hex:'#C2B0A0',tipo:'PET mate'},
+      {id:66,name:'Stone Grey Mate',sec:'PET Mate',f:'mate',hex:'#8E8C88',tipo:'PET mate'},
+      {id:67,name:'Lichen Green Mate',sec:'PET Mate',f:'mate',hex:'#8A9880',tipo:'PET mate'},
+      {id:68,name:'Grey Cement Mate',sec:'PET Mate',f:'mate',hex:'#C5C0B8',tipo:'PET mate'},
+      {id:69,name:'Wolfram Grey Mate',sec:'PET Mate',f:'mate',hex:'#686460',tipo:'PET mate'},
+      {id:70,name:'Aqua Green Mate',sec:'PET Mate',f:'mate',hex:'#4A8E9A',tipo:'PET mate'},
+      {id:71,name:'Indigo Mate',sec:'PET Mate',f:'mate',hex:'#3A3E50',tipo:'PET mate'},
+      {id:72,name:'Vulkan Black Mate',sec:'PET Mate',f:'mate',hex:'#1A1A18',tipo:'PET mate'},
+      {id:73,name:'Ocean Blue Mate',sec:'PET Mate',f:'mate',hex:'#5A6272',tipo:'PET mate'},
+      {id:74,name:'Silver',sec:'PET Metalizados',f:'metalizado',hex:'#ACACAC',tipo:'Metalizado'},
+      {id:75,name:'Light Silver',sec:'PET Metalizados',f:'metalizado',hex:'#C8C8C8',tipo:'Metalizado'},
+      {id:76,name:'Bronze',sec:'PET Metalizados',f:'metalizado',hex:'#9A7060',tipo:'Metalizado'},
+      {id:77,name:'Turkish Coffe',sec:'PP Mate',f:'mate',hex:'#7A7870',tipo:'PP mate'},
+      {id:78,name:'Red Clay',sec:'PP Mate',f:'mate',hex:'#9A7878',tipo:'PP mate'},
+      {id:79,name:'Slate Green',sec:'PP Mate',f:'mate',hex:'#686E78',tipo:'PP mate'},
+      {id:80,name:'Dark Blue',sec:'PP Mate',f:'mate',hex:'#5A6278',tipo:'PP mate'},
+      {id:81,name:'Pink Salt',sec:'PP Mate',f:'mate',hex:'#EEE0D8',tipo:'PP mate'},
+      {id:82,name:'Sage Green',sec:'PP Mate',f:'mate',hex:'#8A9888',tipo:'PP mate'},
+      {id:83,name:'Cool Grey',sec:'PP Mate',f:'mate',hex:'#828080',tipo:'PP mate'},
+      {id:84,name:'Truffle Brushed',sec:'PP Cepillado',f:'textura',hex:'#5A4840',tipo:'Cepillado'},
+      {id:85,name:'Champagne Brushed',sec:'PP Cepillado',f:'textura',hex:'#C0A878',tipo:'Cepillado'},
+      {id:86,name:'Ash Brown',sec:'PP Synchro',f:'textura',hex:'#5A5850',tipo:'Synchro'},
+      {id:87,name:'Native Brown',sec:'PP Synchro',f:'textura',hex:'#8A7058',tipo:'Synchro'},
+      {id:88,name:'Nocce Lucca Bleached',sec:'PP Synchro',f:'textura',hex:'#C8B090',tipo:'Synchro'},
+      {id:89,name:'Nocce Lucca Natural',sec:'PP Synchro',f:'textura',hex:'#A07850',tipo:'Synchro'},
+      {id:90,name:'Oxide Glimmer',sec:'PP Sensitive',f:'textura',hex:'#4A4A4A',tipo:'Sensitivo'},
+      {id:91,name:'Elegant Oxide',sec:'PP Sensitive',f:'textura',hex:'#E8E5E0',tipo:'Sensitivo'},
+      {id:92,name:'Noisy Grey',sec:'PP Sensitive',f:'textura',hex:'#8A8885',tipo:'Sensitivo'},
+      {id:93,name:'Indigo Blue Tex',sec:'PP Sensitive',f:'textura',hex:'#2A2D38',tipo:'Sensitivo'},
+      {id:94,name:'Oak Dove Grey',sec:'PP Sensitive',f:'textura',hex:'#9A9285',tipo:'Sensitivo'},
+      {id:95,name:'Oak Dove Cream',sec:'PP Sensitive',f:'textura',hex:'#C0B09A',tipo:'Sensitivo'},
+      {id:96,name:'Tesuto Earth',sec:'PP Sensitive',f:'textura',hex:'#9A8070',tipo:'Sensitivo'},
+      {id:97,name:'Tesuto Sand',sec:'PP Sensitive',f:'textura',hex:'#C0AE98',tipo:'Sensitivo'},
+      {id:98,name:'Ocean Black',sec:'PP Premium Sensitive',f:'textura',hex:'#181818',tipo:'3D wave'},
+      {id:99,name:'Ocean White',sec:'PP Premium Sensitive',f:'textura',hex:'#F0F0F0',tipo:'3D wave'},
+      {id:100,name:'Alaska White Move',sec:'PP Premium Sensitive',f:'textura',hex:'#E8E6E2',tipo:'3D wave'},
+      {id:101,name:'Vulkan Black Move',sec:'PP Premium Sensitive',f:'textura',hex:'#181818',tipo:'3D wave'},
+      {id:102,name:'Ocean Blue Move',sec:'PP Premium Sensitive',f:'textura',hex:'#1E2230',tipo:'3D wave'},
+    ]
+  },
+
+  crystal: {
+    filters: ['all'],
+    colors: [
+      {id:1,name:'Blanco',sec:'Crystal 2026',f:'all',hex:'#FAFAF8',tipo:'Alto brillo'},
+      {id:2,name:'Gris Claro',sec:'Crystal 2026',f:'all',hex:'#C5C5C2',tipo:'Alto brillo'},
+      {id:3,name:'Aguamarina',sec:'Crystal 2026',f:'all',hex:'#A8D5D2',tipo:'Alto brillo'},
+      {id:4,name:'Marfil',sec:'Crystal 2026',f:'all',hex:'#E8DFC0',tipo:'Alto brillo'},
+      {id:5,name:'Almendra',sec:'Crystal 2026',f:'all',hex:'#A89880',tipo:'Alto brillo'},
+      {id:6,name:'Gemstone',sec:'Crystal 2026',f:'all',hex:'#D5C8A8',tipo:'Alto brillo — nácar'},
+      {id:7,name:'Ocean',sec:'Crystal 2026',f:'all',hex:'#6E7880',tipo:'Alto brillo'},
+      {id:8,name:'Marengo',sec:'Crystal 2026',f:'all',hex:'#4A4A48',tipo:'Alto brillo'},
+      {id:9,name:'Forest',sec:'Crystal 2026',f:'all',hex:'#485A48',tipo:'Alto brillo'},
+      {id:10,name:'Coral',sec:'Crystal 2026',f:'all',hex:'#7A1820',tipo:'Alto brillo'},
+      {id:11,name:'Blue',sec:'Crystal 2026',f:'all',hex:'#101828',tipo:'Alto brillo'},
+      {id:12,name:'Metal Line',sec:'Crystal 2026',f:'all',hex:'#1E2E42',tipo:'Alto brillo metálico'},
+      {id:13,name:'Negro',sec:'Crystal 2026',f:'all',hex:'#0A0A0A',tipo:'Alto brillo'},
+    ]
+  },
+
+  laminova: {
+    filters: ['all','solido','madera-clara','madera-media','madera-oscura','gris','patron'],
+    colors: [
+      {id:1,name:'Artic White',sec:'Neutros fríos',f:'solido',hex:'#F8F8F5',tipo:'Liso'},
+      {id:2,name:'Gris Calido',sec:'Neutros fríos',f:'solido',hex:'#D8D5D0',tipo:'Liso'},
+      {id:3,name:'Gris Humo',sec:'Neutros fríos',f:'solido',hex:'#8A8A88',tipo:'Liso'},
+      {id:4,name:'Grafito',sec:'Neutros fríos',f:'solido',hex:'#484845',tipo:'Liso'},
+      {id:5,name:'Negro',sec:'Neutros fríos',f:'solido',hex:'#101010',tipo:'Liso'},
+      {id:6,name:'Vanyla',sec:'Cálidos',f:'solido',hex:'#F8F5DC',tipo:'Liso'},
+      {id:7,name:'Bay',sec:'Cálidos',f:'solido',hex:'#E8E0C8',tipo:'Liso'},
+      {id:8,name:'Arena',sec:'Cálidos',f:'solido',hex:'#C8B898',tipo:'Liso'},
+      {id:9,name:'Menta',sec:'Acentos',f:'solido',hex:'#6888A0',tipo:'Liso'},
+      {id:10,name:'Verde Esmeralda',sec:'Acentos',f:'solido',hex:'#687868',tipo:'Liso'},
+      {id:11,name:'Terracota',sec:'Acentos',f:'solido',hex:'#9A5038',tipo:'Liso'},
+      {id:12,name:'Aqua Grey',sec:'Acentos',f:'solido',hex:'#3A4858',tipo:'Liso'},
+      {id:13,name:'Ontario Polar',sec:'Maderas claras',f:'madera-clara',hex:'#D8D5CE',tipo:'Madera'},
+      {id:14,name:'Cervino',sec:'Maderas claras',f:'madera-clara',hex:'#C8C0B0',tipo:'Madera'},
+      {id:15,name:'Asili',sec:'Maderas claras',f:'madera-clara',hex:'#D8C090',tipo:'Madera'},
+      {id:16,name:'Maple Fire',sec:'Maderas claras',f:'madera-clara',hex:'#E0A858',tipo:'Madera'},
+      {id:17,name:'Roble Oregon',sec:'Maderas claras',f:'madera-clara',hex:'#C8B898',tipo:'Madera'},
+      {id:18,name:'Roble Ayu',sec:'Maderas medias',f:'madera-media',hex:'#907870',tipo:'Madera'},
+      {id:19,name:'Kipe',sec:'Maderas medias',f:'madera-media',hex:'#B08858',tipo:'Madera'},
+      {id:20,name:'Bahati',sec:'Maderas medias',f:'madera-media',hex:'#806040',tipo:'Madera'},
+      {id:21,name:'Nogal Sicaro',sec:'Maderas medias',f:'madera-media',hex:'#7A5838',tipo:'Madera'},
+      {id:22,name:'Kasten',sec:'Maderas medias',f:'madera-media',hex:'#A86840',tipo:'Madera'},
+      {id:23,name:'Nogal Maka',sec:'Maderas medias',f:'madera-media',hex:'#704828',tipo:'Madera'},
+      {id:24,name:'Blush Cairo',sec:'Maderas medias',f:'madera-media',hex:'#987050',tipo:'Madera'},
+      {id:25,name:'Nogal Parma',sec:'Maderas oscuras',f:'madera-oscura',hex:'#604028',tipo:'Madera'},
+      {id:26,name:'Otago',sec:'Maderas oscuras',f:'madera-oscura',hex:'#584030',tipo:'Madera'},
+      {id:27,name:'Wengue Milan',sec:'Maderas oscuras',f:'madera-oscura',hex:'#201408',tipo:'Madera'},
+      {id:28,name:'White Oak',sec:'Gama de grises',f:'gris',hex:'#C8C5BC',tipo:'Madera gris'},
+      {id:29,name:'Roble Hypster',sec:'Gama de grises',f:'gris',hex:'#B0A898',tipo:'Madera gris'},
+      {id:30,name:'Slip Devon',sec:'Gama de grises',f:'gris',hex:'#989080',tipo:'Madera gris'},
+      {id:31,name:'Fresno Luton',sec:'Gama de grises',f:'gris',hex:'#8A8278',tipo:'Madera gris'},
+      {id:32,name:'Tabaco Cairo',sec:'Gama de grises',f:'gris',hex:'#786860',tipo:'Madera gris'},
+      {id:33,name:'Fedha',sec:'Gama de grises',f:'gris',hex:'#585850',tipo:'Madera gris'},
+      {id:34,name:'Rovere Gris',sec:'Gama de grises',f:'gris',hex:'#383530',tipo:'Madera gris'},
+      {id:35,name:'Yuta',sec:'Patrones especiales',f:'patron',hex:'#E8E5E0',tipo:'Textil'},
+      {id:36,name:'Imeshi',sec:'Patrones especiales',f:'patron',hex:'#D0CEC8',tipo:'Piedra'},
+      {id:37,name:'Black Mont',sec:'Patrones especiales',f:'patron',hex:'#282825',tipo:'Piedra oscura'},
+    ]
+  },
+
+  tmatt: {
+    filters: ['all','soft','intense','woods'],
+    colors: [
+      {id:1,name:'Bianco Zen',sec:'Tmatt Soft',f:'soft',hex:'#F8F8F5',tipo:'Supermate',code:'PMT002M'},
+      {id:2,name:'Nuvola',sec:'Tmatt Soft',f:'soft',hex:'#D5D2CE',tipo:'Supermate',code:'PMT304M'},
+      {id:3,name:'Arena',sec:'Tmatt Soft',f:'soft',hex:'#B8A898',tipo:'Supermate',code:'PMT729M'},
+      {id:4,name:'Visone',sec:'Tmatt Soft',f:'soft',hex:'#8A8278',tipo:'Supermate',code:'PMT4504M'},
+      {id:5,name:'Antracite',sec:'Tmatt Soft',f:'soft',hex:'#4A4845',tipo:'Supermate',code:'PMT761M'},
+      {id:6,name:'Nero',sec:'Tmatt Soft',f:'soft',hex:'#181816',tipo:'Supermate',code:'PMT1303M'},
+      {id:7,name:'Artico',sec:'Tmatt Intense',f:'intense',hex:'#F5F5F2',tipo:'Supermate',code:'PMT003M'},
+      {id:8,name:'Cotton',sec:'Tmatt Intense',f:'intense',hex:'#E8E0D0',tipo:'Supermate',code:'PMT3325M'},
+      {id:9,name:'Smeraldo',sec:'Tmatt Intense',f:'intense',hex:'#2A5A3A',tipo:'Supermate',code:'PMT5025M'},
+      {id:10,name:'Blu',sec:'Tmatt Intense',f:'intense',hex:'#1A2840',tipo:'Supermate',code:'PMT2025M'},
+      {id:11,name:'Terracotta',sec:'Tmatt Intense',f:'intense',hex:'#A84038',tipo:'Supermate',code:'PMT6125M'},
+      {id:12,name:'Lignite',sec:'Tmatt Intense',f:'intense',hex:'#2A2420',tipo:'Supermate',code:'PMT2125M'},
+      {id:13,name:'Legno Fumè',sec:'Tmatt Woods',f:'woods',hex:'#584838',tipo:'Madera supermate',code:'PMT5626M'},
+      {id:14,name:'Toscano',sec:'Tmatt Woods',f:'woods',hex:'#8A6848',tipo:'Madera supermate',code:'PMT5627M'},
+      {id:15,name:'Elba',sec:'Tmatt Woods',f:'woods',hex:'#D0B888',tipo:'Madera supermate',code:'PMT5628M'},
+    ]
+  },
+
+  navetta: {
+    filters: ['all','exclusivo','madera','solido'],
+    colors: [
+      {id:1,name:'Modena',sec:'Acabados exclusivos',f:'exclusivo',hex:'#D4A870',tipo:'Madera texturizada'},
+      {id:2,name:'Duna',sec:'Acabados exclusivos',f:'exclusivo',hex:'#A87848',tipo:'Madera'},
+      {id:3,name:'Nogal Albura',sec:'Acabados exclusivos',f:'exclusivo',hex:'#6A4030',tipo:'Nogal'},
+      {id:4,name:'Carrara',sec:'Acabados exclusivos',f:'exclusivo',hex:'#F0EDE8',tipo:'Mármol blanco'},
+      {id:5,name:'Lisboa',sec:'Acabados exclusivos',f:'exclusivo',hex:'#B09878',tipo:'Roble gris-cálido'},
+      {id:6,name:'Rosa Morada',sec:'Acabados exclusivos',f:'exclusivo',hex:'#987060',tipo:'Madera rosada'},
+      {id:7,name:'Avellana',sec:'Acabados exclusivos',f:'exclusivo',hex:'#C8A878',tipo:'Roble avellana'},
+      {id:8,name:'Tabaco',sec:'Acabados exclusivos',f:'exclusivo',hex:'#282018',tipo:'Madera oscura'},
+      {id:9,name:'Marquina',sec:'Acabados exclusivos',f:'exclusivo',hex:'#1E1E1E',tipo:'Mármol negro'},
+      {id:10,name:'Cedro',sec:'Acabados maderas',f:'madera',hex:'#B06040',tipo:'Cedro'},
+      {id:11,name:'Nogal',sec:'Acabados maderas',f:'madera',hex:'#6A4828',tipo:'Nogal'},
+      {id:12,name:'Fiorano',sec:'Acabados maderas',f:'madera',hex:'#8A8278',tipo:'Madera gris'},
+      {id:13,name:'Tzalam',sec:'Acabados maderas',f:'madera',hex:'#C87840',tipo:'Tzalam natural'},
+      {id:14,name:'Wengue',sec:'Acabados maderas',f:'madera',hex:'#201408',tipo:'Wengué'},
+      {id:15,name:'Linoza',sec:'Acabados maderas',f:'madera',hex:'#7A7870',tipo:'Madera gris'},
+      {id:16,name:'Polar',sec:'Acabados maderas',f:'madera',hex:'#E8E5DC',tipo:'Madera blanca'},
+      {id:17,name:'Parota',sec:'Acabados maderas',f:'madera',hex:'#9A7048',tipo:'Parota'},
+      {id:18,name:'Textil',sec:'Acabados maderas',f:'madera',hex:'#E8E0D0',tipo:'Textil'},
+      {id:19,name:'Gris',sec:'Acabados sólidos',f:'solido',hex:'#737070',tipo:'Liso'},
+      {id:20,name:'Frosty',sec:'Acabados sólidos',f:'solido',hex:'#F4F4F2',tipo:'Liso — ⭐ Mueble de baño',star:true},
+      {id:21,name:'Oxford',sec:'Acabados sólidos',f:'solido',hex:'#5A5A58',tipo:'Liso'},
+      {id:22,name:'Blanco',sec:'Acabados sólidos',f:'solido',hex:'#F8F8F5',tipo:'Liso'},
+      {id:23,name:'Castaña',sec:'Acabados sólidos',f:'solido',hex:'#9A8860',tipo:'Liso'},
+      {id:24,name:'Negro',sec:'Acabados sólidos',f:'solido',hex:'#1A1A18',tipo:'Liso'},
+    ]
+  },
+
+  pelik: {
+    filters: ['all','synchro','mate','poro','cuero','metal','roble','fantasia','madereado','nuevo'],
+    colors: [
+      {id:1,name:'Positano',sec:'Synchro — Nuevos',f:'synchro',hex:'#C5C0BB',tipo:'Synchro',nuevo:true},
+      {id:2,name:'Cartagena',sec:'Synchro — Nuevos',f:'synchro',hex:'#DDD5B8',tipo:'Synchro',nuevo:true},
+      {id:3,name:'Mamba',sec:'Cuero — Nuevos',f:'cuero',hex:'#1E1C18',tipo:'Cuero',nuevo:true},
+      {id:4,name:'Galápagos',sec:'Cuero — Nuevos',f:'cuero',hex:'#5E5E5C',tipo:'Cuero',nuevo:true},
+      {id:5,name:'Burdeos',sec:'Mate — Nuevos',f:'mate',hex:'#6B1A10',tipo:'Mate',nuevo:true},
+      {id:6,name:'Avellana',sec:'Mate — Nuevos',f:'mate',hex:'#8B6B52',tipo:'Mate',nuevo:true},
+      {id:7,name:'Ámbar',sec:'Metal — Nuevos',f:'metal',hex:'#8A7060',tipo:'Metal',nuevo:true},
+      {id:8,name:'Inox',sec:'Metal — Nuevos',f:'metal',hex:'#7A7878',tipo:'Metal',nuevo:true},
+      {id:9,name:'Bardolino',sec:'Synchro',f:'synchro',hex:'#C8B09A',tipo:'Synchro'},
+      {id:10,name:'Bellota',sec:'Synchro',f:'synchro',hex:'#5A4030',tipo:'Synchro'},
+      {id:11,name:'Castaño',sec:'Synchro',f:'synchro',hex:'#7A5838',tipo:'Synchro'},
+      {id:12,name:'Panela',sec:'Synchro',f:'synchro',hex:'#C8A068',tipo:'Synchro'},
+      {id:13,name:'Nácar',sec:'Synchro',f:'synchro',hex:'#C0B0A0',tipo:'Synchro'},
+      {id:14,name:'Macadamia',sec:'Synchro',f:'synchro',hex:'#C0A870',tipo:'Synchro'},
+      {id:15,name:'Milán',sec:'Synchro',f:'synchro',hex:'#5A4838',tipo:'Synchro'},
+      {id:16,name:'Fumé',sec:'Synchro',f:'synchro',hex:'#3A2818',tipo:'Synchro'},
+      {id:17,name:'Capri',sec:'Mate',f:'mate',hex:'#D8C8BE',tipo:'Mate'},
+      {id:18,name:'Nazca',sec:'Mate',f:'mate',hex:'#E8E0D0',tipo:'Mate'},
+      {id:19,name:'Rovere',sec:'Mate',f:'mate',hex:'#C8A868',tipo:'Mate'},
+      {id:20,name:'Manzano',sec:'Mate',f:'mate',hex:'#E0C89A',tipo:'Mate'},
+      {id:21,name:'Ibiza',sec:'Mate',f:'mate',hex:'#D8D4CC',tipo:'Mate'},
+      {id:22,name:'Taupé',sec:'Mate',f:'mate',hex:'#9A9090',tipo:'Mate'},
+      {id:23,name:'Ceniza',sec:'Mate',f:'mate',hex:'#C0B8A8',tipo:'Mate'},
+      {id:24,name:'Arupo',sec:'Mate',f:'mate',hex:'#C87860',tipo:'Mate'},
+      {id:25,name:'Agave',sec:'Mate',f:'mate',hex:'#889880',tipo:'Mate'},
+      {id:26,name:'Ónix',sec:'Mate',f:'mate',hex:'#454550',tipo:'Mate'},
+      {id:27,name:'Cemento',sec:'Mate',f:'mate',hex:'#9A9A98',tipo:'Mate'},
+      {id:28,name:'Miel',sec:'Poro',f:'poro',hex:'#C89858',tipo:'Poro'},
+      {id:29,name:'Espresso',sec:'Poro',f:'poro',hex:'#8A6848',tipo:'Poro'},
+      {id:30,name:'Gales',sec:'Poro',f:'poro',hex:'#907060',tipo:'Poro'},
+      {id:31,name:'Caramelo',sec:'Poro',f:'poro',hex:'#9A6838',tipo:'Poro'},
+      {id:32,name:'Coñac',sec:'Poro',f:'poro',hex:'#785848',tipo:'Poro'},
+      {id:33,name:'Duna',sec:'Poro',f:'poro',hex:'#C8A058',tipo:'Poro'},
+      {id:34,name:'Niebla',sec:'Poro',f:'poro',hex:'#E8E4DC',tipo:'Poro'},
+      {id:35,name:'Ártiko',sec:'Poro',f:'poro',hex:'#E0DCD5',tipo:'Poro'},
+      {id:36,name:'Toquilla',sec:'Cuero',f:'cuero',hex:'#F0EAD8',tipo:'Cuero'},
+      {id:37,name:'Tívoli',sec:'Cuero',f:'cuero',hex:'#D0CCCA',tipo:'Cuero'},
+      {id:38,name:'Roble Blanco',sec:'Roble',f:'roble',hex:'#E0D5C0',tipo:'Roble'},
+      {id:39,name:'Roble Negro',sec:'Roble',f:'roble',hex:'#1A1A18',tipo:'Roble'},
+      {id:40,name:'Roble Gris',sec:'Roble',f:'roble',hex:'#6A6870',tipo:'Roble'},
+      {id:41,name:'Lino',sec:'Fantasía',f:'fantasia',hex:'#D8D0C0',tipo:'Fantasía'},
+      {id:42,name:'Plomo',sec:'Fantasía',f:'fantasia',hex:'#8A8888',tipo:'Fantasía'},
+      {id:43,name:'Gris',sec:'Fantasía',f:'fantasia',hex:'#888890',tipo:'Fantasía'},
+      {id:44,name:'Negro',sec:'Fantasía',f:'fantasia',hex:'#181818',tipo:'Fantasía'},
+      {id:45,name:'Nevado',sec:'Fantasía',f:'fantasia',hex:'#F0EEDD',tipo:'Fantasía'},
+      {id:46,name:'Blanco',sec:'Fantasía',f:'fantasia',hex:'#F8F6F2',tipo:'Fantasía'},
+      {id:47,name:'Wengue',sec:'Madereado',f:'madereado',hex:'#3A2820',tipo:'Madereado'},
+      {id:48,name:'Cedro',sec:'Madereado',f:'madereado',hex:'#9A7060',tipo:'Madereado'},
+    ]
+  }
+
+};
+
+// ════════════════════════════════════════════════
+// ESTADO
+// ════════════════════════════════════════════════
+const state = {};
+Object.keys(DATA).forEach(b=>{state[b]={cat:'all',sel:null};});
+
+// ════════════════════════════════════════════════
+// BRAND SWITCHER
+// ════════════════════════════════════════════════
+function showBrand(brand){
+  document.querySelectorAll('.brand-tab').forEach((t,i)=>{
+    const brands=['decorlux','crystal','laminova','tmatt','navetta','pelik'];
+    t.classList.toggle('on',brands[i]===brand);
+  });
+  document.querySelectorAll('.brand-panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById('brand-'+brand).classList.add('on');
+  renderBrand(brand);
+}
+
+// ════════════════════════════════════════════════
+// FILTER
+// ════════════════════════════════════════════════
+function fc(brand,cat){
+  state[brand].cat=cat;
+  // toggle filter buttons for this brand
+  const filterKeys = DATA[brand].filters;
+  const btns = document.querySelectorAll('#cf-'+brand+' .cfb');
+  btns.forEach((b,i)=>b.classList.toggle('on',filterKeys[i]===cat));
+  renderBrand(brand);
+}
+
+// ════════════════════════════════════════════════
+// RENDER BRAND
+// ════════════════════════════════════════════════
+function renderBrand(brand){
+  const {cat,sel}=state[brand];
+  const colors=DATA[brand].colors;
+  let filtered;
+  if(brand==='pelik'&&cat==='nuevo'){
+    filtered=colors.filter(c=>c.nuevo);
+  } else {
+    filtered=cat==='all'?colors:colors.filter(c=>c.f===cat);
+  }
+  const groups={};
+  filtered.forEach(c=>{if(!groups[c.sec])groups[c.sec]=[];groups[c.sec].push(c);});
+  const container=document.getElementById('cg-'+brand);
+  if(!container)return;
+  container.innerHTML=Object.entries(groups).map(([sec,items])=>`
+    <div class="col-section">
+      <p class="col-section-title">${sec}</p>
+      <div class="cgrid">${items.map(c=>`
+        <div class="cc${sel===c.id?' sel':''}${c.star?' sel':''}" onclick="pick('${brand}',${c.id})">
+          <div class="csw" style="background:${c.hex}">${c.nuevo?'<span class="nuevo-badge">Nuevo</span>':''}${c.star?'<span class="nuevo-badge">⭐</span>':''}</div>
+          <p class="cn">${c.name}</p>
+          <p class="chx">${c.hex}</p>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+// ════════════════════════════════════════════════
+// PICK — muestra detalle
+// ════════════════════════════════════════════════
+function pick(brand,id){
+  state[brand].sel=id;
+  const c=DATA[brand].colors.find(x=>x.id===id);
+  document.getElementById('ds-'+brand).style.background=c.hex;
+  document.getElementById('dn-'+brand).textContent=c.name+(c.nuevo?' ⭐ Nuevo 2026':'')+(c.star?' ⭐ Tu mueble':'');
+  let rows=`<span class="dk">Marca</span><span class="dv">${brand==='decorlux'?'Decorlux':brand==='crystal'?'Crystal / Transformad':brand==='laminova'?'Laminova':brand==='tmatt'?'Tmatt / Transformad':brand==='navetta'?'Navetta':brand==='pelik'?'Pelík / Novopan':brand}</span>
+    <span class="dk">Colección</span><span class="dv">${c.sec}</span>
+    <span class="dk">Tipo</span><span class="dv">${c.tipo}</span>
+    <span class="dk">HEX aprox.</span><span class="dv">${c.hex}</span>`;
+  if(c.code) rows+=`<span class="dk">Código</span><span class="dv">${c.code}</span>`;
+  document.getElementById('dt-'+brand).innerHTML=rows;
+  const ref=`${brand==='decorlux'?'Decorlux':brand==='crystal'?'Crystal':brand==='laminova'?'Laminova':brand==='tmatt'?'Tmatt':brand==='navetta'?'Navetta':'Pelík'} · ${c.sec} · ${c.name}${c.code?' · '+c.code:''}`;
+  document.getElementById('dr-'+brand).textContent=ref;
+  document.getElementById('dp-'+brand).classList.add('on');
+  renderBrand(brand);
+}
+
+// ════════════════════════════════════════════════
+// COPY
+// ════════════════════════════════════════════════
+function cr(brand){
+  const id=state[brand].sel;
+  const c=DATA[brand].colors.find(x=>x.id===id);
+  if(!c)return;
+  const ref=`${brand==='decorlux'?'Decorlux':brand==='crystal'?'Crystal':brand==='laminova'?'Laminova':brand==='tmatt'?'Tmatt':brand==='navetta'?'Navetta':'Pelík'} · ${c.sec} · ${c.name}${c.code?' · '+c.code:''}`;
+  const btn=document.getElementById('cb-'+brand);
+  navigator.clipboard.writeText(ref).then(()=>{btn.textContent='Copiado ✓';setTimeout(()=>btn.textContent='Copiar ↗',2000);}).catch(()=>{btn.textContent='—';setTimeout(()=>btn.textContent='Copiar ↗',2000);});
+}
+
+// ════════════════════════════════════════════════
+// INIT — renderiza la primera marca al cargar
+// ════════════════════════════════════════════════
+renderBrand('decorlux');
+</script>
+</body>
+</html>
