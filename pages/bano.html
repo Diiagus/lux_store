@@ -3,16 +3,202 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mueble de Baño — Lux Concept</title>
-
-  <!-- ../ significa "sube una carpeta" — porque estamos dentro de pages/ -->
+  <title>Muebles de Baño — Lux Concept</title>
   <link rel="stylesheet" href="../css/nav.css">
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/products.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    /* ── VISTA 1: GRID DE PRODUCTOS ── */
+    .catalog-hero {
+      text-align: center;
+      padding: 60px 5% 40px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .catalog-hero h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+      margin-bottom: 12px;
+    }
+    .catalog-hero p {
+      font-size: 17px;
+      color: #6e6e73;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .catalog-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 5% 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .catalog-card {
+      border: 1px solid #e8e8e8;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #fff;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .catalog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+    }
+    .catalog-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #f5f5f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .catalog-card-img img {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+      transition: transform .3s;
+    }
+    .catalog-card:hover .catalog-card-img img { transform: scale(1.05); }
+    .catalog-card-body { padding: 20px 22px 24px; }
+    .catalog-card-cat {
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #6e6e73;
+      margin-bottom: 6px;
+    }
+    .catalog-card-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1d1d1f;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .catalog-card-desc {
+      font-size: 14px;
+      color: #6e6e73;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .catalog-card-price {
+      font-size: 26px;
+      font-weight: 300;
+      color: #1d1d1f;
+      margin-bottom: 14px;
+    }
+    .catalog-card-price span { font-size: 13px; color: #6e6e73; }
+    .btn-ver {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #1d1d1f;
+      color: white;
+      border: none;
+      border-radius: 980px;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: background .2s;
+      font-family: -apple-system, sans-serif;
+    }
+    .btn-ver:hover { background: #515154; }
+
+    /* ── VISTA 2: DETALLE DEL PRODUCTO ── */
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #0066cc;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 16px 5%;
+      font-family: -apple-system, sans-serif;
+    }
+    .btn-back:hover { opacity: .7; }
+
+    /* ── COLOR SELECTOR ── */
+    .color-selector { margin-bottom: 20px; }
+    .color-selector-label { font-size: 13px; color: #6e6e73; margin-bottom: 10px; }
+    .color-selector-label strong { color: #1d1d1f; font-weight: 500; }
+    .color-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+    .swatch {
+      width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+      border: 2px solid transparent; transition: all .15s; position: relative;
+    }
+    .swatch:hover { transform: scale(1.15); }
+    .swatch.active { border-color: #1d1d1f; transform: scale(1.15); }
+    .swatch[title]:hover::after {
+      content: attr(title); position: absolute; bottom: 34px; left: 50%;
+      transform: translateX(-50%); background: #1d1d1f; color: #fff;
+      font-size: 10px; padding: 3px 7px; border-radius: 4px;
+      white-space: nowrap; pointer-events: none; z-index: 10;
+    }
+
+    /* ── EXTRAS ── */
+    .extras-block {
+      border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0;
+      padding: 16px 0; margin-bottom: 20px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .extra-row { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .extra-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: #1d1d1f; flex-shrink: 0; }
+    .extra-row-info { flex: 1; }
+    .extra-row-title { font-size: 14px; font-weight: 500; color: #1d1d1f; }
+    .extra-row-desc { font-size: 12px; color: #6e6e73; }
+    .extra-row-price { font-size: 14px; font-weight: 500; color: #1d1d1f; }
+
+    /* ── ENVÍO ── */
+    .delivery-block { display: flex; flex-direction: column; gap: 10px; }
+    .delivery-title { font-size: 14px; font-weight: 500; color: #1d1d1f; margin-bottom: 4px; }
+    .delivery-option {
+      display: flex; align-items: flex-start; gap: 10px; padding: 12px;
+      border: 1px solid #e8e8e8; border-radius: 12px; cursor: pointer; transition: border-color .15s;
+    }
+    .delivery-option:hover { border-color: #adadad; }
+    .delivery-option.selected { border-color: #1d1d1f; background: #fafafa; }
+    .delivery-option input[type="radio"] { margin-top: 2px; accent-color: #1d1d1f; flex-shrink: 0; }
+    .delivery-option-title { font-size: 13px; font-weight: 500; color: #1d1d1f; }
+    .delivery-option-sub { font-size: 12px; color: #6e6e73; }
+    .delivery-option-price { font-size: 13px; font-weight: 500; color: #1d1d1f; margin-left: auto; flex-shrink: 0; }
+    .map-section { display: none; margin-top: 10px; }
+    .map-search { display: flex; gap: 8px; margin-bottom: 10px; }
+    .map-search input {
+      flex: 1; padding: 10px 14px; border: 1px solid #d2d2d7;
+      border-radius: 10px; font-size: 13px; font-family: -apple-system, sans-serif; outline: none;
+    }
+    .map-search input:focus { border-color: #1d1d1f; }
+    .map-search button {
+      padding: 10px 16px; background: #1d1d1f; color: #fff; border: none;
+      border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer;
+      font-family: -apple-system, sans-serif;
+    }
+    .map-search button:hover { background: #515154; }
+    #delivery-map { height: 240px; border-radius: 12px; border: 1px solid #e8e8e8; }
+    .delivery-km-result {
+      display: none; margin-top: 10px; padding: 10px 14px;
+      background: #f5f5f7; border-radius: 10px; font-size: 13px; color: #1d1d1f;
+    }
+
+    /* ── TOTAL ── */
+    .total-block { background: #f5f5f7; border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; }
+    .total-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #6e6e73; margin-bottom: 6px; }
+    .total-amount { font-size: 42px; font-weight: 300; color: #1d1d1f; letter-spacing: -0.02em; line-height: 1; margin-bottom: 4px; }
+    .total-amount span { font-size: 16px; color: #6e6e73; }
+    .total-breakdown { font-size: 12px; color: #6e6e73; line-height: 1.6; }
+  </style>
 </head>
 <body>
 
-  <!-- NAV: Igual que index.html pero todas las rutas llevan ../ -->
+  <!-- NAV -->
   <nav class="nav">
     <div class="nav-inner">
       <a href="../index.html" class="nav-logo">
@@ -23,135 +209,317 @@
         <li><a href="cocinas.html">Cocinas</a></li>
         <li><a href="#">Cortinas</a></li>
         <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
-        <li><a href="pages/nuur.html">NUUR</a></li>
+        <li><a href="nuur.html">NUUR</a></li>
         <li><a href="colors.html" class="nav-colors">COLORS</a></li>
         <li>
-  <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" 
-     target="_blank" 
-     class="nav-cta">
-    Cotiza a tu medida
-  </a>
-</li>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
+             target="_blank" class="nav-cta">Cotiza a tu medida</a>
+        </li>
       </ul>
       <div class="nav-actions">
         <a href="#" class="nav-icon" aria-label="Mi cuenta">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </a>
         <a href="#" class="nav-icon" aria-label="Carrito">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <path d="M16 10a4 4 0 0 1-8 0"/>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         </a>
       </div>
     </div>
   </nav>
 
-  <!-- BREADCRUMB: Le dice al cliente dónde está -->
-  <div class="breadcrumb">
-    <a href="../index.html">Inicio</a>
-    <span>/</span>
-    <span>Muebles de Baño</span>
+  <!-- ══════════════════════════════════════
+       VISTA 1: CATÁLOGO DE PRODUCTOS
+  ══════════════════════════════════════ -->
+  <div id="vista-catalogo">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Inicio</a>
+      <span>/</span>
+      <span>Muebles de Baño</span>
+    </div>
+
+    <div class="catalog-hero">
+      <h1>Muebles de Baño</h1>
+      <p>Gabinetes y conjuntos fabricados con materiales de primera. Listos para armar y montar.</p>
+    </div>
+
+    <div class="catalog-grid">
+
+      <!-- PRODUCTO 1: Gabinete Blanco Frosty + Ovalín -->
+      <div class="catalog-card" onclick="verProducto('gabinete-frosty')">
+        <div class="catalog-card-img">
+          <img src="../assets/products/bano/gabinete.jpeg" alt="Gabinete Blanco Frosty">
+        </div>
+        <div class="catalog-card-body">
+          <p class="catalog-card-cat">Mueble de Baño · Navetta</p>
+          <p class="catalog-card-name">Gabinete Lux — 40×40×40 cm</p>
+          <p class="catalog-card-desc">2 puertas · MDF 15mm · Colgante · Disponible en todos los colores Navetta</p>
+          <p class="catalog-card-price">Desde $1,025 <span>MXN</span></p>
+          <button class="btn-ver">Ver producto</button>
+        </div>
+      </div>
+
+      <!-- Aquí irán más productos cuando los tengas -->
+
+    </div>
   </div>
 
-  <!-- ============================================
-       SECCIÓN PRINCIPAL DEL PRODUCTO
-       Grid de dos columnas: visor | información
-       ============================================ -->
-  <section class="product-section">
+  <!-- ══════════════════════════════════════
+       VISTA 2: DETALLE + SANDWICH VIEWER
+  ══════════════════════════════════════ -->
+  <div id="vista-detalle" style="display:none">
 
-    <!-- IZQUIERDA: El visor interactivo (el sandwich) -->
-    <div class="product-viewer">
-
-      <p class="viewer-hint">Toca cada pieza para ver su precio</p>
-
-      <!-- El sandwich: ovalín arriba, mueble abajo -->
-      <div class="sandwich-wrapper">
-
-        <!-- OVALÍN — clic llama a selectPiece('ovalin') -->
-        <div class="piece piece-ovalin"
-             id="piece-ovalin"
-             onclick="selectPiece('ovalin')">
-          <img src="../assets/products/bano/ovalin.png"
-               alt="Ovalín Bowl 32cm">
-          <div class="piece-label">Ovalín Bowl</div>
-        </div>
-
-        <!-- MUEBLE — clic llama a selectPiece('vanity') -->
-        <div class="piece piece-vanity"
-             id="piece-vanity"
-             onclick="selectPiece('vanity')">
-          <img src="../assets/products/bano/gabinete.jpeg"
-               alt="Gabinete Blanco Frosty">
-          <div class="piece-label">Mueble de Baño</div>
-        </div>
-
-      </div>
-
-      <!-- Los 3 botones debajo del sandwich -->
-      <div class="view-toggle">
-        <button class="toggle-btn" id="btn-conjunto"
-                onclick="selectPiece('conjunto')">Conjunto</button>
-        <button class="toggle-btn" id="btn-vanity"
-                onclick="selectPiece('vanity')">Solo mueble</button>
-        <button class="toggle-btn" id="btn-ovalin"
-                onclick="selectPiece('ovalin')">Solo ovalín</button>
-      </div>
-
+    <div class="breadcrumb">
+      <a href="../index.html">Inicio</a>
+      <span>/</span>
+      <a href="bano.html" onclick="volverCatalogo(); return false;">Muebles de Baño</a>
+      <span>/</span>
+      <span id="breadcrumb-producto">Gabinete Lux</span>
     </div>
 
-    <!-- DERECHA: Panel de información (cambia según selección) -->
-    <div class="product-info">
+    <!-- Botón volver -->
+    <button class="btn-back" onclick="volverCatalogo()">
+      ← Todos los muebles de baño
+    </button>
 
-      <p class="product-cat">Muebles de Baño</p>
+    <section class="product-section">
 
-      <!-- El título cambia según lo que el cliente seleccione -->
-      <h1 class="product-title" id="product-title">
-        Conjunto Mueble + Ovalín
-      </h1>
-
-      <p class="product-desc" id="product-desc">
-        Mueble colgante con ovalín Bowl incluido. Listo para instalar.
-      </p>
-
-      <!-- El precio cambia según selección -->
-      <div class="price-block">
-        <p class="price-label">Precio</p>
-        <p class="price-amount" id="price-amount">
-          $2,069 <span>MXN</span>
-        </p>
-        <p class="price-note" id="price-note">
-          IVA incluido · Entrega en Puebla
-        </p>
+      <!-- IZQUIERDA: Visor -->
+      <div class="product-viewer">
+        <p class="viewer-hint">Toca cada pieza para ver su precio</p>
+        <div class="sandwich-wrapper">
+          <div class="piece piece-ovalin" id="piece-ovalin" onclick="selectPiece('ovalin')">
+            <img src="../assets/products/bano/ovalin.png" alt="Ovalín Bowl 32cm">
+            <div class="piece-label">Ovalín Bowl</div>
+          </div>
+          <div class="piece piece-vanity" id="piece-vanity" onclick="selectPiece('vanity')">
+            <img src="../assets/products/bano/gabinete.jpeg" alt="Gabinete">
+            <div class="piece-label">Mueble de Baño</div>
+          </div>
+        </div>
+        <div class="view-toggle">
+          <button class="toggle-btn" id="btn-conjunto" onclick="selectPiece('conjunto')">Conjunto</button>
+          <button class="toggle-btn" id="btn-vanity" onclick="selectPiece('vanity')">Solo mueble</button>
+          <button class="toggle-btn" id="btn-ovalin" onclick="selectPiece('ovalin')">Solo ovalín</button>
+        </div>
       </div>
 
-      <!-- Las características cambian según selección -->
-      <div class="specs-block">
-        <p class="specs-title">Características</p>
-        <ul class="specs-list" id="specs-list">
-          <!-- El JS llena esto automáticamente -->
-        </ul>
+      <!-- DERECHA: Info -->
+      <div class="product-info">
+        <p class="product-cat">Muebles de Baño</p>
+        <h1 class="product-title" id="product-title">Conjunto Mueble + Ovalín</h1>
+        <p class="product-desc" id="product-desc">Mueble colgante con ovalín Bowl incluido. Listo para instalar.</p>
+
+        <!-- oculto para compatibilidad con product-viewer.js -->
+        <p id="price-amount" style="display:none">$2,069 <span>MXN</span></p>
+        <p id="price-note" style="display:none"></p>
+
+        <!-- Colores -->
+        <div class="color-selector">
+          <p class="color-selector-label">Color — <strong id="selected-color-name">Blanco Frosty</strong></p>
+          <div class="color-swatches" id="color-swatches"></div>
+        </div>
+
+        <!-- Características -->
+        <div class="specs-block">
+          <p class="specs-title">Características</p>
+          <ul class="specs-list" id="specs-list"></ul>
+        </div>
+
+        <!-- Extras -->
+        <div class="extras-block">
+          <label class="extra-row">
+            <input type="checkbox" id="check-assembly" onchange="updateTotal()">
+            <div class="extra-row-info">
+              <p class="extra-row-title">Ensamble incluido</p>
+              <p class="extra-row-desc">Nuestro equipo lo arma e instala por ti</p>
+            </div>
+            <span class="extra-row-price">+$150</span>
+          </label>
+
+          <div class="delivery-block">
+            <p class="delivery-title">Entrega</p>
+            <label class="delivery-option selected" id="opt-fabrica" onclick="setDelivery('fabrica')">
+              <input type="radio" name="delivery" value="fabrica" checked>
+              <div class="delivery-option-info">
+                <p class="delivery-option-title">Recoger en fábrica</p>
+                <p class="delivery-option-sub">Cuautlancingo, Puebla</p>
+              </div>
+              <span class="delivery-option-price">Gratis</span>
+            </label>
+            <label class="delivery-option" id="opt-showroom" onclick="setDelivery('showroom')">
+              <input type="radio" name="delivery" value="showroom">
+              <div class="delivery-option-info">
+                <p class="delivery-option-title">Recoger en showroom</p>
+                <p class="delivery-option-sub">19 Poniente, Puebla</p>
+              </div>
+              <span class="delivery-option-price">Gratis</span>
+            </label>
+            <label class="delivery-option" id="opt-domicilio" onclick="setDelivery('domicilio')">
+              <input type="radio" name="delivery" value="domicilio">
+              <div class="delivery-option-info">
+                <p class="delivery-option-title">Envío a domicilio</p>
+                <p class="delivery-option-sub">$15.50 por kilómetro</p>
+              </div>
+              <span class="delivery-option-price" id="delivery-price-tag">Calcular</span>
+            </label>
+            <div class="map-section" id="map-section">
+              <div class="map-search">
+                <input type="text" id="address-input" placeholder="Escribe tu dirección en Puebla...">
+                <button onclick="searchAddress()">Calcular</button>
+              </div>
+              <div id="delivery-map"></div>
+              <div class="delivery-km-result" id="km-result"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total -->
+        <div class="total-block">
+          <p class="total-label">Total estimado</p>
+          <p class="total-amount" id="total-amount">$2,069 <span>MXN</span></p>
+          <p class="total-breakdown" id="total-breakdown">IVA incluido · Entrega en Puebla</p>
+        </div>
+
+        <!-- ¿Otra medida? -->
+        <div class="custom-option">
+          <p>¿Necesitas otra medida?</p>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20necesito%20un%20mueble%20de%20ba%C3%B1o%20con%20medidas%20especiales.%20%C2%BFPodr%C3%ADan%20cotizarlo%3F"
+             target="_blank">Cotizarlo a tu medida →</a>
+        </div>
+
+        <button class="btn-cart">Agregar al carrito</button>
       </div>
 
-      <!-- Opción de sobre medida -->
-      <div class="custom-option">
-        <p>¿Necesitas otra medida?</p>
-        <a href="disenalo.html">Diseñarlo a tu medida →</a>
-      </div>
+    </section>
+  </div><!-- /vista-detalle -->
 
-      <!-- Botón de carrito -->
-      <button class="btn-cart">Agregar al carrito</button>
+  <script>
+    // ── NAVEGACIÓN ENTRE VISTAS ──
+    function verProducto(id) {
+      document.getElementById('vista-catalogo').style.display = 'none';
+      document.getElementById('vista-detalle').style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+    function volverCatalogo() {
+      document.getElementById('vista-detalle').style.display = 'none';
+      document.getElementById('vista-catalogo').style.display = 'block';
+      window.scrollTo(0, 0);
+    }
 
-    </div>
-  </section>
+    // ── COLORES NAVETTA ──
+    const NAVETTA_COLORS = [
+      {name:'Blanco Frosty', hex:'#F4F4F2'},{name:'Blanco', hex:'#F8F8F5'},
+      {name:'Gris',          hex:'#737070'},{name:'Oxford',  hex:'#5A5A58'},
+      {name:'Castaña',       hex:'#9A8860'},{name:'Negro',   hex:'#1A1A18'},
+      {name:'Modena',        hex:'#D4A870'},{name:'Duna',    hex:'#A87848'},
+      {name:'Avellana',      hex:'#C8A878'},{name:'Lisboa',  hex:'#B09878'},
+      {name:'Rosa Morada',   hex:'#987060'},{name:'Nogal Albura', hex:'#6A4030'},
+      {name:'Tabaco',        hex:'#282018'},{name:'Cedro',   hex:'#B06040'},
+      {name:'Nogal',         hex:'#6A4828'},{name:'Parota',  hex:'#9A7048'},
+      {name:'Tzalam',        hex:'#C87840'},{name:'Wengue',  hex:'#201408'},
+      {name:'Polar',         hex:'#E8E5DC'},
+    ];
+    let selectedColor = NAVETTA_COLORS[0];
 
-  <!-- El JS va al final del body — así el HTML carga primero -->
+    function buildSwatches() {
+      document.getElementById('color-swatches').innerHTML = NAVETTA_COLORS.map((c,i) => {
+        const light = ['#F4F4F2','#F8F8F5','#E8E5DC'].includes(c.hex);
+        return `<div class="swatch${i===0?' active':''}"
+          style="background:${c.hex};${light?'border:1.5px solid #d2d2d7;':''}"
+          title="${c.name}" onclick="selectColor(${i})"></div>`;
+      }).join('');
+    }
+
+    function selectColor(i) {
+      selectedColor = NAVETTA_COLORS[i];
+      document.getElementById('selected-color-name').textContent = selectedColor.name;
+      document.querySelectorAll('.swatch').forEach((s,j) => s.classList.toggle('active', j===i));
+      document.querySelectorAll('#specs-list li').forEach(li => {
+        if(li.children[0]?.textContent === 'Material')
+          li.children[1].textContent = 'MDF 15mm ' + selectedColor.name + ' Navetta';
+      });
+    }
+
+    // ── DELIVERY ──
+    let deliveryMode = 'fabrica', deliveryCost = 0, mapInstance = null, userMarker = null;
+    const FABRICA = [19.0827, -98.2697], SHOWROOM = [19.0414, -98.2063];
+
+    function setDelivery(mode) {
+      deliveryMode = mode;
+      ['fabrica','showroom','domicilio'].forEach(m =>
+        document.getElementById('opt-'+m).classList.toggle('selected', m===mode));
+      if(mode === 'domicilio') {
+        document.getElementById('map-section').style.display = 'block';
+        initMap(); deliveryCost = 0;
+      } else {
+        document.getElementById('map-section').style.display = 'none';
+        deliveryCost = 0;
+        document.getElementById('delivery-price-tag').textContent = 'Calcular';
+      }
+      updateTotal();
+    }
+
+    function initMap() {
+      if(mapInstance) return;
+      mapInstance = L.map('delivery-map').setView([19.0432,-98.1988], 12);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {attribution:'© OpenStreetMap'}).addTo(mapInstance);
+      L.marker(FABRICA).addTo(mapInstance).bindPopup('<b>Fábrica</b><br>Cuautlancingo');
+      L.marker(SHOWROOM).addTo(mapInstance).bindPopup('<b>Showroom</b><br>19 Poniente');
+      mapInstance.on('click', e => placeUserMarker(e.latlng.lat, e.latlng.lng));
+    }
+
+    function searchAddress() {
+      const q = document.getElementById('address-input').value.trim();
+      if(!q) return;
+      fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q='
+            + encodeURIComponent(q + ', Puebla, México'))
+        .then(r => r.json())
+        .then(d => { if(!d.length){alert('No encontrado.');return;}
+          placeUserMarker(parseFloat(d[0].lat), parseFloat(d[0].lon)); })
+        .catch(() => alert('Error de conexión.'));
+    }
+
+    function placeUserMarker(lat, lon) {
+      if(userMarker) mapInstance.removeLayer(userMarker);
+      userMarker = L.marker([lat,lon]).addTo(mapInstance).bindPopup('Tu dirección').openPopup();
+      mapInstance.setView([lat,lon], 14);
+      const dF = haversine(FABRICA[0],FABRICA[1],lat,lon);
+      const dS = haversine(SHOWROOM[0],SHOWROOM[1],lat,lon);
+      const km = Math.min(dF,dS)*1.3;
+      deliveryCost = Math.round(km*15.50);
+      document.getElementById('delivery-price-tag').textContent = '$'+deliveryCost.toLocaleString();
+      const r = document.getElementById('km-result');
+      r.style.display = 'block';
+      r.innerHTML = '📍 '+km.toFixed(1)+' km · Envío: <strong>$'+deliveryCost.toLocaleString()+' MXN</strong>';
+      updateTotal();
+    }
+
+    function haversine(a,b,c,d) {
+      const R=6371,r=Math.PI/180,dL=(c-a)*r,dO=(d-b)*r;
+      const x=Math.sin(dL/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin(dO/2)**2;
+      return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+    }
+
+    // ── TOTAL ──
+    function updateTotal() {
+      const base = window.currentBasePrice || 2069;
+      const asm  = document.getElementById('check-assembly').checked ? 150 : 0;
+      const del  = deliveryMode==='domicilio' ? deliveryCost : 0;
+      const tot  = base + asm + del;
+      document.getElementById('total-amount').innerHTML = '$'+tot.toLocaleString()+' <span>MXN</span>';
+      let b = 'Producto: $'+base.toLocaleString();
+      if(asm) b += ' · Ensamble: $150';
+      if(del) b += ' · Envío: $'+del.toLocaleString();
+      b += ' · IVA incluido';
+      document.getElementById('total-breakdown').textContent = b;
+    }
+
+    buildSwatches();
+    window.currentBasePrice = 2069;
+  </script>
+
   <script src="../js/product-viewer.js"></script>
 
 </body>
