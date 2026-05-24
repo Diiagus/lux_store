@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesas de Piedra — Lux Concept</title>
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .mesas-hero {
+      text-align: center;
+      padding: 60px 5% 40px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .mesas-hero h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+      margin-bottom: 12px;
+    }
+    .mesas-hero p {
+      font-size: 17px;
+      color: #6e6e73;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .mesas-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 5% 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .mesa-card {
+      border: 1px solid #e8e8e8;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #fff;
+      transition: transform .2s;
+    }
+    .mesa-card:hover { transform: translateY(-4px); }
+    .mesa-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+    .mesa-card-body { padding: 20px 22px 24px; }
+    .mesa-card-cat {
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #6e6e73;
+      margin-bottom: 8px;
+    }
+    .mesa-card-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1d1d1f;
+      margin-bottom: 6px;
+    }
+    .mesa-card-desc {
+      font-size: 14px;
+      color: #6e6e73;
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }
+    .mesa-card-price {
+      font-size: 28px;
+      font-weight: 300;
+      color: #1d1d1f;
+      margin: 14px 0 16px;
+    }
+    .mesa-card-price span {
+      font-size: 14px;
+      color: #6e6e73;
+    }
+    .btn-whatsapp {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      background: #1d1d1f;
+      color: white;
+      border: none;
+      border-radius: 980px;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      text-decoration: none;
+      transition: background .2s;
+      font-family: -apple-system, sans-serif;
+    }
+    .btn-whatsapp:hover { background: #515154; }
+    .coming-soon {
+      text-align: center;
+      padding: 60px 5%;
+      color: #6e6e73;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/logos/logo-black.png" alt="Lux Concept">
+      </a>
+      <ul class="nav-links">
+        <li><a href="bano.html">Muebles de Baño</a></li>
+        <li><a href="cocinas.html">Cocinas</a></li>
+        <li><a href="#">Cortinas</a></li>
+        <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
+        <li><a href="nuur.html">NUUR</a></li>
+        <li><a href="colors.html" class="nav-colors">COLORS</a></li>
+        <li>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
+             target="_blank" class="nav-cta">Cotiza a tu medida</a>
+        </li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="nav-icon" aria-label="Mi cuenta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <a href="#" class="nav-icon" aria-label="Carrito">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="mesas-hero">
+    <h1>Mesas de Piedra</h1>
+    <p>Superficies de piedra sinterizada Ascale. Diseño exclusivo, durabilidad sin igual. Cada mesa es única.</p>
+  </div>
+
+  <!-- GRID -->
+  <div class="mesas-grid">
+
+    <div class="mesa-card">
+      <img src="../assets/products/mesas-piedra/MESA.jpeg"
+           alt="Mesa redonda piedra sinterizada Ascale">
+      <div class="mesa-card-body">
+        <p class="mesa-card-cat">Piedra sinterizada · Ascale</p>
+        <p class="mesa-card-name">Mesa Redonda Ascale</p>
+        <p class="mesa-card-desc">Superficie de piedra sinterizada con veta natural. Base metálica blanca. Acabado pulido de alta resistencia.</p>
+        <p class="mesa-card-price">$8,500 <span>MXN</span></p>
+        <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20la%20Mesa%20Redonda%20Ascale%20de%20%248%2C500%20MXN.%20%C2%BFTienen%20disponibilidad%3F"
+           target="_blank" class="btn-whatsapp">Solicitar información</a>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="coming-soon">Más modelos próximamente — contáctanos para ver el catálogo completo.</p>
+
+</body>
+</html>
