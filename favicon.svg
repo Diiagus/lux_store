@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <!-- Fondo negro -->
+  <rect width="160" height="160" rx="24" fill="#1d1d1f"/>
+
+  <!-- MUEBLE DE BAÑO -->
+  <!-- Gabinete -->
+  <rect x="20" y="72" width="68" height="36" fill="white"/>
+  <line x1="54" y1="72" x2="54" y2="108" stroke="#1d1d1f" stroke-width="3"/>
+  <!-- Encimera -->
+  <rect x="18" y="65" width="72" height="8" fill="white"/>
+  <!-- Lavabo -->
+  <rect x="28" y="44" width="30" height="22" rx="8" fill="white"/>
+  <!-- Grifo -->
+  <rect x="41" y="34" width="5" height="12" rx="2" fill="white"/>
+  <rect x="33" y="32" width="20" height="5" rx="2" fill="white"/>
+
+  <!-- Línea base -->
+  <line x1="18" y1="112" x2="142" y2="112" stroke="white" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- ARMARIO ALTO -->
+  <rect x="96" y="30" width="46" height="82" fill="white"/>
+  <line x1="119" y1="30" x2="119" y2="112" stroke="#1d1d1f" stroke-width="3"/>
+  <!-- Manijas -->
+  <rect x="109" y="68" width="5" height="16" rx="2" fill="#1d1d1f"/>
+  <rect x="125" y="68" width="5" height="16" rx="2" fill="#1d1d1f"/>
+
+  <!-- TEXTO: LUX CONCEPT -->
+  <text x="80" y="138"
+    font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+    font-size="18"
+    font-weight="700"
+    fill="white"
+    text-anchor="middle"
+    letter-spacing="3">LUX CONCEPT</text>
+</svg>
