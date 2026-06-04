@@ -91,14 +91,43 @@
     </div>
     <div class="hero-visual">
       <div class="hero-img-box">
-        <img src="assets/products/bano/gabinete.jpeg"
-             alt="Mueble de baño Lux Concept — Blanco Frosty">
+        <img id="hero-carousel-img"
+             src="assets/products/bano/gabinete.jpeg"
+             alt="Lux Concept — Producto"
+             style="transition: opacity 0.6s ease;">
         <div class="hero-badge">
-          <span>Disponible ahora</span>
-          Mueble de Baño · Blanco Frosty
+          <span id="hero-badge-label">Disponible ahora</span>
+          <span id="hero-badge-name">Mueble de Baño · Blanco Frosty</span>
         </div>
       </div>
     </div>
+
+  <script>
+    const HERO_SLIDES = [
+      { src: 'assets/products/bano/gabinete.jpeg',  label: 'Disponible ahora', name: 'Mueble de Baño · Blanco Frosty' },
+      { src: 'assets/products/bano/gabinete2.jpeg', label: 'Disponible ahora', name: 'Gabinete Lux M · 75×40×40 cm' },
+      { src: 'assets/products/bano/gabinete3.jpeg', label: 'Disponible ahora', name: 'Gabinete Lux L · 75×50×40 cm' },
+      { src: 'assets/products/mesas-piedra/MESA.jpeg', label: 'Disponible ahora', name: 'Mesa Redonda · Piedra Ascale' },
+    ];
+
+    let heroUsed = [];
+    function nextHeroSlide() {
+      if (heroUsed.length === HERO_SLIDES.length) heroUsed = [];
+      let available = HERO_SLIDES.filter((_, i) => !heroUsed.includes(i));
+      let idx = HERO_SLIDES.indexOf(available[Math.floor(Math.random() * available.length)]);
+      heroUsed.push(idx);
+      const slide = HERO_SLIDES[idx];
+      const img = document.getElementById('hero-carousel-img');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = slide.src;
+        img.onload = () => { img.style.opacity = '1'; };
+        document.getElementById('hero-badge-label').textContent = slide.label;
+        document.getElementById('hero-badge-name').textContent = slide.name;
+      }, 600);
+    }
+    setInterval(nextHeroSlide, 6000);
+  </script>
   </section>
   <!-- DIFERENCIADORES -->
   <style>
@@ -157,7 +186,7 @@
           <p>Llevamos tu mueble listo para instalar. Cobertura en todo el estado de Puebla.</p>
         </div>
 
-      </div>/div>
+      </div>
       <div class="dif-cta">
         <a href="pages/bano.html" class="btn-primary">Ver catálogo completo</a>
         <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
