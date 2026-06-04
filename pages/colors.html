@@ -65,8 +65,8 @@
 .nuevo-badge{position:absolute;top:4px;right:4px;background:rgba(255,255,255,.9);color:#1d1d1f;font-size:7px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 4px;border-radius:3px}
 
 /* ── DETAIL PANEL ─────────────────────────────── */
-.dpane{background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:1rem 1.25rem;display:none;margin-bottom:16px}
-.dpane.on{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.dpane{display:none!important;}
+
 .dsw{width:80px;height:80px;border-radius:10px;border:1px solid #e8e8e8;flex-shrink:0}
 .dl{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;font-size:12px}
 .dk{color:#6e6e73}.dv{color:#1d1d1f;font-weight:500}
@@ -961,5 +961,174 @@ renderBrand('decorlux');
       mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
     }
   </script>
+
+  <!-- FLOATING COLOR PANEL -->
+  <style>
+    .color-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 300px;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid #e8e8e8;
+      border-radius: 18px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.14);
+      padding: 16px;
+      z-index: 999;
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    .color-float.on {
+      display: flex;
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .color-float-top {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .color-float-swatch {
+      width: 72px;
+      height: 72px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.08);
+      flex-shrink: 0;
+      background: #f5f5f7;
+    }
+    .color-float-info { flex: 1; min-width: 0; }
+    .color-float-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1d1d1f;
+      margin-bottom: 6px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .color-float-meta {
+      font-size: 11px;
+      color: #6e6e73;
+      line-height: 1.8;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .color-float-meta b { color: #1d1d1f; font-weight: 500; }
+    .color-float-ref {
+      background: #f5f5f7;
+      border-radius: 8px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .color-float-ref span {
+      font-size: 12px;
+      color: #6e6e73;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .color-float-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.06);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #6e6e73;
+      transition: background 0.15s;
+      font-family: -apple-system, sans-serif;
+    }
+    .color-float-close:hover { background: rgba(0,0,0,0.12); color: #1d1d1f; }
+    .color-float-copybtn {
+      font-size: 11px;
+      font-weight: 500;
+      color: #0066cc;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 0;
+      white-space: nowrap;
+    }
+    @media (max-width: 480px) {
+      .color-float { right: 12px; bottom: 12px; left: 12px; width: auto; }
+    }
+  </style>
+
+  <div class="color-float" id="color-float">
+    <button class="color-float-close" onclick="closeColorFloat()">✕</button>
+    <div class="color-float-top">
+      <div class="color-float-swatch" id="cf-swatch"></div>
+      <div class="color-float-info">
+        <p class="color-float-name" id="cf-name"></p>
+        <div class="color-float-meta" id="cf-meta"></div>
+      </div>
+    </div>
+    <div class="color-float-ref">
+      <span id="cf-ref"></span>
+      <button class="color-float-copybtn" id="cf-copy">Copiar ↗</button>
+    </div>
+  </div>
+
+  <script>
+    function closeColorFloat() {
+      const el = document.getElementById('color-float');
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      setTimeout(() => { el.classList.remove('on'); }, 300);
+    }
+
+    // Override pick() to also show the floating panel
+    const _origPick = pick;
+    function pick(brand, id) {
+      _origPick(brand, id);
+      const DATA_BRANDS = { decorlux: DATA.decorlux, crystal: DATA.crystal, laminova: DATA.laminova, tmatt: DATA.tmatt, navetta: DATA.navetta, pelik: DATA.pelik };
+      const c = DATA_BRANDS[brand].find(x => x.id === id);
+      if (!c) return;
+      const BRAND_NAMES = { decorlux:'Decorlux', crystal:'Crystal', laminova:'Laminova', tmatt:'Tmatt', navetta:'Navetta', pelik:'Pelik' };
+      const img = IMGS[brand] && IMGS[brand][c.id];
+      const swatch = document.getElementById('cf-swatch');
+      if (img) {
+        swatch.style.cssText = `background-image:url('${img}');background-size:cover;background-position:center;`;
+      } else {
+        swatch.style.cssText = `background:${c.hex};`;
+      }
+      document.getElementById('cf-name').textContent = c.name;
+      document.getElementById('cf-meta').innerHTML =
+        `<b>Marca</b> ${BRAND_NAMES[brand]}<br>` +
+        `<b>Colección</b> ${c.sec}<br>` +
+        `<b>Tipo</b> ${c.tipo}<br>` +
+        `<b>HEX aprox.</b> ${c.hex}`;
+      const refText = c.code ? c.code : c.hex;
+      document.getElementById('cf-ref').textContent = refText;
+      document.getElementById('cf-copy').onclick = () => {
+        navigator.clipboard.writeText(refText).then(() => {
+          document.getElementById('cf-copy').textContent = '¡Copiado!';
+          setTimeout(() => { document.getElementById('cf-copy').textContent = 'Copiar ↗'; }, 1500);
+        });
+      };
+      const el = document.getElementById('color-float');
+      el.classList.add('on');
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      requestAnimationFrame(() => {
+        el.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+    }
+  </script>
+
 </body>
 </html>
