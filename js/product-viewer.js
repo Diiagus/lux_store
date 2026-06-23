@@ -1,7 +1,6 @@
 /* ================================================
    VISOR DE PRODUCTO — Muebles de baño
-   Conserva la interacción original y toma los precios
-   del modelo seleccionado.
+   Mantiene los precios y datos del modelo seleccionado.
    ================================================ */
 
 const OVALIN_DATA = {
@@ -27,7 +26,7 @@ function getModeloSeleccionado() {
     return MODELOS[modeloActual];
   }
 
-  // Respaldo para evitar que el visor deje de funcionar.
+  // Datos de respaldo.
   return {
     nombre: 'Lux Vanity S',
     precios: {
@@ -47,13 +46,15 @@ function getModeloSeleccionado() {
 }
 
 function getColorSeleccionado() {
-  return (
+  if (
     typeof selectedColor !== 'undefined' &&
     selectedColor &&
     selectedColor.name
-  )
-    ? selectedColor.name
-    : 'Blanco Frosty';
+  ) {
+    return selectedColor.name;
+  }
+
+  return 'Blanco Frosty';
 }
 
 function specsConColor(specs) {
@@ -61,7 +62,10 @@ function specsConColor(specs) {
 
   return specs.map(function (spec) {
     if (spec[0] === 'Material') {
-      return ['Material', 'MDF 15mm ' + color + ' Navetta'];
+      return [
+        'Material',
+        'MDF 15mm ' + color + ' Navetta'
+      ];
     }
 
     return [spec[0], spec[1]];
@@ -86,7 +90,9 @@ function getDatosPieza(pieza) {
   if (pieza === 'vanity') {
     return {
       titulo: modelo.nombre + ' — Solo mueble',
-      desc: 'Gabinete fabricado en MDF Navetta. Selecciona el color, ensamble y forma de entrega.',
+      desc:
+        'Gabinete fabricado en MDF Navetta. ' +
+        'Selecciona el color, ensamble y forma de entrega.',
       precio: precio,
       nota: 'Sin ovalín · IVA incluido · Entrega en Puebla',
       specs: specsMueble
@@ -95,7 +101,9 @@ function getDatosPieza(pieza) {
 
   return {
     titulo: modelo.nombre + ' + Ovalín',
-    desc: 'Conjunto de gabinete y ovalín Bowl. Selecciona el color, ensamble y forma de entrega.',
+    desc:
+      'Conjunto de gabinete y ovalín Bowl. ' +
+      'Selecciona el color, ensamble y forma de entrega.',
     precio: precio,
     nota: 'IVA incluido · Entrega en Puebla',
     specs: specsMueble.concat([
@@ -108,48 +116,84 @@ function getDatosPieza(pieza) {
 function selectPiece(pieza) {
   const datos = getDatosPieza(pieza);
 
-  document.getElementById('product-title').textContent = datos.titulo;
-  document.getElementById('product-desc').textContent = datos.desc;
-
-  document.getElementById('price-amount').innerHTML =
-    '$' +
-    datos.precio.toLocaleString('es-MX') +
-    ' <span>MXN</span>';
-
-  document.getElementById('price-note').textContent = datos.nota;
-
+  const titulo = document.getElementById('product-title');
+  const descripcion = document.getElementById('product-desc');
+  const precio = document.getElementById('price-amount');
+  const nota = document.getElementById('price-note');
   const lista = document.getElementById('specs-list');
-  lista.innerHTML = '';
 
-  datos.specs.forEach(function (spec) {
-    lista.insertAdjacentHTML(
-      'beforeend',
-      `<li><span>${spec[0]}</span><span>${spec[1]}</span></li>`
-    );
-  });
-
-  document.querySelectorAll('.toggle-btn').forEach(function (btn) {
-    btn.classList.remove('active');
-  });
-
-  const activeButton = document.getElementById('btn-' + pieza);
-
-  if (activeButton) {
-    activeButton.classList.add('active');
+  if (titulo) {
+    titulo.textContent = datos.titulo;
   }
 
-  const elOvalin = document.getElementById('piece-ovalin');
-  const elVanity = document.getElementById('piece-vanity');
+  if (descripcion) {
+    descripcion.textContent = datos.desc;
+  }
 
-  elOvalin.classList.remove('active', 'dimmed');
-  elVanity.classList.remove('active', 'dimmed');
+  if (precio) {
+    precio.innerHTML =
+      '$' +
+      datos.precio.toLocaleString('es-MX') +
+      ' <span>MXN</span>';
+  }
+
+  if (nota) {
+    nota.textContent = datos.nota;
+  }
+
+  if (lista) {
+    lista.innerHTML = '';
+
+    datos.specs.forEach(function (spec) {
+      lista.insertAdjacentHTML(
+        'beforeend',
+        `<li>
+          <span>${spec[0]}</span>
+          <span>${spec[1]}</span>
+        </li>`
+      );
+    });
+  }
+
+  document.querySelectorAll('.toggle-btn').forEach(function (boton) {
+    boton.classList.remove('active');
+  });
+
+  const botonActivo = document.getElementById('btn-' + pieza);
+
+  if (botonActivo) {
+    botonActivo.classList.add('active');
+  }
+
+  const ovalin = document.getElementById('piece-ovalin');
+  const vanity = document.getElementById('piece-vanity');
+
+  if (ovalin) {
+    ovalin.classList.remove('active', 'dimmed');
+  }
+
+  if (vanity) {
+    vanity.classList.remove('active', 'dimmed');
+  }
 
   if (pieza === 'ovalin') {
-    elOvalin.classList.add('active');
-    elVanity.classList.add('dimmed');
-  } else if (pieza === 'vanity') {
-    elVanity.classList.add('active');
-    elOvalin.classList.add('dimmed');
+    if (ovalin) {
+      ovalin.classList.add('active');
+    }
+
+    if (vanity) {
+      vanity.classList.add('dimmed');
+    }
+  }
+
+  if (pieza === 'vanity') {
+    if (vanity) {
+      vanity.classList.add('active');
+    }
+
+    if (ovalin) {
+      ovalin.classList.add('dimmed');
+    }
   }
 
   window.currentBasePrice = datos.precio;
