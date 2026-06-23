@@ -1,27 +1,20 @@
-/* ================================================
-   LUX CART — Carrito de compras global
-   Funciona en TODAS las páginas con solo agregar:
-   <script src="../js/cart.js"></script> (o "js/cart.js" en index.html)
-
-   Guarda el carrito en localStorage, así que persiste
-   aunque el cliente cierre el navegador y vuelva después.
-   ================================================ */
-
+/* LUX CART — carrito global y solicitud de cotización */
 (function () {
+  'use strict';
+
   const STORAGE_KEY = 'luxCart';
   const WHATSAPP_NUMBER = '527771071589';
+  let lastFocusedElement = null;
 
-  // ── Detecta si estamos en /pages/ o en la raíz, para armar rutas ──
-  const inPages = window.location.pathname.includes('/pages/');
-  const ROOT = inPages ? '../' : '';
+  const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+  })[char]);
 
-  // ════════════════════════════════════════
-  // ESTADO DEL CARRITO
-  // ════════════════════════════════════════
   function getCart() {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    } catch (e) {
+      const value = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      return Array.isArray(value) ? value : [];
+    } catch (_) {
       return [];
     }
   }
@@ -31,43 +24,42 @@
     renderBadge();
   }
 
+  function getCount() {
+    return getCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+  }
+
+  function getTotal() {
+    return getCart().reduce((total, item) => {
+      return total + Number(item.unitPrice || 0) * Number(item.qty || 0);
+    }, 0);
+  }
+
   function addToCart(item) {
+    if (!item || !item.id || !item.name) return;
     const cart = getCart();
-    // item necesita: id, name, category, unitPrice, qty, image, details
-    const existing = cart.find(i => i.id === item.id);
-    if (existing) {
-      existing.qty += item.qty || 1;
-    } else {
-      cart.push(Object.assign({ qty: 1 }, item));
-    }
+    const quantity = Math.max(1, Number(item.qty || 1));
+    const existing = cart.find(product => product.id === item.id);
+
+    if (existing) existing.qty = Number(existing.qty || 0) + quantity;
+    else cart.push(Object.assign({ qty: quantity }, item));
+
     saveCart(cart);
-    openModal();
     renderModal();
+    openModal();
   }
 
   function removeFromCart(id) {
-    let cart = getCart();
-    cart = cart.filter(i => i.id !== id);
-    saveCart(cart);
+    saveCart(getCart().filter(item => item.id !== id));
     renderModal();
   }
 
   function updateQty(id, qty) {
     const cart = getCart();
-    const item = cart.find(i => i.id === id);
-    if (item) {
-      item.qty = Math.max(1, qty);
-      saveCart(cart);
-      renderModal();
-    }
-  }
-
-  function getTotal() {
-    return getCart().reduce((sum, i) => sum + i.unitPrice * i.qty, 0);
-  }
-
-  function getCount() {
-    return getCart().reduce((sum, i) => sum + i.qty, 0);
+    const item = cart.find(product => product.id === id);
+    if (!item) return;
+    item.qty = Math.max(1, Number(qty || 1));
+    saveCart(cart);
+    renderModal();
   }
 
   function clearCart() {
@@ -75,278 +67,228 @@
     renderModal();
   }
 
-  // ════════════════════════════════════════
-  // BADGE (número rojo sobre el ícono de carrito)
-  // ════════════════════════════════════════
   function renderBadge() {
     const count = getCount();
-    document.querySelectorAll('.cart-badge').forEach(b => {
-      if (count > 0) {
-        b.textContent = count;
-        b.style.display = 'flex';
-      } else {
-        b.style.display = 'none';
-      }
+    document.querySelectorAll('.cart-badge').forEach(badge => {
+      badge.textContent = count;
+      badge.style.display = count > 0 ? 'flex' : 'none';
     });
   }
 
-  // ════════════════════════════════════════
-  // MODAL DEL CARRITO
-  // ════════════════════════════════════════
   function openModal() {
-    document.getElementById('lux-cart-overlay').classList.add('open');
+    const overlay = document.getElementById('lux-cart-overlay');
+    if (!overlay) return;
+    lastFocusedElement = document.activeElement;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    overlay.querySelector('.lux-cart-close')?.focus();
   }
 
   function closeModal() {
-    document.getElementById('lux-cart-overlay').classList.remove('open');
+    const overlay = document.getElementById('lux-cart-overlay');
+    if (!overlay) return;
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+    }
+  }
+
+  function itemMarkup(item) {
+    const id = encodeURIComponent(item.id);
+    const quantity = Math.max(1, Number(item.qty || 1));
+    const subtotal = Number(item.unitPrice || 0) * quantity;
+    const image = String(item.image || '').replace(/["'()\\]/g, '\\$&');
+
+    return `
+      <article class="lux-cart-item" data-cart-id="${id}">
+        <div class="lux-cart-item-img" style="background-image:url('${image}')" aria-hidden="true"></div>
+        <div class="lux-cart-item-info">
+          <p class="lux-cart-item-cat">${escapeHtml(item.category)}</p>
+          <p class="lux-cart-item-name">${escapeHtml(item.name)}</p>
+          <p class="lux-cart-item-details">${escapeHtml(item.details || '')}</p>
+          <div class="lux-cart-item-row">
+            <div class="lux-qty-control" aria-label="Cantidad de ${escapeHtml(item.name)}">
+              <button type="button" data-cart-action="decrease" aria-label="Reducir cantidad">−</button>
+              <span>${quantity}</span>
+              <button type="button" data-cart-action="increase" aria-label="Aumentar cantidad">+</button>
+            </div>
+            <span class="lux-cart-item-price">$${subtotal.toLocaleString('es-MX')} <small>MXN</small></span>
+          </div>
+        </div>
+        <button type="button" class="lux-cart-item-remove" data-cart-action="remove" aria-label="Eliminar ${escapeHtml(item.name)}">×</button>
+      </article>`;
   }
 
   function renderModal() {
-    const cart = getCart();
     const body = document.getElementById('lux-cart-body');
     const footer = document.getElementById('lux-cart-footer');
+    if (!body || !footer) return;
 
+    const cart = getCart();
     if (cart.length === 0) {
       body.innerHTML = `
         <div class="lux-cart-empty">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-            <line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
-          </svg>
-          <p>Tu carrito está vacío</p>
-          <span>Explora el catálogo y agrega tus muebles favoritos</span>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+          <p>Tu cotización está vacía</p>
+          <span>Agrega los productos que deseas cotizar</span>
         </div>`;
       footer.style.display = 'none';
       return;
     }
 
+    body.innerHTML = cart.map(itemMarkup).join('');
     footer.style.display = 'block';
-    body.innerHTML = cart.map(item => `
-      <div class="lux-cart-item">
-        <div class="lux-cart-item-img" style="background-image:url('${item.image}')"></div>
-        <div class="lux-cart-item-info">
-          <p class="lux-cart-item-cat">${item.category}</p>
-          <p class="lux-cart-item-name">${item.name}</p>
-          <p class="lux-cart-item-details">${item.details || ''}</p>
-          <div class="lux-cart-item-row">
-            <div class="lux-qty-control">
-              <button onclick="LuxCart.updateQty('${item.id}', ${item.qty - 1})">−</button>
-              <span>${item.qty}</span>
-              <button onclick="LuxCart.updateQty('${item.id}', ${item.qty + 1})">+</button>
-            </div>
-            <span class="lux-cart-item-price">$${(item.unitPrice * item.qty).toLocaleString()} <small>MXN</small></span>
-          </div>
-        </div>
-        <button class="lux-cart-item-remove" onclick="LuxCart.removeFromCart('${item.id}')" aria-label="Eliminar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
-      </div>
-    `).join('');
-
     document.getElementById('lux-cart-total').innerHTML =
-      '$' + getTotal().toLocaleString() + ' <span>MXN</span>';
+      `$${getTotal().toLocaleString('es-MX')} <span>MXN</span>`;
   }
 
-  // ════════════════════════════════════════
-  // CHECKOUT POR WHATSAPP
-  // ════════════════════════════════════════
   function checkout() {
     const cart = getCart();
     if (cart.length === 0) return;
 
-    let msg = '¡Hola! Quiero hacer un pedido en Lux Concept Store MX 🛒\n\n';
-    cart.forEach((item, i) => {
-      msg += `${i + 1}. ${item.name} (x${item.qty})\n`;
-      if (item.details) msg += `   ${item.details}\n`;
-      msg += `   Subtotal: $${(item.unitPrice * item.qty).toLocaleString()} MXN\n\n`;
+    let message = '¡Hola! Quiero solicitar una cotización en Lux Concept Store MX 🛒\n\n';
+    cart.forEach((item, index) => {
+      const quantity = Number(item.qty || 1);
+      const subtotal = Number(item.unitPrice || 0) * quantity;
+      message += `${index + 1}. ${item.name} (x${quantity})\n`;
+      if (item.details) message += `   ${item.details}\n`;
+      message += `   Subtotal estimado: $${subtotal.toLocaleString('es-MX')} MXN\n\n`;
     });
-    msg += `TOTAL: $${getTotal().toLocaleString()} MXN\n\n`;
-    msg += 'Quedo al pendiente de los datos de pago. ¡Gracias!';
+    message += `TOTAL ESTIMADO: $${getTotal().toLocaleString('es-MX')} MXN\n\n`;
+    message += 'Quedo al pendiente de confirmar disponibilidad, entrega, instalación y forma de pago. ¡Gracias!';
 
-    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
-    window.open(url, '_blank');
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const quoteWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    if (quoteWindow) quoteWindow.opener = null;
   }
 
-  // ════════════════════════════════════════
-  // INYECTAR HTML + CSS DEL MODAL
-  // ════════════════════════════════════════
+  function ensureMobileNavigation() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const actions = document.querySelector('.nav-actions');
+    if (!mobileMenu || !actions || document.getElementById('hamburger')) return;
+
+    const button = document.createElement('button');
+    button.className = 'nav-hamburger';
+    button.id = 'hamburger';
+    button.type = 'button';
+    button.setAttribute('aria-label', 'Abrir menú');
+    button.setAttribute('aria-controls', 'mobile-menu');
+    button.setAttribute('aria-expanded', 'false');
+    button.innerHTML = '<span></span><span></span><span></span>';
+    actions.appendChild(button);
+
+    const setOpen = open => {
+      mobileMenu.classList.toggle('open', open);
+      button.setAttribute('aria-expanded', String(open));
+      button.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    };
+
+    button.addEventListener('click', () => setOpen(!mobileMenu.classList.contains('open')));
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  }
+
   function injectMarkup() {
+    if (document.getElementById('lux-cart-overlay')) return;
+
     const style = document.createElement('style');
     style.textContent = `
-      .cart-badge {
-        position: absolute; top: -2px; right: -2px;
-        background: #ff3b30; color: #fff;
-        font-size: 10px; font-weight: 600;
-        min-width: 16px; height: 16px;
-        border-radius: 50%;
-        display: none; align-items: center; justify-content: center;
-        padding: 0 3px;
-        font-family: -apple-system, sans-serif;
-      }
-      .nav-icon { position: relative; }
-
-      #lux-cart-overlay {
-        position: fixed; inset: 0; z-index: 2000;
-        background: rgba(0,0,0,0.4);
-        display: none; align-items: stretch; justify-content: flex-end;
-        opacity: 0; transition: opacity .25s ease;
-      }
-      #lux-cart-overlay.open { display: flex; opacity: 1; }
-      .lux-cart-panel {
-        background: #fff; width: 420px; max-width: 92vw; height: 100%;
-        display: flex; flex-direction: column;
-        transform: translateX(100%); transition: transform .3s cubic-bezier(.4,0,.2,1);
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      }
-      #lux-cart-overlay.open .lux-cart-panel { transform: translateX(0); }
-      .lux-cart-head {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 20px 22px; border-bottom: 1px solid #f0f0f0;
-      }
-      .lux-cart-head h3 { font-size: 18px; font-weight: 600; color: #1d1d1f; }
-      .lux-cart-close {
-        background: none; border: none; cursor: pointer; color: #6e6e73;
-        width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        transition: background .15s;
-      }
-      .lux-cart-close:hover { background: #f5f5f7; }
-      #lux-cart-body { flex: 1; overflow-y: auto; padding: 12px 22px; }
-      .lux-cart-empty {
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        height: 100%; color: #6e6e73; text-align: center; gap: 8px;
-      }
-      .lux-cart-empty p { font-size: 15px; font-weight: 500; color: #1d1d1f; margin-top: 8px; }
-      .lux-cart-empty span { font-size: 13px; }
-      .lux-cart-item {
-        display: flex; gap: 12px; padding: 16px 0; border-bottom: 1px solid #f5f5f7;
-        position: relative;
-      }
-      .lux-cart-item-img {
-        width: 64px; height: 64px; border-radius: 12px; background-color: #f5f5f7;
-        background-size: contain; background-position: center; background-repeat: no-repeat;
-        flex-shrink: 0;
-      }
-      .lux-cart-item-info { flex: 1; min-width: 0; }
-      .lux-cart-item-cat { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: #6e6e73; margin-bottom: 2px; }
-      .lux-cart-item-name { font-size: 14px; font-weight: 600; color: #1d1d1f; margin-bottom: 3px; line-height: 1.3; }
-      .lux-cart-item-details { font-size: 11px; color: #6e6e73; margin-bottom: 8px; line-height: 1.4; }
-      .lux-cart-item-row { display: flex; align-items: center; justify-content: space-between; }
-      .lux-qty-control {
-        display: flex; align-items: center; gap: 10px;
-        border: 1px solid #e8e8e8; border-radius: 980px; padding: 3px 10px;
-      }
-      .lux-qty-control button {
-        background: none; border: none; cursor: pointer; font-size: 14px; color: #1d1d1f;
-        width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;
-      }
-      .lux-qty-control span { font-size: 13px; font-weight: 500; min-width: 14px; text-align: center; }
-      .lux-cart-item-price { font-size: 14px; font-weight: 600; color: #1d1d1f; }
-      .lux-cart-item-price small { font-size: 10px; color: #6e6e73; font-weight: 400; }
-      .lux-cart-item-remove {
-        position: absolute; top: 14px; right: 0;
-        background: none; border: none; cursor: pointer; color: #c8c8cc;
-        transition: color .15s;
-      }
-      .lux-cart-item-remove:hover { color: #ff3b30; }
-      #lux-cart-footer {
-        padding: 18px 22px 22px; border-top: 1px solid #f0f0f0; display: none;
-      }
-      .lux-cart-total-row {
-        display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px;
-      }
-      .lux-cart-total-label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #6e6e73; }
-      #lux-cart-total { font-size: 24px; font-weight: 600; color: #1d1d1f; }
-      #lux-cart-total span { font-size: 13px; color: #6e6e73; font-weight: 400; }
-      .lux-cart-checkout-btn {
-        width: 100%; padding: 15px; background: #25D366; color: #fff; border: none;
-        border-radius: 980px; font-size: 15px; font-weight: 600; cursor: pointer;
-        display: flex; align-items: center; justify-content: center; gap: 8px;
-        transition: background .2s; font-family: -apple-system, sans-serif;
-      }
-      .lux-cart-checkout-btn:hover { background: #1eb858; }
-      .lux-cart-clear {
-        display: block; text-align: center; width: 100%; margin-top: 10px;
-        background: none; border: none; color: #6e6e73; font-size: 12px; cursor: pointer;
-        font-family: -apple-system, sans-serif;
-      }
-      .lux-cart-clear:hover { color: #ff3b30; }
+      .nav-icon{position:relative}.csw{width:100%!important}
+      .cart-badge{position:absolute;top:-2px;right:-2px;display:none;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 3px;border-radius:50%;background:#ff3b30;color:#fff;font:600 10px -apple-system,sans-serif}
+      #lux-cart-overlay{position:fixed;inset:0;z-index:2000;display:none;justify-content:flex-end;background:rgba(0,0,0,.4)}#lux-cart-overlay.open{display:flex}
+      .lux-cart-panel{width:420px;max-width:92vw;height:100%;display:flex;flex-direction:column;background:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+      .lux-cart-head{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid #f0f0f0}.lux-cart-head h3{margin:0;font-size:18px}
+      .lux-cart-close,.lux-cart-item-remove{border:0;background:none;cursor:pointer}.lux-cart-close{width:32px;height:32px;border-radius:50%;font-size:22px;color:#6e6e73}.lux-cart-close:hover{background:#f5f5f7}
+      #lux-cart-body{flex:1;overflow:auto;padding:12px 22px}.lux-cart-empty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;color:#6e6e73}.lux-cart-empty p{margin:8px 0 0;color:#1d1d1f;font-weight:600}.lux-cart-empty span{font-size:13px}
+      .lux-cart-item{position:relative;display:flex;gap:12px;padding:16px 0;border-bottom:1px solid #f5f5f7}.lux-cart-item-img{width:64px;height:64px;flex:none;border-radius:12px;background:#f5f5f7 center/contain no-repeat}.lux-cart-item-info{flex:1;min-width:0}.lux-cart-item-cat{margin:0 0 2px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6e6e73}.lux-cart-item-name{margin:0 24px 3px 0;font-size:14px;font-weight:600}.lux-cart-item-details{margin:0 0 8px;font-size:11px;line-height:1.4;color:#6e6e73}.lux-cart-item-row{display:flex;align-items:center;justify-content:space-between;gap:8px}.lux-qty-control{display:flex;align-items:center;gap:10px;padding:3px 10px;border:1px solid #e8e8e8;border-radius:999px}.lux-qty-control button{width:18px;height:18px;border:0;background:none;cursor:pointer}.lux-qty-control span{min-width:14px;text-align:center;font-size:13px}.lux-cart-item-price{font-size:14px;font-weight:600}.lux-cart-item-price small{font-size:10px;color:#6e6e73;font-weight:400}.lux-cart-item-remove{position:absolute;top:14px;right:0;color:#c8c8cc;font-size:20px}.lux-cart-item-remove:hover{color:#ff3b30}
+      #lux-cart-footer{display:none;padding:18px 22px 22px;border-top:1px solid #f0f0f0}.lux-cart-total-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}.lux-cart-total-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6e6e73}#lux-cart-total{font-size:24px;font-weight:600}#lux-cart-total span{font-size:13px;color:#6e6e73;font-weight:400}
+      .lux-cart-checkout-btn{width:100%;padding:15px;border:0;border-radius:999px;background:#25d366;color:#fff;font:600 15px -apple-system,sans-serif;cursor:pointer}.lux-cart-checkout-btn:hover{background:#1eb858}.lux-cart-disclaimer{margin:10px 0 0;text-align:center;color:#86868b;font-size:11px;line-height:1.45}.lux-cart-clear{width:100%;margin-top:10px;border:0;background:none;color:#6e6e73;font-size:12px;cursor:pointer}.lux-cart-clear:hover{color:#ff3b30}
     `;
     document.head.appendChild(style);
 
     const overlay = document.createElement('div');
     overlay.id = 'lux-cart-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-labelledby', 'lux-cart-title');
+    overlay.setAttribute('aria-hidden', 'true');
     overlay.innerHTML = `
       <div class="lux-cart-panel">
-        <div class="lux-cart-head">
-          <h3>Tu carrito</h3>
-          <button class="lux-cart-close" onclick="LuxCart.closeModal()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-          </button>
-        </div>
+        <header class="lux-cart-head"><h3 id="lux-cart-title">Tu cotización</h3><button type="button" class="lux-cart-close" aria-label="Cerrar cotización">×</button></header>
         <div id="lux-cart-body"></div>
-        <div id="lux-cart-footer">
-          <div class="lux-cart-total-row">
-            <span class="lux-cart-total-label">Total</span>
-            <span id="lux-cart-total">$0 <span>MXN</span></span>
-          </div>
-          <button class="lux-cart-checkout-btn" onclick="LuxCart.checkout()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A8.7 8.7 0 0 0 12 4a8.8 8.8 0 0 0-7.6 13.3L3 21l3.8-1.3A8.8 8.8 0 0 0 12 20.8 8.8 8.8 0 0 0 17.6 6.3zM12 19.2a7.2 7.2 0 0 1-3.7-1l-.3-.2-2.8 1 .9-2.7-.2-.3A7.2 7.2 0 1 1 19.2 12 7.3 7.3 0 0 1 12 19.2z"/></svg>
-            Finalizar pedido por WhatsApp
-          </button>
-          <button class="lux-cart-clear" onclick="LuxCart.clearCart()">Vaciar carrito</button>
-        </div>
-      </div>
-    `;
+        <footer id="lux-cart-footer">
+          <div class="lux-cart-total-row"><span class="lux-cart-total-label">Total estimado</span><span id="lux-cart-total">$0 <span>MXN</span></span></div>
+          <button type="button" class="lux-cart-checkout-btn">Solicitar cotización por WhatsApp</button>
+          <p class="lux-cart-disclaimer">El total es estimado y está sujeto a disponibilidad, entrega e instalación.</p>
+          <button type="button" class="lux-cart-clear">Vaciar cotización</button>
+        </footer>
+      </div>`;
     document.body.appendChild(overlay);
-    overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) closeModal();
+
+    overlay.querySelector('.lux-cart-close').addEventListener('click', closeModal);
+    overlay.querySelector('.lux-cart-checkout-btn').addEventListener('click', checkout);
+    overlay.querySelector('.lux-cart-clear').addEventListener('click', clearCart);
+    overlay.addEventListener('click', event => {
+      if (event.target === overlay) closeModal();
+    });
+    overlay.addEventListener('click', event => {
+      const action = event.target.closest('[data-cart-action]');
+      const item = event.target.closest('[data-cart-id]');
+      if (!action || !item) return;
+      const id = decodeURIComponent(item.dataset.cartId);
+      const cartItem = getCart().find(product => product.id === id);
+      if (!cartItem) return;
+      if (action.dataset.cartAction === 'remove') removeFromCart(id);
+      if (action.dataset.cartAction === 'decrease') updateQty(id, Number(cartItem.qty) - 1);
+      if (action.dataset.cartAction === 'increase') updateQty(id, Number(cartItem.qty) + 1);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && overlay.classList.contains('open')) closeModal();
     });
   }
 
   function wireCartIcons() {
     document.querySelectorAll('.nav-icon[aria-label="Carrito"]').forEach(icon => {
-      const badge = document.createElement('span');
-      badge.className = 'cart-badge';
-      icon.appendChild(badge);
-      icon.addEventListener('click', function (e) {
-        e.preventDefault();
-        openModal();
+      let badge = icon.querySelector('.cart-badge');
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'cart-badge';
+        badge.setAttribute('aria-hidden', 'true');
+        icon.appendChild(badge);
+      }
+      icon.setAttribute('aria-haspopup', 'dialog');
+      icon.addEventListener('click', event => {
+        event.preventDefault();
         renderModal();
+        openModal();
       });
     });
   }
 
-  // ════════════════════════════════════════
-  // INIT
-  // ════════════════════════════════════════
   function init() {
+    ensureMobileNavigation();
     injectMarkup();
     wireCartIcons();
     renderBadge();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 
-  // ── API pública ──
   window.LuxCart = {
     add: addToCart,
-    removeFromCart: removeFromCart,
-    updateQty: updateQty,
-    clearCart: clearCart,
-    openModal: openModal,
-    closeModal: closeModal,
-    checkout: checkout,
-    getCart: getCart,
-    getTotal: getTotal
+    removeFromCart,
+    updateQty,
+    clearCart,
+    openModal,
+    closeModal,
+    checkout,
+    getCart,
+    getTotal
   };
 })();
