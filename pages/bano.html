@@ -82,6 +82,14 @@
     .added-confirm.show{display:flex}
   .catalog-card:last-child{grid-column:1/-1;width:calc(50% - 12px);justify-self:center}
     @media(max-width:760px){.catalog-grid{grid-template-columns:1fr}.catalog-card:last-child{grid-column:auto;width:100%}}
+  
+    .bath-purchase-actions{display:grid;gap:9px;margin-top:12px}
+    .bath-purchase-actions .btn-cart{margin:0}
+    .btn-cart-continue{background:#f0f0f2!important;color:#1d1d1f!important}
+    .btn-cart-continue:hover{background:#e4e4e7!important}
+    .btn-cart-pay{background:#1d1d1f!important;color:#fff!important}
+    .btn-cart-pay:hover{background:#3a3a3c!important}
+
   </style>
   <link rel="canonical" href="https://luxstoremx.netlify.app/pages/bano.html">
 </head>
@@ -142,7 +150,7 @@
           <p class="catalog-card-name">Lux Vanity S — 40×40×40 cm</p>
           <p class="catalog-card-desc">2 puertas · MDF 15mm · Colgante · Disponible en todos los colores Navetta</p>
           <p class="catalog-card-price">Desde $1,025 <span>MXN</span></p>
-          <button class="btn-ver">Ver producto</button>
+          <button class="btn-ver">Agregar al carrito</button>
         </div>
       </div>
 
@@ -155,7 +163,7 @@
           <p class="catalog-card-name">Lux Vanity M — 40×40×75 cm</p>
           <p class="catalog-card-desc">1 puerta · MDF 15mm · Piso · Disponible en todos los colores Navetta</p>
           <p class="catalog-card-price">Desde $2,100 <span>MXN</span></p>
-          <button class="btn-ver">Ver producto</button>
+          <button class="btn-ver">Agregar al carrito</button>
         </div>
       </div>
 
@@ -168,7 +176,7 @@
           <p class="catalog-card-name">Lux Vanity L — 50×40×75 cm</p>
           <p class="catalog-card-desc">2 puertas · MDF 15mm · Piso · Disponible en todos los colores Navetta</p>
           <p class="catalog-card-price">Desde $2,400 <span>MXN</span></p>
-          <button class="btn-ver">Ver producto</button>
+          <button class="btn-ver">Agregar al carrito</button>
         </div>
       </div>
 
@@ -283,7 +291,14 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
           Agregado al carrito
         </div>
-        <button class="btn-cart" onclick="agregarAlCarrito()">Agregar al carrito</button>
+        <div class="bath-purchase-actions">
+          <button class="btn-cart btn-cart-continue" onclick="agregarYSeguirComprando()">
+            Agregar al carrito y seguir comprando
+          </button>
+          <button class="btn-cart btn-cart-pay" onclick="pagarAhoraBano()">
+            Pagar ahora
+          </button>
+        </div>
       </div>
     </section>
   </div>
@@ -535,34 +550,107 @@
       document.getElementById('added-confirm').classList.remove('show');
     }
 
-    // ── AGREGAR AL CARRITO ──
-    function agregarAlCarrito() {
+    // ── PRODUCTO CONFIGURADO / CARRITO / PAGO ──
+    function obtenerProductoBanoConfigurado() {
       const m = MODELOS[modeloActual];
       const asm = document.getElementById('check-assembly').checked;
-      const total = window.currentBasePrice + (asm?150:0) + (deliveryMode==='domicilio'?deliveryCost:0);
 
-      const piezaNombre = {conjunto:'Conjunto', vanity:'Solo mueble', ovalin:'Solo ovalín'}[piezaActual];
-      let detalles = `Color: ${selectedColor.name}`;
-      if (piezaActual !== 'ovalin') detalles += ` · ${piezaNombre}`;
-      if (asm) detalles += ' · Ensamble incluido';
-      if (deliveryMode === 'domicilio') detalles += ` · Envío a domicilio: $${deliveryCost}`;
-      else if (deliveryMode === 'fabrica') detalles += ' · Recoger en fábrica';
-      else if (deliveryMode === 'showroom') detalles += ' · Recoger en showroom';
+      if (deliveryMode === 'domicilio' && !deliveryCost) {
+        alert('Calcula primero el costo de envío o selecciona una opción de recolección.');
+        return null;
+      }
 
-      const id = [modeloActual, piezaActual, selectedColor.name, asm?'asm':'noasm', deliveryMode, deliveryCost].join('|');
+      const total =
+        window.currentBasePrice +
+        (asm ? 150 : 0) +
+        (deliveryMode === 'domicilio' ? deliveryCost : 0);
 
-      LuxCart.add({
-        id: id,
-        name: m.nombre + (piezaActual!=='conjunto' ? ' — '+piezaNombre : ''),
+      const piezaNombre = {
+        conjunto: 'Conjunto',
+        vanity: 'Solo mueble',
+        ovalin: 'Solo ovalín'
+      }[piezaActual];
+
+      const detalles = [`Color: ${selectedColor.name}`];
+
+      if (piezaActual !== 'ovalin') detalles.push(piezaNombre);
+      detalles.push(asm ? 'Ensamblado' : 'Sin ensamble');
+
+      if (deliveryMode === 'domicilio') {
+        detalles.push(`Envío a domicilio: $${deliveryCost.toLocaleString('es-MX')}`);
+      } else if (deliveryMode === 'fabrica') {
+        detalles.push('Recoger en fábrica');
+      } else if (deliveryMode === 'showroom') {
+        detalles.push('Recoger en tienda');
+      }
+
+      return {
+        id: [
+          modeloActual,
+          piezaActual,
+          selectedColor.name,
+          asm ? 'asm' : 'noasm',
+          deliveryMode,
+          deliveryCost
+        ].join('|'),
+        name: m.nombre + (piezaActual !== 'conjunto' ? ' — ' + piezaNombre : ''),
         category: 'Muebles de Baño',
         unitPrice: total,
+        qty: 1,
         image: m.img,
-        details: detalles
-      });
+        details: detalles.join(' · ')
+      };
+    }
+
+    function agregarYSeguirComprando() {
+      const producto = obtenerProductoBanoConfigurado();
+      if (!producto) return;
+
+      if (!window.LuxCart) {
+        alert('El carrito todavía no está disponible. Recarga la página.');
+        return;
+      }
+
+      LuxCart.add(producto);
+
+      if (typeof LuxCart.closeModal === 'function') {
+        LuxCart.closeModal();
+      }
 
       const confirm = document.getElementById('added-confirm');
+      confirm.textContent = 'Agregado al carrito';
       confirm.classList.add('show');
-      setTimeout(() => confirm.classList.remove('show'), 3000);
+
+      setTimeout(() => {
+        confirm.classList.remove('show');
+        volverCatalogo();
+      }, 700);
+    }
+
+    function pagarAhoraBano() {
+      const producto = obtenerProductoBanoConfigurado();
+      if (!producto) return;
+
+      const mensaje = [
+        'Hola, quiero continuar con la compra de este producto:',
+        '',
+        producto.name,
+        producto.details,
+        `Total estimado: $${producto.unitPrice.toLocaleString('es-MX')} MXN`,
+        '',
+        'Quedo al pendiente para confirmar disponibilidad, entrega y forma de pago.'
+      ].join('\n');
+
+      window.open(
+        'https://wa.me/527771071589?text=' + encodeURIComponent(mensaje),
+        '_blank',
+        'noopener,noreferrer'
+      );
+    }
+
+    // Compatibilidad con llamadas anteriores.
+    function agregarAlCarrito() {
+      agregarYSeguirComprando();
     }
 
     buildSwatches();
