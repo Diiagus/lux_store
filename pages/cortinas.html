@@ -1,45 +1,630 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="../favicon.svg"><title>Cortinas — Lux Concept</title><meta name="description" content="Solicita información y cotización de cortinas con Lux Concept en Puebla."><link rel="stylesheet" href="../css/nav.css"><link rel="stylesheet" href="../css/main.css"><link rel="stylesheet" href="../css/footer.css"><link rel="stylesheet" href="../css/mobile.css"><style>.soon{min-height:68vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 5%}.soon-inner{max-width:720px}.soon small{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6e6e73}.soon h1{font-size:clamp(48px,8vw,88px);letter-spacing:-.04em;margin:16px 0}.soon p{font-size:17px;line-height:1.65;color:#6e6e73;margin:0 auto 30px;max-width:580px}</style></head><body><nav class="nav">
-  <div class="nav-inner">
-    <a href="../index.html" class="nav-logo"><img src="../assets/logos/logo-black.png" alt="Lux Concept"></a>
-    <ul class="nav-links">
-      <li><a href="bano.html">Muebles de Baño</a></li>
-      <li><a href="cocinas.html">Cocinas</a></li>
-      <li><a href="cortinas.html">Cortinas</a></li>
-      <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
-      <li><a href="nuur.html">NUUR</a></li>
-      <li><a href="colors.html" class="nav-colors">COLORS</a></li>
-      <li><a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" target="_blank" rel="noopener" class="nav-cta">Cotiza a tu medida</a></li>
-    </ul>
-    <div class="nav-actions">
-      <a href="cuenta.html" class="nav-icon" aria-label="Mi cuenta">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="../favicon.svg">
+  <title>Cortinas — Lux Concept</title>
+  <meta name="description" content="Catálogo de cortinas Lux Concept en Puebla. Explora nuestros modelos y solicita una cotización a tu medida.">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/mobile.css">
+
+  <style>
+    .curtains-hero {
+      text-align: center;
+      padding: 68px 5% 44px;
+      border-bottom: 1px solid #f0f0f0;
+      background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+    }
+
+    .curtains-hero small {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #6e6e73;
+    }
+
+    .curtains-hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(44px, 7vw, 82px);
+      line-height: .95;
+      letter-spacing: -.04em;
+      color: #1d1d1f;
+    }
+
+    .curtains-hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 17px;
+      line-height: 1.65;
+      color: #6e6e73;
+    }
+
+    .curtains-section {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 54px 5% 88px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 6px;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -.03em;
+      color: #1d1d1f;
+    }
+
+    .section-heading p {
+      margin: 0;
+      max-width: 620px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #6e6e73;
+    }
+
+    .curtains-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .curtain-card {
+      overflow: hidden;
+      border: 1px solid #e8e8e8;
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 8px 30px rgba(0,0,0,.035);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .curtain-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 36px rgba(0,0,0,.07);
+    }
+
+    .curtain-image-wrap {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background: #f5f5f7;
+      overflow: hidden;
+    }
+
+    .curtain-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity .18s ease, transform .35s ease;
+    }
+
+    .curtain-card:hover .curtain-image {
+      transform: scale(1.015);
+    }
+
+    .image-counter {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.9);
+      backdrop-filter: blur(10px);
+      font-size: 11px;
+      font-weight: 600;
+      color: #1d1d1f;
+      box-shadow: 0 3px 14px rgba(0,0,0,.08);
+    }
+
+    .image-switch {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      padding: 5px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.9);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 18px rgba(0,0,0,.09);
+    }
+
+    .image-switch button {
+      border: 0;
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: transparent;
+      color: #6e6e73;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease;
+    }
+
+    .image-switch button.active {
+      background: #1d1d1f;
+      color: #fff;
+    }
+
+    .curtain-card-body {
+      padding: 21px 22px 23px;
+    }
+
+    .curtain-category {
+      margin: 0 0 6px;
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #6e6e73;
+    }
+
+    .curtain-name {
+      margin: 0 0 8px;
+      font-size: 23px;
+      line-height: 1.15;
+      font-weight: 600;
+      letter-spacing: -.02em;
+      color: #1d1d1f;
+    }
+
+    .curtain-desc {
+      min-height: 44px;
+      margin: 0 0 18px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #6e6e73;
+    }
+
+    .quote-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 13px 18px;
+      border-radius: 999px;
+      background: #1d1d1f;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background .18s ease;
+    }
+
+    .quote-btn:hover {
+      background: #515154;
+    }
+
+    .measure-callout {
+      max-width: 1240px;
+      margin: 0 auto 88px;
+      padding: 0 5%;
+    }
+
+    .measure-panel {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 36px;
+      align-items: center;
+      padding: 44px;
+      border-radius: 26px;
+      background: #f5f5f7;
+    }
+
+    .measure-panel h2 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -.03em;
+      color: #1d1d1f;
+    }
+
+    .measure-panel p {
+      margin: 0;
+      max-width: 610px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #6e6e73;
+    }
+
+    .measure-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .measure-actions a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 14px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .measure-actions .primary {
+      background: #25D366;
+      color: #fff;
+    }
+
+    .measure-actions .secondary {
+      border: 1px solid #d2d2d7;
+      background: #fff;
+      color: #1d1d1f;
+    }
+
+    @media (max-width: 960px) {
+      .curtains-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .measure-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .curtains-hero {
+        padding-top: 54px;
+      }
+
+      .curtains-section {
+        padding-top: 38px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading p {
+        margin-top: 8px;
+      }
+
+      .curtains-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .measure-panel {
+        padding: 30px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/logos/logo-black.png" alt="Lux Concept">
       </a>
-      <a href="#" class="nav-icon" aria-label="Carrito">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-      </a>
-      <button class="nav-hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+
+      <ul class="nav-links">
+        <li><a href="bano.html">Muebles de Baño</a></li>
+        <li><a href="cocinas.html">Cocinas</a></li>
+        <li><a href="cortinas.html">Cortinas</a></li>
+        <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
+        <li><a href="nuur.html">NUUR</a></li>
+        <li><a href="colors.html" class="nav-colors">COLORS</a></li>
+        <li>
+          <a
+            href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
+            target="_blank"
+            rel="noopener"
+            class="nav-cta"
+          >Cotiza a tu medida</a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="cuenta.html" class="nav-icon" aria-label="Mi cuenta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+
+        <a href="#" class="nav-icon" aria-label="Carrito">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+        </a>
+
+        <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
+  </nav>
+
+  <div class="nav-mobile-menu" id="mobile-menu">
+    <a href="bano.html">Muebles de Baño</a>
+    <a href="cocinas.html">Cocinas</a>
+    <a href="cortinas.html">Cortinas</a>
+    <a href="mesas-piedra.html">Mesas de Piedra</a>
+    <a href="nuur.html">NUUR</a>
+    <a href="colors.html">COLORS</a>
+    <a
+      href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
+      target="_blank"
+      rel="noopener"
+      class="nav-cta"
+    >Cotiza a tu medida</a>
   </div>
-</nav>
-<div class="nav-mobile-menu" id="mobile-menu">
-  <a href="bano.html">Muebles de Baño</a><a href="cocinas.html">Cocinas</a><a href="cortinas.html">Cortinas</a>
-  <a href="mesas-piedra.html">Mesas de Piedra</a><a href="nuur.html">NUUR</a><a href="colors.html">COLORS</a>
-  <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" target="_blank" rel="noopener" class="nav-cta">Cotiza a tu medida</a>
-</div><main class="soon"><div class="soon-inner"><small>Catálogo en preparación</small><h1>Cortinas.</h1><p>Estamos preparando esta sección para mostrar opciones, acabados y formas de cotización. Mientras tanto, cuéntanos qué necesitas y te atendemos directamente.</p><a class="btn-primary" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20recibir%20informaci%C3%B3n%20y%20cotizar%20cortinas.">Solicitar información</a></div></main><footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand"><img src="../assets/logos/logo-black.png" alt="Lux Concept Store MX"><p>Muebles de diseño fabricados en Cuautlancingo, Puebla. Directo a tu hogar, sin intermediarios.</p><span class="footer-badge">Entrega en Puebla</span></div>
-      <div class="footer-col"><h4>Catálogo</h4><ul><li><a href="bano.html">Muebles de Baño</a></li><li><a href="cocinas.html">Cocinas</a></li><li><a href="cortinas.html">Cortinas</a></li><li><a href="mesas-piedra.html">Mesas de Piedra</a></li><li><a href="nuur.html">NUUR</a></li><li><a href="colors.html">COLORS</a></li></ul></div>
-      <div class="footer-col"><h4>Contacto</h4><ul><li><a href="https://wa.me/527771071589" target="_blank" rel="noopener">WhatsApp · 777 107 1589</a></li><li><a href="https://www.instagram.com/lux_conceptmx/" target="_blank" rel="noopener">@lux_conceptmx</a></li><li><a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar." target="_blank" rel="noopener">Cotiza a tu medida →</a></li></ul></div>
-      <div class="footer-col"><h4>Empresa</h4><ul><li><a href="legal.html#privacidad">Aviso de privacidad</a></li><li><a href="legal.html#terminos">Términos y condiciones</a></li><li><a href="legal.html#envios">Política de envíos</a></li></ul></div>
+
+  <main>
+    <section class="curtains-hero">
+      <small>Colección de cortinas</small>
+      <h1>Cortinas.</h1>
+      <p>
+        Explora nuestros modelos y solicita una cotización de acuerdo con las medidas de tu ventana.
+      </p>
+    </section>
+
+    <section class="curtains-section">
+      <div class="section-heading">
+        <div>
+          <h2>Modelos disponibles</h2>
+          <p>
+            Selecciona el diseño que más te guste. Las cortinas se cotizan de acuerdo con las medidas y características de tu espacio.
+          </p>
+        </div>
+      </div>
+
+      <div class="curtains-grid">
+
+        <article class="curtain-card">
+          <div class="curtain-image-wrap">
+            <img
+              class="curtain-image"
+              id="curtain-img-1"
+              src="../assets/products/Cortinas/1/1.jpeg"
+              alt="Cortina 1"
+            >
+            <span class="image-counter" id="counter-1">1 / 2</span>
+            <div class="image-switch">
+              <button type="button" class="active" onclick="changeCurtainImage(1, 1, this)">Vista 1</button>
+              <button type="button" onclick="changeCurtainImage(1, 2, this)">Vista 2</button>
+            </div>
+          </div>
+          <div class="curtain-card-body">
+            <p class="curtain-category">Colección Lux</p>
+            <h2 class="curtain-name">Cortina 1</h2>
+            <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%201.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+          </div>
+        </article>
+
+        <article class="curtain-card">
+          <div class="curtain-image-wrap">
+            <img
+              class="curtain-image"
+              src="../assets/products/Cortinas/2/1.jpeg"
+              alt="Cortina 2"
+            >
+          </div>
+          <div class="curtain-card-body">
+            <p class="curtain-category">Colección Lux</p>
+            <h2 class="curtain-name">Cortina 2</h2>
+            <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%202.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+          </div>
+        </article>
+
+        <article class="curtain-card">
+          <div class="curtain-image-wrap">
+            <img
+              class="curtain-image"
+              src="../assets/products/Cortinas/3/1.jpeg"
+              alt="Cortina 3"
+            >
+          </div>
+          <div class="curtain-card-body">
+            <p class="curtain-category">Colección Lux</p>
+            <h2 class="curtain-name">Cortina 3</h2>
+            <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%203.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+          </div>
+        </article>
+
+        <article class="curtain-card">
+          <div class="curtain-image-wrap">
+            <img
+              class="curtain-image"
+              id="curtain-img-4"
+              src="../assets/products/Cortinas/4/1.jpeg"
+              alt="Cortina 4"
+            >
+            <span class="image-counter" id="counter-4">1 / 2</span>
+            <div class="image-switch">
+              <button type="button" class="active" onclick="changeCurtainImage(4, 1, this)">Vista 1</button>
+              <button type="button" onclick="changeCurtainImage(4, 2, this)">Vista 2</button>
+            </div>
+          </div>
+          <div class="curtain-card-body">
+            <p class="curtain-category">Colección Lux</p>
+            <h2 class="curtain-name">Cortina 4</h2>
+            <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%204.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+          </div>
+        </article>
+
+        <article class="curtain-card">
+          <div class="curtain-image-wrap">
+            <img
+              class="curtain-image"
+              id="curtain-img-5"
+              src="../assets/products/Cortinas/5/1.jpeg"
+              alt="Cortina 5"
+            >
+            <span class="image-counter" id="counter-5">1 / 2</span>
+            <div class="image-switch">
+              <button type="button" class="active" onclick="changeCurtainImage(5, 1, this)">Vista 1</button>
+              <button type="button" onclick="changeCurtainImage(5, 2, this)">Vista 2</button>
+            </div>
+          </div>
+          <div class="curtain-card-body">
+            <p class="curtain-category">Colección Lux</p>
+            <h2 class="curtain-name">Cortina 5</h2>
+            <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%205.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+          </div>
+        </article>
+
+        <article class="curtain-card">
+          <div class="curtain-image-wrap">
+            <img
+              class="curtain-image"
+              src="../assets/products/Cortinas/6/1.jpeg"
+              alt="Cortina 6"
+            >
+          </div>
+          <div class="curtain-card-body">
+            <p class="curtain-category">Colección Lux</p>
+            <h2 class="curtain-name">Cortina 6</h2>
+            <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%206.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="measure-callout">
+      <div class="measure-panel">
+        <div>
+          <h2>Cotización según tus medidas</h2>
+          <p>
+            Envíanos el ancho y el alto aproximados de tu ventana, una fotografía del espacio y el modelo que te interesa. Te ayudaremos a preparar una propuesta.
+          </p>
+        </div>
+
+        <div class="measure-actions">
+          <a
+            class="primary"
+            target="_blank"
+            rel="noopener"
+            href="https://wa.me/527771071589?text=Hola%2C%20quiero%20cotizar%20una%20cortina.%20Tengo%20las%20medidas%20y%20una%20foto%20de%20mi%20ventana."
+          >Cotizar por WhatsApp</a>
+
+          <a
+            class="secondary"
+            href="https://www.instagram.com/lux_conceptmx/"
+            target="_blank"
+            rel="noopener"
+          >Ver Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="../assets/logos/logo-black.png" alt="Lux Concept Store MX">
+          <p>Muebles de diseño fabricados en Cuautlancingo, Puebla. Directo a tu hogar, sin intermediarios.</p>
+          <span class="footer-badge">Entrega en Puebla</span>
+        </div>
+
+        <div class="footer-col">
+          <h4>Catálogo</h4>
+          <ul>
+            <li><a href="bano.html">Muebles de Baño</a></li>
+            <li><a href="cocinas.html">Cocinas</a></li>
+            <li><a href="cortinas.html">Cortinas</a></li>
+            <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
+            <li><a href="nuur.html">NUUR</a></li>
+            <li><a href="colors.html">COLORS</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="https://wa.me/527771071589" target="_blank" rel="noopener">WhatsApp · 777 107 1589</a></li>
+            <li><a href="https://www.instagram.com/lux_conceptmx/" target="_blank" rel="noopener">@lux_conceptmx</a></li>
+            <li><a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar." target="_blank" rel="noopener">Cotiza a tu medida →</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="legal.html#privacidad">Aviso de privacidad</a></li>
+            <li><a href="legal.html#terminos">Términos y condiciones</a></li>
+            <li><a href="legal.html#envios">Política de envíos</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Lux Concept Store MX. Todos los derechos reservados.</p>
+      </div>
     </div>
-    <div class="footer-bottom"><p class="footer-copy">© 2026 Lux Concept Store MX. Todos los derechos reservados.</p></div>
-  </div>
-</footer><script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
-  }
-</script><script src="../js/cart.js"></script></body></html>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', function () {
+        mobileMenu.classList.toggle('open');
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          mobileMenu.classList.remove('open');
+        });
+      });
+    }
+
+    function changeCurtainImage(model, view, button) {
+      const image = document.getElementById('curtain-img-' + model);
+      const counter = document.getElementById('counter-' + model);
+
+      if (!image) {
+        return;
+      }
+
+      image.style.opacity = '0';
+
+      window.setTimeout(function () {
+        image.src = '../assets/products/Cortinas/' + model + '/' + view + '.jpeg';
+        image.alt = 'Cortina ' + model + ' - Vista ' + view;
+        image.style.opacity = '1';
+      }, 120);
+
+      if (counter) {
+        counter.textContent = view + ' / 2';
+      }
+
+      const switcher = button.closest('.image-switch');
+
+      if (switcher) {
+        switcher.querySelectorAll('button').forEach(function (item) {
+          item.classList.remove('active');
+        });
+      }
+
+      button.classList.add('active');
+    }
+  </script>
+
+  <script src="../js/cart.js"></script>
+</body>
+</html>
