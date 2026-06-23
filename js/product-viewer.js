@@ -1,7 +1,7 @@
 /* ================================================
    VISOR DE PRODUCTO — Muebles de baño
    Conserva la interacción original y toma los precios
-   del modelo seleccionado (Lux S, Lux M o Lux L).
+   del modelo seleccionado.
    ================================================ */
 
 const OVALIN_DATA = {
@@ -11,10 +11,10 @@ const OVALIN_DATA = {
   specs: [
     ['Material', 'Cerámica blanca'],
     ['Diámetro', '32 cm'],
-    ['Tipo',     'Bowl — se monta sobre el mueble'],
-    ['Color',    'Blanco'],
-    ['Incluye',  'Desagüe'],
-    ['Entrega',  'Empacado con protección']
+    ['Tipo', 'Bowl — se monta sobre el mueble'],
+    ['Color', 'Blanco'],
+    ['Incluye', 'Desagüe'],
+    ['Entrega', 'Empacado con protección']
   ]
 };
 
@@ -27,20 +27,20 @@ function getModeloSeleccionado() {
     return MODELOS[modeloActual];
   }
 
-  // Respaldo para evitar que el visor deje de funcionar si se reutiliza solo.
+  // Respaldo para evitar que el visor deje de funcionar.
   return {
-    nombre: 'Gabinete Lux S',
+    nombre: 'Lux Vanity S',
     precios: {
       conjunto: 2069,
       vanity: 1025,
       ovalin: 1044
     },
     specs_vanity: [
-      ['Material',    'MDF 15mm Blanco Frosty Navetta'],
-      ['Alto',        '40 cm'],
-      ['Ancho',       '40 cm'],
+      ['Material', 'MDF 15mm Blanco Frosty Navetta'],
+      ['Alto', '40 cm'],
+      ['Ancho', '40 cm'],
       ['Profundidad', '40 cm'],
-      ['Puertas',     '2 puertas con bisagra'],
+      ['Puertas', '2 puertas con bisagra'],
       ['Instalación', 'Colgante — montaje en pared']
     ]
   };
@@ -99,7 +99,7 @@ function getDatosPieza(pieza) {
     precio: precio,
     nota: 'IVA incluido · Entrega en Puebla',
     specs: specsMueble.concat([
-      ['Ovalín',  'Bowl cerámico · Diámetro 32 cm'],
+      ['Ovalín', 'Bowl cerámico · Diámetro 32 cm'],
       ['Entrega', 'Desarmado, listo para armar']
     ])
   };
@@ -152,7 +152,6 @@ function selectPiece(pieza) {
     elOvalin.classList.add('dimmed');
   }
 
-  // El precio base ahora proviene del modelo seleccionado.
   window.currentBasePrice = datos.precio;
 
   if (typeof updateTotal === 'function') {
