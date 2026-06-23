@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="description" content="Lux Concept Store MX — Muebles de diseño fabricados en Puebla. Muebles de baño, cocinas, mesas de piedra y más. Entrega directa en Puebla, sin intermediarios.">
-  <meta name="keywords" content="muebles puebla, muebles de baño puebla, cocinas puebla, mesas de piedra, muebles a medida puebla">
+  <meta name="description" content="Lux Concept Store MX — Muebles de diseño fabricados en Puebla. Muebles de baño, cocinas, persianas, mesas de piedra y más. Entrega directa en Puebla, sin intermediarios.">
+  <meta name="keywords" content="muebles puebla, muebles de baño puebla, cocinas puebla, persianas puebla, mesas de piedra, muebles a medida puebla">
   <meta name="author" content="Lux Concept Store MX">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="Lux Concept Store MX — Muebles · Puebla">
@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/mobile.css">
+  <link rel="canonical" href="https://luxstoremx.netlify.app/">
 </head>
 <body>
 
@@ -29,9 +30,8 @@
       <ul class="nav-links">
         <li><a href="pages/bano.html">Muebles de Baño</a></li>
         <li><a href="pages/cocinas.html">Cocinas</a></li>
-        <li><a href="pages/cortinas.html">Cortinas</a></li>
+        <li><a href="pages/persianas.html">Persianas</a></li>
         <li><a href="pages/mesas-piedra.html">Mesas de Piedra</a></li>
-        <li><a href="pages/nuur.html">NUUR</a></li>
         <li><a href="pages/colors.html" class="nav-colors">COLORS</a></li>
         <li>
           <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
@@ -39,13 +39,6 @@
         </li>
       </ul>
       <div class="nav-actions">
-        <a href="pages/cuenta.html" class="nav-icon" aria-label="Mi cuenta">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </a>
         <a href="#" class="nav-icon" aria-label="Carrito">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
@@ -63,9 +56,8 @@
   <div class="nav-mobile-menu" id="mobile-menu">
     <a href="pages/bano.html">Muebles de Baño</a>
     <a href="pages/cocinas.html">Cocinas</a>
-    <a href="pages/cortinas.html">Cortinas</a>
+    <a href="pages/persianas.html">Persianas</a>
     <a href="pages/mesas-piedra.html">Mesas de Piedra</a>
-    <a href="pages/nuur.html">NUUR</a>
     <a href="pages/colors.html">COLORS</a>
     <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" target="_blank" class="nav-cta">Cotiza a tu medida</a>
   </div>
@@ -90,7 +82,7 @@
       </div>
     </div>
     <div class="hero-visual">
-      <div class="hero-img-box">
+      <div class="hero-img-box" id="hero-carousel-link" role="link" tabindex="0" aria-label="Abrir producto destacado" style="cursor:pointer;">
         <img id="hero-carousel-img"
              src="assets/products/bano/gabinete.jpeg"
              alt="Lux Concept — Producto"
@@ -104,23 +96,42 @@
 
     <script>
       const HERO_SLIDES = [
-        { src: 'assets/products/bano/gabinete.jpeg', label: 'Disponible ahora', name: 'Lux Vanity S · Blanco Frosty' },
-        { src: 'assets/products/bano/gabinete2.jpeg', label: 'Disponible ahora', name: 'Lux Vanity M · 75×40×40 cm' },
-        { src: 'assets/products/bano/gabinete3.jpeg', label: 'Disponible ahora', name: 'Lux Vanity L · 75×50×40 cm' },
-        { src: 'assets/products/mesas-piedra/MESA.jpeg', label: 'Disponible ahora', name: 'Mesa Redonda · Piedra Ascale' },
+        { href: 'pages/bano.html', src: 'assets/products/bano/gabinete.jpeg', label: 'Disponible ahora', name: 'Lux Vanity S · Blanco Frosty' },
+        { href: 'pages/bano.html', src: 'assets/products/bano/gabinete2.jpeg', label: 'Disponible ahora', name: 'Lux Vanity M · 75×40×40 cm' },
+        { href: 'pages/bano.html', src: 'assets/products/bano/gabinete3.jpeg', label: 'Disponible ahora', name: 'Lux Vanity L · 75×50×40 cm' },
+        { href: 'pages/mesas-piedra.html', src: 'assets/products/mesas-piedra/MESA.jpeg', label: 'Disponible ahora', name: 'Mesa Redonda · Piedra Ascale' },
 
-        { src: 'assets/products/cocinas/botellero/botellero.jpeg', label: 'Muebles de cocina', name: 'Lux Wine Rack · 50×180×30 cm' },
-        { src: 'assets/products/cocinas/alacena1/alacena1.jpeg', label: 'Muebles de cocina', name: 'Lux Cook S · 60×50×30 cm' },
-        { src: 'assets/products/cocinas/alacena2/alacena2.jpeg', label: 'Muebles de cocina', name: 'Lux Cook M · 80×50×30 cm' },
-        { src: 'assets/products/cocinas/alacena3/alacena3.jpeg', label: 'Muebles de cocina', name: 'Lux Cook L · 100×70×30 cm' },
+        { href: 'pages/cocinas.html', src: 'assets/products/cocinas/botellero/botellero.jpeg', label: 'Muebles de cocina', name: 'Lux Wine Rack · 50×180×30 cm' },
+        { href: 'pages/cocinas.html', src: 'assets/products/cocinas/alacena1/alacena1.jpeg', label: 'Muebles de cocina', name: 'Lux Cook S · 60×50×30 cm' },
+        { href: 'pages/cocinas.html', src: 'assets/products/cocinas/alacena2/alacena2.jpeg', label: 'Muebles de cocina', name: 'Lux Cook M · 80×50×30 cm' },
+        { href: 'pages/cocinas.html', src: 'assets/products/cocinas/alacena3/alacena3.jpeg', label: 'Muebles de cocina', name: 'Lux Cook L · 100×70×30 cm' },
 
-        { src: 'assets/products/Cortinas/1/1.jpeg', label: 'Cotización a medida', name: 'Cortina 1 · Colección Lux' },
-        { src: 'assets/products/Cortinas/2/1.jpeg', label: 'Cotización a medida', name: 'Cortina 2 · Colección Lux' },
-        { src: 'assets/products/Cortinas/3/1.jpeg', label: 'Cotización a medida', name: 'Cortina 3 · Colección Lux' },
-        { src: 'assets/products/Cortinas/4/1.jpeg', label: 'Cotización a medida', name: 'Cortina 4 · Colección Lux' },
-        { src: 'assets/products/Cortinas/5/1.jpeg', label: 'Cotización a medida', name: 'Cortina 5 · Colección Lux' },
-        { src: 'assets/products/Cortinas/6/1.jpeg', label: 'Cotización a medida', name: 'Cortina 6 · Colección Lux' }
+        { href: 'pages/persianas.html', src: 'assets/products/Cortinas/1/1.jpeg', label: 'Cotización a medida', name: 'Persiana 1 · Colección Lux' },
+        { href: 'pages/persianas.html', src: 'assets/products/Cortinas/2/1.jpeg', label: 'Cotización a medida', name: 'Persiana 2 · Colección Lux' },
+        { href: 'pages/persianas.html', src: 'assets/products/Cortinas/3/1.jpeg', label: 'Cotización a medida', name: 'Persiana 3 · Colección Lux' },
+        { href: 'pages/persianas.html', src: 'assets/products/Cortinas/4/1.jpeg', label: 'Cotización a medida', name: 'Persiana 4 · Colección Lux' },
+        { href: 'pages/persianas.html', src: 'assets/products/Cortinas/5/1.jpeg', label: 'Cotización a medida', name: 'Persiana 5 · Colección Lux' },
+        { href: 'pages/persianas.html', src: 'assets/products/Cortinas/6/1.jpeg', label: 'Cotización a medida', name: 'Persiana 6 · Colección Lux' }
       ];
+
+
+      const heroCarouselLink = document.getElementById('hero-carousel-link');
+
+      function openHeroProduct() {
+        const href = heroCarouselLink && heroCarouselLink.dataset.href;
+        if (href) window.location.href = href;
+      }
+
+      if (heroCarouselLink) {
+        heroCarouselLink.dataset.href = HERO_SLIDES[0].href;
+        heroCarouselLink.addEventListener('click', openHeroProduct);
+        heroCarouselLink.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openHeroProduct();
+          }
+        });
+      }
 
       let heroUsed = [];
 
@@ -142,6 +153,7 @@
             image.style.opacity = '1';
             document.getElementById('hero-badge-label').textContent = selected.label;
             document.getElementById('hero-badge-name').textContent = selected.name;
+            if (heroCarouselLink) heroCarouselLink.dataset.href = selected.href;
           };
 
           image.onerror = () => {
@@ -251,9 +263,8 @@
           <ul>
             <li><a href="pages/bano.html">Muebles de Baño</a></li>
             <li><a href="pages/cocinas.html">Cocinas</a></li>
-            <li><a href="pages/cortinas.html">Cortinas</a></li>
+            <li><a href="pages/persianas.html">Persianas</a></li>
             <li><a href="pages/mesas-piedra.html">Mesas de Piedra</a></li>
-            <li><a href="pages/nuur.html">NUUR</a></li>
             <li><a href="pages/colors.html">COLORS</a></li>
           </ul>
         </div>
