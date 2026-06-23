@@ -29,7 +29,7 @@
       <ul class="nav-links">
         <li><a href="pages/bano.html">Muebles de Baño</a></li>
         <li><a href="pages/cocinas.html">Cocinas</a></li>
-        <li><a href="#">Cortinas</a></li>
+        <li><a href="pages/cortinas.html">Cortinas</a></li>
         <li><a href="pages/mesas-piedra.html">Mesas de Piedra</a></li>
         <li><a href="pages/nuur.html">NUUR</a></li>
         <li><a href="pages/colors.html" class="nav-colors">COLORS</a></li>
@@ -39,7 +39,7 @@
         </li>
       </ul>
       <div class="nav-actions">
-        <a href="#" class="nav-icon" aria-label="Mi cuenta">
+        <a href="pages/cuenta.html" class="nav-icon" aria-label="Mi cuenta">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -63,7 +63,7 @@
   <div class="nav-mobile-menu" id="mobile-menu">
     <a href="pages/bano.html">Muebles de Baño</a>
     <a href="pages/cocinas.html">Cocinas</a>
-    <a href="#">Cortinas</a>
+    <a href="pages/cortinas.html">Cortinas</a>
     <a href="pages/mesas-piedra.html">Mesas de Piedra</a>
     <a href="pages/nuur.html">NUUR</a>
     <a href="pages/colors.html">COLORS</a>
@@ -136,11 +136,22 @@
         image.style.opacity = '0';
 
         setTimeout(() => {
-          image.src = selected.src;
+          const previousSrc = image.src;
+
+          image.onload = () => {
+            image.style.opacity = '1';
+            document.getElementById('hero-badge-label').textContent = selected.label;
+            document.getElementById('hero-badge-name').textContent = selected.name;
+          };
+
+          image.onerror = () => {
+            image.onerror = null;
+            image.src = previousSrc;
+            image.style.opacity = '1';
+          };
+
           image.alt = selected.name;
-          image.onload = () => { image.style.opacity = '1'; };
-          document.getElementById('hero-badge-label').textContent = selected.label;
-          document.getElementById('hero-badge-name').textContent = selected.name;
+          image.src = selected.src;
         }, 600);
       }
 
@@ -240,6 +251,7 @@
           <ul>
             <li><a href="pages/bano.html">Muebles de Baño</a></li>
             <li><a href="pages/cocinas.html">Cocinas</a></li>
+            <li><a href="pages/cortinas.html">Cortinas</a></li>
             <li><a href="pages/mesas-piedra.html">Mesas de Piedra</a></li>
             <li><a href="pages/nuur.html">NUUR</a></li>
             <li><a href="pages/colors.html">COLORS</a></li>
@@ -256,14 +268,14 @@
         <div class="footer-col">
           <h4>Empresa</h4>
           <ul>
-            <li><a href="#">Aviso de privacidad</a></li>
-            <li><a href="#">Términos y condiciones</a></li>
-            <li><a href="#">Política de envíos</a></li>
+            <li><a href="pages/legal.html#privacidad">Aviso de privacidad</a></li>
+            <li><a href="pages/legal.html#terminos">Términos y condiciones</a></li>
+            <li><a href="pages/legal.html#envios">Política de envíos</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">© 2025 Lux Concept Store MX. Todos los derechos reservados.</p>
+        <p class="footer-copy">© 2026 Lux Concept Store MX. Todos los derechos reservados.</p>
         <div class="footer-social">
           <a href="https://www.instagram.com/lux_conceptmx/" target="_blank" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
