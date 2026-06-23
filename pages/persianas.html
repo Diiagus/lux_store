@@ -95,7 +95,7 @@
 
     .curtain-image-wrap {
       position: relative;
-      aspect-ratio: 4 / 3;
+      height: clamp(290px, 30vw, 410px);
       background: #fff;
       overflow: hidden;
       display: flex;
@@ -104,12 +104,14 @@
     }
 
     .curtain-image {
+      display: block;
       width: 100%;
       height: 100%;
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
       object-position: center;
-      display: block;
-      padding: 14px;
+      padding: 18px;
       box-sizing: border-box;
       background: #fff;
       transition: opacity .18s ease;
@@ -319,6 +321,32 @@
     .blind-info-card span{display:block;font-size:12px;line-height:1.55;color:#6e6e73}
     @media(max-width:760px){.blind-info-grid{grid-template-columns:1fr}}
 
+
+    .curtain-image-wrap.image-missing::after {
+      content: "Imagen temporalmente no disponible";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      text-align: center;
+      color: #86868b;
+      background: #f5f5f7;
+      font-size: 13px;
+    }
+
+    .curtain-image-wrap.image-missing .image-switch,
+    .curtain-image-wrap.image-missing .image-counter {
+      display: none;
+    }
+
+    @media (max-width: 620px) {
+      .curtain-image-wrap {
+        height: 300px;
+      }
+    }
+
   </style>
   <link rel="canonical" href="https://luxstoremx.netlify.app/pages/persianas.html">
 </head>
@@ -405,18 +433,18 @@
               id="curtain-img-1"
               src="../assets/products/Cortinas/1/1.jpeg"
               alt="Persiana 1"
-            >
+             decoding="async" fetchpriority="high" onerror="handleBlindImageError(this)">
             <span class="image-counter" id="counter-1">1 / 2</span>
             <div class="image-switch">
-              <button type="button" class="active" onclick="changeCurtainImage(1, 1, this)">Vista 1</button>
-              <button type="button" onclick="changeCurtainImage(1, 2, this)">Vista 2</button>
+              <button type="button" class="active" aria-pressed="true" onclick="changeBlindImage(1, 1, this)">Vista 1</button>
+              <button type="button" aria-pressed="false" onclick="changeBlindImage(1, 2, this)">Vista 2</button>
             </div>
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
             <h2 class="curtain-name">Persiana 1</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
-            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%201.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Persiana%201.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
         </article>
 
@@ -426,13 +454,13 @@
               class="curtain-image"
               src="../assets/products/Cortinas/2/1.jpeg"
               alt="Persiana 2"
-            >
+             decoding="async" loading="lazy" onerror="handleBlindImageError(this)">
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
             <h2 class="curtain-name">Persiana 2</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
-            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%202.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Persiana%202.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
         </article>
 
@@ -442,13 +470,13 @@
               class="curtain-image"
               src="../assets/products/Cortinas/3/1.jpeg"
               alt="Persiana 3"
-            >
+             decoding="async" loading="lazy" onerror="handleBlindImageError(this)">
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
             <h2 class="curtain-name">Persiana 3</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
-            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%203.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Persiana%203.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
         </article>
 
@@ -459,18 +487,18 @@
               id="curtain-img-4"
               src="../assets/products/Cortinas/4/1.jpeg"
               alt="Persiana 4"
-            >
+             decoding="async" loading="lazy" onerror="handleBlindImageError(this)">
             <span class="image-counter" id="counter-4">1 / 2</span>
             <div class="image-switch">
-              <button type="button" class="active" onclick="changeCurtainImage(4, 1, this)">Vista 1</button>
-              <button type="button" onclick="changeCurtainImage(4, 2, this)">Vista 2</button>
+              <button type="button" class="active" aria-pressed="true" onclick="changeBlindImage(4, 1, this)">Vista 1</button>
+              <button type="button" aria-pressed="false" onclick="changeBlindImage(4, 2, this)">Vista 2</button>
             </div>
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
             <h2 class="curtain-name">Persiana 4</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
-            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%204.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Persiana%204.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
         </article>
 
@@ -481,18 +509,18 @@
               id="curtain-img-5"
               src="../assets/products/Cortinas/5/1.jpeg"
               alt="Persiana 5"
-            >
+             decoding="async" loading="lazy" onerror="handleBlindImageError(this)">
             <span class="image-counter" id="counter-5">1 / 2</span>
             <div class="image-switch">
-              <button type="button" class="active" onclick="changeCurtainImage(5, 1, this)">Vista 1</button>
-              <button type="button" onclick="changeCurtainImage(5, 2, this)">Vista 2</button>
+              <button type="button" class="active" aria-pressed="true" onclick="changeBlindImage(5, 1, this)">Vista 1</button>
+              <button type="button" aria-pressed="false" onclick="changeBlindImage(5, 2, this)">Vista 2</button>
             </div>
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
             <h2 class="curtain-name">Persiana 5</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
-            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%205.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Persiana%205.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
         </article>
 
@@ -502,13 +530,13 @@
               class="curtain-image"
               src="../assets/products/Cortinas/6/1.jpeg"
               alt="Persiana 6"
-            >
+             decoding="async" loading="lazy" onerror="handleBlindImageError(this)">
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
             <h2 class="curtain-name">Persiana 6</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
-            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%206.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
+            <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Persiana%206.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
         </article>
 
@@ -545,7 +573,7 @@
             class="primary"
             target="_blank"
             rel="noopener"
-            href="https://wa.me/527771071589?text=Hola%2C%20quiero%20cotizar%20una%20cortina.%20Tengo%20las%20medidas%20y%20una%20foto%20de%20mi%20ventana."
+            href="https://wa.me/527771071589?text=Hola%2C%20quiero%20cotizar%20una%20persiana.%20Tengo%20las%20medidas%20y%20una%20foto%20de%20mi%20ventana."
           >Cotizar por WhatsApp</a>
 
           <a
@@ -620,35 +648,53 @@
       });
     }
 
-    function changeCurtainImage(model, view, button) {
+    function handleBlindImageError(image) {
+      const wrapper = image.closest('.curtain-image-wrap');
+      image.style.display = 'none';
+      if (wrapper) wrapper.classList.add('image-missing');
+    }
+
+    function changeBlindImage(model, view, button) {
       const image = document.getElementById('curtain-img-' + model);
       const counter = document.getElementById('counter-' + model);
 
-      if (!image) {
-        return;
-      }
+      if (!image) return;
 
+      const nextSrc = '../assets/products/Cortinas/' + model + '/' + view + '.jpeg';
+      const loader = new Image();
+
+      button.disabled = true;
       image.style.opacity = '0';
 
-      window.setTimeout(function () {
-        image.src = '../assets/products/Cortinas/' + model + '/' + view + '.jpeg';
+      loader.onload = function () {
+        const wrapper = image.closest('.curtain-image-wrap');
+
+        if (wrapper) wrapper.classList.remove('image-missing');
+        image.style.display = 'block';
+        image.src = nextSrc;
         image.alt = 'Persiana ' + model + ' - Vista ' + view;
         image.style.opacity = '1';
-      }, 120);
 
-      if (counter) {
-        counter.textContent = view + ' / 2';
-      }
+        if (counter) counter.textContent = view + ' / 2';
 
-      const switcher = button.closest('.image-switch');
+        const switcher = button.closest('.image-switch');
+        if (switcher) {
+          switcher.querySelectorAll('button').forEach(function (item) {
+            const active = item === button;
+            item.classList.toggle('active', active);
+            item.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+        }
 
-      if (switcher) {
-        switcher.querySelectorAll('button').forEach(function (item) {
-          item.classList.remove('active');
-        });
-      }
+        button.disabled = false;
+      };
 
-      button.classList.add('active');
+      loader.onerror = function () {
+        image.style.opacity = '1';
+        button.disabled = false;
+      };
+
+      loader.src = nextSrc;
     }
   </script>
 
