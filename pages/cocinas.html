@@ -1,67 +1,935 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="../favicon.svg"><title>Cocinas a medida en Puebla — Lux Concept</title>
-<meta name="description" content="Diseño y fabricación de cocinas a medida en Puebla. Selecciona distribución, materiales y acabados con Lux Concept.">
-<link rel="stylesheet" href="../css/nav.css"><link rel="stylesheet" href="../css/main.css"><link rel="stylesheet" href="../css/footer.css"><link rel="stylesheet" href="../css/mobile.css">
-<style>
-.k-hero{max-width:1200px;margin:0 auto;padding:72px 5% 64px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.k-eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6e6e73;margin-bottom:14px}.k-hero h1{font-size:clamp(42px,6vw,78px);line-height:1.02;letter-spacing:-.035em;margin:0 0 20px}.k-hero p{font-size:17px;line-height:1.65;color:#6e6e73;max-width:520px}.k-actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
-.k-visual{min-height:460px;border-radius:26px;background:#f5f5f7;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:34px}.k-wall{position:absolute;inset:0;background:linear-gradient(145deg,#f7f4ef 0 55%,#ded6cb 55% 57%,#eee8df 57%)}.k-cabinets{position:relative;width:100%;display:grid;grid-template-columns:1.4fr .85fr .85fr;gap:8px;align-items:end}.k-cab{background:#c4a781;border-radius:3px 3px 0 0;box-shadow:0 18px 35px rgba(0,0,0,.12)}.k-cab:nth-child(1){height:205px}.k-cab:nth-child(2){height:285px;background:#2d2d2d}.k-cab:nth-child(3){height:205px}.k-counter{position:absolute;height:12px;background:#f3f0ea;left:0;right:0;bottom:205px;border-radius:3px}
-.k-section{max-width:1200px;margin:0 auto;padding:74px 5%}.k-section h2{font-size:clamp(30px,4vw,52px);letter-spacing:-.025em;margin-bottom:14px}.k-lead{color:#6e6e73;font-size:17px;line-height:1.65;max-width:650px;margin-bottom:36px}.k-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.k-card{padding:28px;border:1px solid #e8e8ed;border-radius:20px;background:white}.k-card span{display:block;font-size:11px;color:#6e6e73;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}.k-card h3{font-size:20px;margin-bottom:9px}.k-card p{font-size:14px;color:#6e6e73;line-height:1.6}
-.k-form{background:#f5f5f7;border-radius:26px;padding:38px;display:grid;grid-template-columns:1fr 1fr;gap:18px}.k-field{display:flex;flex-direction:column;gap:7px}.k-field.full{grid-column:1/-1}.k-field label{font-size:12px;color:#6e6e73}.k-field select,.k-field input,.k-field textarea{font:inherit;padding:13px 15px;border:1px solid #d2d2d7;border-radius:12px;background:white;outline:none}.k-field textarea{min-height:110px;resize:vertical}.k-submit{grid-column:1/-1;border:0;border-radius:980px;background:#1d1d1f;color:white;padding:15px;font-size:15px;font-weight:600;cursor:pointer}
-@media(max-width:800px){.k-hero{grid-template-columns:1fr;padding-top:46px}.k-visual{min-height:330px}.k-grid{grid-template-columns:1fr}.k-form{grid-template-columns:1fr}.k-field.full,.k-submit{grid-column:auto}}
-</style></head><body><nav class="nav">
-  <div class="nav-inner">
-    <a href="../index.html" class="nav-logo"><img src="../assets/logos/logo-black.png" alt="Lux Concept"></a>
-    <ul class="nav-links">
-      <li><a href="bano.html">Muebles de Baño</a></li>
-      <li><a href="cocinas.html">Cocinas</a></li>
-      <li><a href="cortinas.html">Cortinas</a></li>
-      <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
-      <li><a href="nuur.html">NUUR</a></li>
-      <li><a href="colors.html" class="nav-colors">COLORS</a></li>
-      <li><a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" target="_blank" rel="noopener" class="nav-cta">Cotiza a tu medida</a></li>
-    </ul>
-    <div class="nav-actions">
-      <a href="cuenta.html" class="nav-icon" aria-label="Mi cuenta">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </a>
-      <a href="#" class="nav-icon" aria-label="Carrito">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-      </a>
-      <button class="nav-hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-</nav>
-<div class="nav-mobile-menu" id="mobile-menu">
-  <a href="bano.html">Muebles de Baño</a><a href="cocinas.html">Cocinas</a><a href="cortinas.html">Cortinas</a>
-  <a href="mesas-piedra.html">Mesas de Piedra</a><a href="nuur.html">NUUR</a><a href="colors.html">COLORS</a>
-  <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" target="_blank" rel="noopener" class="nav-cta">Cotiza a tu medida</a>
-</div>
-<main><section class="k-hero"><div><p class="k-eyebrow">Cocinas · Fabricación en Puebla</p><h1>Diseñada para tu espacio.</h1><p>Cada cocina comienza con tus medidas, tu forma de cocinar y el acabado que quieres ver todos los días. Diseñamos y fabricamos proyectos a medida.</p><div class="k-actions"><a class="btn-primary" href="#cotizar">Iniciar cotización</a><a class="btn-secondary" href="colors.html">Explorar materiales →</a></div></div><div class="k-visual" aria-label="Representación de una cocina Lux Concept"><div class="k-wall"></div><div class="k-cabinets"><div class="k-cab"></div><div class="k-cab"></div><div class="k-cab"></div><div class="k-counter"></div></div></div></section>
-<section class="k-section"><p class="k-eyebrow">Un proyecto, paso a paso</p><h2>De la idea a la instalación.</h2><p class="k-lead">La cotización final depende de las medidas, distribución, materiales, herrajes y accesorios elegidos.</p><div class="k-grid"><article class="k-card"><span>01</span><h3>Medimos y entendemos</h3><p>Revisamos el espacio, necesidades de almacenamiento, instalaciones y estilo deseado.</p></article><article class="k-card"><span>02</span><h3>Diseñamos y cotizamos</h3><p>Definimos distribución, materiales, colores, herrajes y alcance del proyecto.</p></article><article class="k-card"><span>03</span><h3>Fabricamos e instalamos</h3><p>El proyecto pasa a fabricación y coordinamos la entrega e instalación en Puebla.</p></article></div></section>
-<section class="k-section" id="cotizar"><p class="k-eyebrow">Cuéntanos tu proyecto</p><h2>Solicita una cotización.</h2><p class="k-lead">Completa los datos básicos. La información se enviará por WhatsApp para continuar la atención.</p><form class="k-form" id="kitchen-form"><div class="k-field"><label for="k-name">Nombre</label><input id="k-name" required></div><div class="k-field"><label for="k-zone">Municipio o colonia</label><input id="k-zone" required></div><div class="k-field"><label for="k-layout">Distribución aproximada</label><select id="k-layout"><option>Por definir</option><option>Lineal</option><option>En L</option><option>En U</option><option>Con isla</option></select></div><div class="k-field"><label for="k-stage">Etapa del proyecto</label><select id="k-stage"><option>Solo estoy cotizando</option><option>Ya tengo medidas</option><option>Ya tengo diseño o planos</option><option>Necesito visita y medición</option></select></div><div class="k-field full"><label for="k-notes">Medidas, idea o detalles</label><textarea id="k-notes" placeholder="Describe el espacio y lo que necesitas..."></textarea></div><button class="k-submit" type="submit">Enviar solicitud por WhatsApp</button></form></section></main><footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand"><img src="../assets/logos/logo-black.png" alt="Lux Concept Store MX"><p>Muebles de diseño fabricados en Cuautlancingo, Puebla. Directo a tu hogar, sin intermediarios.</p><span class="footer-badge">Entrega en Puebla</span></div>
-      <div class="footer-col"><h4>Catálogo</h4><ul><li><a href="bano.html">Muebles de Baño</a></li><li><a href="cocinas.html">Cocinas</a></li><li><a href="cortinas.html">Cortinas</a></li><li><a href="mesas-piedra.html">Mesas de Piedra</a></li><li><a href="nuur.html">NUUR</a></li><li><a href="colors.html">COLORS</a></li></ul></div>
-      <div class="footer-col"><h4>Contacto</h4><ul><li><a href="https://wa.me/527771071589" target="_blank" rel="noopener">WhatsApp · 777 107 1589</a></li><li><a href="https://www.instagram.com/lux_conceptmx/" target="_blank" rel="noopener">@lux_conceptmx</a></li><li><a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar." target="_blank" rel="noopener">Cotiza a tu medida →</a></li></ul></div>
-      <div class="footer-col"><h4>Empresa</h4><ul><li><a href="legal.html#privacidad">Aviso de privacidad</a></li><li><a href="legal.html#terminos">Términos y condiciones</a></li><li><a href="legal.html#envios">Política de envíos</a></li></ul></div>
-    </div>
-    <div class="footer-bottom"><p class="footer-copy">© 2026 Lux Concept Store MX. Todos los derechos reservados.</p></div>
-  </div>
-</footer><script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
-  }
-</script>
-<script>document.getElementById('kitchen-form').addEventListener('submit',function(e){e.preventDefault();const n=document.getElementById('k-name').value.trim(),z=document.getElementById('k-zone').value.trim(),l=document.getElementById('k-layout').value,s=document.getElementById('k-stage').value,d=document.getElementById('k-notes').value.trim();const msg=`Hola, me interesa cotizar una cocina a medida.
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <title>Cocinas y muebles de cocina en Puebla — Lux Concept</title>
+  <meta name="description" content="Alacenas, botellero y cocinas a medida fabricadas en Puebla. Conoce Lux Cook S, M y L, Lux Wine Rack y solicita tu proyecto personalizado.">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/mobile.css">
 
-Nombre: ${n}
-Zona: ${z}
-Distribución: ${l}
-Etapa: ${s}
-Detalles: ${d||'Por definir'}`;window.open('https://wa.me/527771071589?text='+encodeURIComponent(msg),'_blank','noopener');});</script><script src="../js/cart.js"></script></body></html>
+  <style>
+    .k-hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 72px 5% 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .k-eyebrow {
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #6e6e73;
+      margin-bottom: 14px;
+    }
+
+    .k-hero h1 {
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 1.02;
+      letter-spacing: -.035em;
+      margin: 0 0 20px;
+    }
+
+    .k-hero p {
+      font-size: 17px;
+      line-height: 1.65;
+      color: #6e6e73;
+      max-width: 520px;
+    }
+
+    .k-actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .k-visual {
+      min-height: 460px;
+      border-radius: 26px;
+      background: #f5f5f7;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 34px;
+    }
+
+    .k-wall {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, #f7f4ef 0 55%, #ded6cb 55% 57%, #eee8df 57%);
+    }
+
+    .k-cabinets {
+      position: relative;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.4fr .85fr .85fr;
+      gap: 8px;
+      align-items: end;
+    }
+
+    .k-cab {
+      background: #c4a781;
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 18px 35px rgba(0, 0, 0, .12);
+    }
+
+    .k-cab:nth-child(1) { height: 205px; }
+    .k-cab:nth-child(2) { height: 285px; background: #2d2d2d; }
+    .k-cab:nth-child(3) { height: 205px; }
+
+    .k-counter {
+      position: absolute;
+      height: 12px;
+      background: #f3f0ea;
+      left: 0;
+      right: 0;
+      bottom: 205px;
+      border-radius: 3px;
+    }
+
+    .k-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 74px 5%;
+    }
+
+    .k-section h2 {
+      font-size: clamp(30px, 4vw, 52px);
+      letter-spacing: -.025em;
+      margin-bottom: 14px;
+    }
+
+    .k-lead {
+      color: #6e6e73;
+      font-size: 17px;
+      line-height: 1.65;
+      max-width: 680px;
+      margin-bottom: 36px;
+    }
+
+    .k-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .k-card {
+      padding: 28px;
+      border: 1px solid #e8e8ed;
+      border-radius: 20px;
+      background: white;
+    }
+
+    .k-card span {
+      display: block;
+      font-size: 11px;
+      color: #6e6e73;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .k-card h3 {
+      font-size: 20px;
+      margin-bottom: 9px;
+    }
+
+    .k-card p {
+      font-size: 14px;
+      color: #6e6e73;
+      line-height: 1.6;
+    }
+
+    /* Catálogo de muebles estándar */
+    .k-products-section {
+      background: #f5f5f7;
+      border-top: 1px solid #e8e8ed;
+      border-bottom: 1px solid #e8e8ed;
+    }
+
+    .k-products-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 76px 5% 84px;
+    }
+
+    .k-products-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 36px;
+    }
+
+    .k-products-head h2 {
+      font-size: clamp(32px, 4.5vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      margin: 0 0 12px;
+    }
+
+    .k-products-head p:not(.k-eyebrow) {
+      max-width: 650px;
+      color: #6e6e73;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .k-products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .k-product-card {
+      background: #fff;
+      border: 1px solid #e4e4e8;
+      border-radius: 24px;
+      overflow: hidden;
+      min-width: 0;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .k-product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, .08);
+    }
+
+    .k-product-media {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .k-product-media img {
+      width: 88%;
+      height: 88%;
+      object-fit: contain;
+      transition: opacity .22s ease, transform .3s ease;
+    }
+
+    .k-product-card:hover .k-product-media img {
+      transform: scale(1.025);
+    }
+
+    .k-view-switch {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      display: flex;
+      gap: 6px;
+      padding: 5px;
+      background: rgba(255, 255, 255, .9);
+      border: 1px solid rgba(0, 0, 0, .08);
+      border-radius: 980px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 5px 18px rgba(0, 0, 0, .08);
+    }
+
+    .k-view-btn {
+      border: 0;
+      background: transparent;
+      color: #6e6e73;
+      padding: 7px 12px;
+      border-radius: 980px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      transition: background .15s ease, color .15s ease;
+    }
+
+    .k-view-btn.active {
+      background: #1d1d1f;
+      color: #fff;
+    }
+
+    .k-product-body {
+      padding: 24px 25px 26px;
+    }
+
+    .k-product-cat {
+      font-size: 11px;
+      color: #6e6e73;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .k-product-title-row {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 10px;
+    }
+
+    .k-product-title-row h3 {
+      font-size: 24px;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    .k-product-price {
+      white-space: nowrap;
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -.02em;
+      color: #1d1d1f;
+    }
+
+    .k-product-price small {
+      display: block;
+      text-align: right;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: .04em;
+      color: #6e6e73;
+      margin-top: 2px;
+    }
+
+    .k-product-desc {
+      color: #6e6e73;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 45px;
+      margin-bottom: 17px;
+    }
+
+    .k-product-specs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid #ededf0;
+      border-bottom: 1px solid #ededf0;
+      margin-bottom: 20px;
+    }
+
+    .k-product-spec {
+      padding: 14px 10px;
+      text-align: center;
+      border-right: 1px solid #ededf0;
+    }
+
+    .k-product-spec:last-child { border-right: 0; }
+
+    .k-product-spec span {
+      display: block;
+      font-size: 10px;
+      color: #86868b;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .k-product-spec strong {
+      font-size: 13px;
+      color: #1d1d1f;
+      font-weight: 600;
+    }
+
+    .k-product-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .k-add-btn {
+      flex: 1;
+      border: 0;
+      border-radius: 980px;
+      padding: 14px 18px;
+      background: #1d1d1f;
+      color: #fff;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s ease, transform .15s ease;
+    }
+
+    .k-add-btn:hover { background: #3a3a3c; }
+    .k-add-btn:active { transform: scale(.985); }
+
+    .k-added-message {
+      display: none;
+      color: #1a7a3e;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .k-added-message.show { display: inline; }
+
+    .k-products-note {
+      margin-top: 24px;
+      color: #6e6e73;
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .k-form {
+      background: #f5f5f7;
+      border-radius: 26px;
+      padding: 38px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .k-field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .k-field.full { grid-column: 1 / -1; }
+    .k-field label { font-size: 12px; color: #6e6e73; }
+
+    .k-field select,
+    .k-field input,
+    .k-field textarea {
+      font: inherit;
+      padding: 13px 15px;
+      border: 1px solid #d2d2d7;
+      border-radius: 12px;
+      background: white;
+      outline: none;
+    }
+
+    .k-field textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .k-submit {
+      grid-column: 1 / -1;
+      border: 0;
+      border-radius: 980px;
+      background: #1d1d1f;
+      color: white;
+      padding: 15px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .k-products-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 800px) {
+      .k-hero {
+        grid-template-columns: 1fr;
+        padding-top: 46px;
+      }
+
+      .k-visual { min-height: 330px; }
+      .k-grid { grid-template-columns: 1fr; }
+      .k-form { grid-template-columns: 1fr; }
+      .k-field.full, .k-submit { grid-column: auto; }
+      .k-products-head { display: block; }
+    }
+
+    @media (max-width: 540px) {
+      .k-products-inner { padding-left: 4%; padding-right: 4%; }
+      .k-product-title-row { display: block; }
+      .k-product-price { margin-top: 10px; }
+      .k-product-price small { display: inline; margin-left: 3px; }
+      .k-product-actions { align-items: stretch; flex-direction: column; }
+      .k-added-message { text-align: center; }
+      .k-product-spec { padding-left: 5px; padding-right: 5px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/logos/logo-black.png" alt="Lux Concept">
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="bano.html">Muebles de Baño</a></li>
+        <li><a href="cocinas.html">Cocinas</a></li>
+        <li><a href="cortinas.html">Cortinas</a></li>
+        <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
+        <li><a href="nuur.html">NUUR</a></li>
+        <li><a href="colors.html" class="nav-colors">COLORS</a></li>
+        <li>
+          <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
+             target="_blank" rel="noopener" class="nav-cta">Cotiza a tu medida</a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="cuenta.html" class="nav-icon" aria-label="Mi cuenta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+
+        <a href="#" class="nav-icon" aria-label="Carrito">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+        </a>
+
+        <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-menu" id="mobile-menu">
+    <a href="bano.html">Muebles de Baño</a>
+    <a href="cocinas.html">Cocinas</a>
+    <a href="cortinas.html">Cortinas</a>
+    <a href="mesas-piedra.html">Mesas de Piedra</a>
+    <a href="nuur.html">NUUR</a>
+    <a href="colors.html">COLORS</a>
+    <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
+       target="_blank" rel="noopener" class="nav-cta">Cotiza a tu medida</a>
+  </div>
+
+  <main>
+    <section class="k-hero">
+      <div>
+        <p class="k-eyebrow">Cocinas · Fabricación en Puebla</p>
+        <h1>Diseñada para tu espacio.</h1>
+        <p>Cada cocina comienza con tus medidas, tu forma de cocinar y el acabado que quieres ver todos los días. Elige uno de nuestros muebles estándar o solicita un proyecto completamente a medida.</p>
+        <div class="k-actions">
+          <a class="btn-primary" href="#muebles-cocina">Ver muebles de cocina</a>
+          <a class="btn-secondary" href="#cotizar">Cotizar cocina a medida →</a>
+        </div>
+      </div>
+
+      <div class="k-visual" aria-label="Representación de una cocina Lux Concept">
+        <div class="k-wall"></div>
+        <div class="k-cabinets">
+          <div class="k-cab"></div>
+          <div class="k-cab"></div>
+          <div class="k-cab"></div>
+          <div class="k-counter"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="k-products-section" id="muebles-cocina">
+      <div class="k-products-inner">
+        <div class="k-products-head">
+          <div>
+            <p class="k-eyebrow">Colección estándar</p>
+            <h2>Muebles para organizar tu cocina.</h2>
+            <p>Cuatro diseños fabricados en Puebla: tres alacenas y un botellero vertical. Puedes pedirlos individualmente o integrarlos dentro de un proyecto de cocina a medida.</p>
+          </div>
+        </div>
+
+        <div class="k-products-grid">
+          <article class="k-product-card" data-product="wine-rack">
+            <div class="k-product-media">
+              <img id="img-wine-rack"
+                   src="../assets/products/cocinas/botellero/botellero.jpeg"
+                   alt="Lux Wine Rack, botellero vertical de cocina"
+                   loading="lazy">
+            </div>
+
+            <div class="k-product-body">
+              <p class="k-product-cat">Botellero · Cocina</p>
+              <div class="k-product-title-row">
+                <h3>Lux Wine Rack</h3>
+                <p class="k-product-price">$2,550 <small>MXN</small></p>
+              </div>
+              <p class="k-product-desc">Nicho vertical para organizar botellas y aprovechar espacios angostos dentro de la cocina.</p>
+
+              <div class="k-product-specs" aria-label="Medidas Lux Wine Rack">
+                <div class="k-product-spec"><span>Ancho</span><strong>50 cm</strong></div>
+                <div class="k-product-spec"><span>Alto</span><strong>180 cm</strong></div>
+                <div class="k-product-spec"><span>Prof.</span><strong>30 cm</strong></div>
+              </div>
+
+              <div class="k-product-actions">
+                <button class="k-add-btn" type="button" onclick="addKitchenProduct('wine-rack')">Agregar al carrito</button>
+                <span class="k-added-message" id="added-wine-rack" aria-live="polite">Agregado ✓</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="k-product-card" data-product="cook-s">
+            <div class="k-product-media">
+              <img id="img-cook-s"
+                   src="../assets/products/cocinas/alacena1/alacena1.jpeg"
+                   alt="Lux Cook S cerrada"
+                   loading="lazy">
+
+              <div class="k-view-switch" aria-label="Vista de Lux Cook S">
+                <button class="k-view-btn active" type="button"
+                        onclick="setKitchenImage('cook-s','closed',this)">Cerrada</button>
+                <button class="k-view-btn" type="button"
+                        onclick="setKitchenImage('cook-s','open',this)">Abierta</button>
+              </div>
+            </div>
+
+            <div class="k-product-body">
+              <p class="k-product-cat">Alacena · Cocina</p>
+              <div class="k-product-title-row">
+                <h3>Lux Cook S</h3>
+                <p class="k-product-price">$1,750 <small>MXN</small></p>
+              </div>
+              <p class="k-product-desc">Alacena compacta para almacenamiento superior. Ideal para cocinas pequeñas o composiciones modulares.</p>
+
+              <div class="k-product-specs" aria-label="Medidas Lux Cook S">
+                <div class="k-product-spec"><span>Ancho</span><strong>60 cm</strong></div>
+                <div class="k-product-spec"><span>Alto</span><strong>50 cm</strong></div>
+                <div class="k-product-spec"><span>Prof.</span><strong>30 cm</strong></div>
+              </div>
+
+              <div class="k-product-actions">
+                <button class="k-add-btn" type="button" onclick="addKitchenProduct('cook-s')">Agregar al carrito</button>
+                <span class="k-added-message" id="added-cook-s" aria-live="polite">Agregado ✓</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="k-product-card" data-product="cook-m">
+            <div class="k-product-media">
+              <img id="img-cook-m"
+                   src="../assets/products/cocinas/alacena2/alacena2.jpeg"
+                   alt="Lux Cook M cerrada"
+                   loading="lazy">
+
+              <div class="k-view-switch" aria-label="Vista de Lux Cook M">
+                <button class="k-view-btn active" type="button"
+                        onclick="setKitchenImage('cook-m','closed',this)">Cerrada</button>
+                <button class="k-view-btn" type="button"
+                        onclick="setKitchenImage('cook-m','open',this)">Abierta</button>
+              </div>
+            </div>
+
+            <div class="k-product-body">
+              <p class="k-product-cat">Alacena · Cocina</p>
+              <div class="k-product-title-row">
+                <h3>Lux Cook M</h3>
+                <p class="k-product-price">$1,950 <small>MXN</small></p>
+              </div>
+              <p class="k-product-desc">Alacena de dos puertas con dos nichos centrales para objetos de uso frecuente o decoración.</p>
+
+              <div class="k-product-specs" aria-label="Medidas Lux Cook M">
+                <div class="k-product-spec"><span>Ancho</span><strong>80 cm</strong></div>
+                <div class="k-product-spec"><span>Alto</span><strong>50 cm</strong></div>
+                <div class="k-product-spec"><span>Prof.</span><strong>30 cm</strong></div>
+              </div>
+
+              <div class="k-product-actions">
+                <button class="k-add-btn" type="button" onclick="addKitchenProduct('cook-m')">Agregar al carrito</button>
+                <span class="k-added-message" id="added-cook-m" aria-live="polite">Agregado ✓</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="k-product-card" data-product="cook-l">
+            <div class="k-product-media">
+              <img id="img-cook-l"
+                   src="../assets/products/cocinas/alacena3/alacena3.jpeg"
+                   alt="Lux Cook L cerrada"
+                   loading="lazy">
+
+              <div class="k-view-switch" aria-label="Vista de Lux Cook L">
+                <button class="k-view-btn active" type="button"
+                        onclick="setKitchenImage('cook-l','closed',this)">Cerrada</button>
+                <button class="k-view-btn" type="button"
+                        onclick="setKitchenImage('cook-l','open',this)">Abierta</button>
+              </div>
+            </div>
+
+            <div class="k-product-body">
+              <p class="k-product-cat">Alacena · Cocina</p>
+              <div class="k-product-title-row">
+                <h3>Lux Cook L</h3>
+                <p class="k-product-price">$2,500 <small>MXN</small></p>
+              </div>
+              <p class="k-product-desc">Alacena amplia de dos puertas y dos nichos centrales, pensada para ofrecer mayor capacidad de almacenamiento.</p>
+
+              <div class="k-product-specs" aria-label="Medidas Lux Cook L">
+                <div class="k-product-spec"><span>Ancho</span><strong>100 cm</strong></div>
+                <div class="k-product-spec"><span>Alto</span><strong>70 cm</strong></div>
+                <div class="k-product-spec"><span>Prof.</span><strong>30 cm</strong></div>
+              </div>
+
+              <div class="k-product-actions">
+                <button class="k-add-btn" type="button" onclick="addKitchenProduct('cook-l')">Agregar al carrito</button>
+                <span class="k-added-message" id="added-cook-l" aria-live="polite">Agregado ✓</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="k-products-note">Las fotografías muestran los modelos de referencia. La apariencia del color puede variar según la pantalla y la iluminación.</p>
+      </div>
+    </section>
+
+    <section class="k-section">
+      <p class="k-eyebrow">Un proyecto, paso a paso</p>
+      <h2>De la idea a la instalación.</h2>
+      <p class="k-lead">La cotización final depende de las medidas, distribución, materiales, herrajes y accesorios elegidos.</p>
+
+      <div class="k-grid">
+        <article class="k-card">
+          <span>01</span>
+          <h3>Medimos y entendemos</h3>
+          <p>Revisamos el espacio, necesidades de almacenamiento, instalaciones y estilo deseado.</p>
+        </article>
+
+        <article class="k-card">
+          <span>02</span>
+          <h3>Diseñamos y cotizamos</h3>
+          <p>Definimos distribución, materiales, colores, herrajes y alcance del proyecto.</p>
+        </article>
+
+        <article class="k-card">
+          <span>03</span>
+          <h3>Fabricamos e instalamos</h3>
+          <p>El proyecto pasa a fabricación y coordinamos la entrega e instalación en Puebla.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="k-section" id="cotizar">
+      <p class="k-eyebrow">Cuéntanos tu proyecto</p>
+      <h2>Solicita una cotización.</h2>
+      <p class="k-lead">Completa los datos básicos. La información se enviará por WhatsApp para continuar la atención.</p>
+
+      <form class="k-form" id="kitchen-form">
+        <div class="k-field">
+          <label for="k-name">Nombre</label>
+          <input id="k-name" required>
+        </div>
+
+        <div class="k-field">
+          <label for="k-zone">Municipio o colonia</label>
+          <input id="k-zone" required>
+        </div>
+
+        <div class="k-field">
+          <label for="k-layout">Distribución aproximada</label>
+          <select id="k-layout">
+            <option>Por definir</option>
+            <option>Lineal</option>
+            <option>En L</option>
+            <option>En U</option>
+            <option>Con isla</option>
+          </select>
+        </div>
+
+        <div class="k-field">
+          <label for="k-stage">Etapa del proyecto</label>
+          <select id="k-stage">
+            <option>Solo estoy cotizando</option>
+            <option>Ya tengo medidas</option>
+            <option>Ya tengo diseño o planos</option>
+            <option>Necesito visita y medición</option>
+          </select>
+        </div>
+
+        <div class="k-field full">
+          <label for="k-notes">Medidas, idea o detalles</label>
+          <textarea id="k-notes" placeholder="Describe el espacio y lo que necesitas..."></textarea>
+        </div>
+
+        <button class="k-submit" type="submit">Enviar solicitud por WhatsApp</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="../assets/logos/logo-black.png" alt="Lux Concept Store MX">
+          <p>Muebles de diseño fabricados en Cuautlancingo, Puebla. Directo a tu hogar, sin intermediarios.</p>
+          <span class="footer-badge">Entrega en Puebla</span>
+        </div>
+
+        <div class="footer-col">
+          <h4>Catálogo</h4>
+          <ul>
+            <li><a href="bano.html">Muebles de Baño</a></li>
+            <li><a href="cocinas.html">Cocinas</a></li>
+            <li><a href="cortinas.html">Cortinas</a></li>
+            <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
+            <li><a href="nuur.html">NUUR</a></li>
+            <li><a href="colors.html">COLORS</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="https://wa.me/527771071589" target="_blank" rel="noopener">WhatsApp · 777 107 1589</a></li>
+            <li><a href="https://www.instagram.com/lux_conceptmx/" target="_blank" rel="noopener">@lux_conceptmx</a></li>
+            <li><a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar." target="_blank" rel="noopener">Cotiza a tu medida →</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="legal.html#privacidad">Aviso de privacidad</a></li>
+            <li><a href="legal.html#terminos">Términos y condiciones</a></li>
+            <li><a href="legal.html#envios">Política de envíos</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Lux Concept Store MX. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+      });
+    }
+
+    const KITCHEN_PRODUCTS = {
+      'wine-rack': {
+        id: 'lux-wine-rack',
+        name: 'Lux Wine Rack',
+        category: 'Muebles de Cocina',
+        unitPrice: 2550,
+        image: '../assets/products/cocinas/botellero/.jpeg',
+        details: '50 × 180 × 30 cm · Botellero vertical'
+      },
+      'cook-s': {
+        id: 'lux-cook-s',
+        name: 'Lux Cook S',
+        category: 'Muebles de Cocina',
+        unitPrice: 1750,
+        image: '../assets/products/cocinas/alacena1/alacena1.jpeg',
+        images: {
+          closed: '../assets/products/cocinas/alacena1/alacena1.jpeg',
+          open: '../assets/products/cocinas/alacena1/alacena1abierta.jpeg'
+        },
+        details: '60 × 50 × 30 cm · Alacena compacta'
+      },
+      'cook-m': {
+        id: 'lux-cook-m',
+        name: 'Lux Cook M',
+        category: 'Muebles de Cocina',
+        unitPrice: 1950,
+        image: '../assets/products/cocinas/alacena2/alacena2.jpeg',
+        images: {
+          closed: '../assets/products/cocinas/alacena2/alacena2.jpeg',
+          open: '../assets/products/cocinas/alacena2/alacena2abierta.jpeg'
+        },
+        details: '80 × 50 × 30 cm · 2 puertas y 2 nichos centrales'
+      },
+      'cook-l': {
+        id: 'lux-cook-l',
+        name: 'Lux Cook L',
+        category: 'Muebles de Cocina',
+        unitPrice: 2500,
+        image: '../assets/products/cocinas/alacena3/alacena3.jpeg',
+        images: {
+          closed: '../assets/products/cocinas/alacena3/alacena3.jpeg',
+          open: '../assets/products/cocinas/alacena3/alacena3abierta.jpeg'
+        },
+        details: '100 × 70 × 30 cm · 2 puertas y 2 nichos centrales'
+      }
+    };
+
+    function setKitchenImage(productKey, state, button) {
+      const product = KITCHEN_PRODUCTS[productKey];
+      const image = document.getElementById('img-' + productKey);
+
+      if (!product || !product.images || !product.images[state] || !image) return;
+
+      image.style.opacity = '0';
+
+      setTimeout(() => {
+        image.src = product.images[state];
+        image.alt = product.name + (state === 'open' ? ' abierta' : ' cerrada');
+        image.style.opacity = '1';
+      }, 130);
+
+      const switchContainer = button.closest('.k-view-switch');
+      switchContainer.querySelectorAll('.k-view-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+    }
+
+    function addKitchenProduct(productKey) {
+      const product = KITCHEN_PRODUCTS[productKey];
+
+      if (!product) return;
+
+      if (!window.LuxCart || typeof window.LuxCart.add !== 'function') {
+        alert('El carrito todavía no está disponible. Recarga la página e inténtalo de nuevo.');
+        return;
+      }
+
+      window.LuxCart.add({
+        id: product.id,
+        name: product.name,
+        category: product.category,
+        unitPrice: product.unitPrice,
+        qty: 1,
+        image: product.image,
+        details: product.details
+      });
+
+      const confirmation = document.getElementById('added-' + productKey);
+
+      if (confirmation) {
+        confirmation.classList.add('show');
+        clearTimeout(confirmation._hideTimer);
+        confirmation._hideTimer = setTimeout(() => confirmation.classList.remove('show'), 2200);
+      }
+    }
+
+    document.getElementById('kitchen-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById('k-name').value.trim();
+      const zone = document.getElementById('k-zone').value.trim();
+      const layout = document.getElementById('k-layout').value;
+      const stage = document.getElementById('k-stage').value;
+      const details = document.getElementById('k-notes').value.trim();
+
+      const message = `Hola, me interesa cotizar una cocina a medida.\n\nNombre: ${name}\nZona: ${zone}\nDistribución: ${layout}\nEtapa: ${stage}\nDetalles: ${details || 'Por definir'}`;
+
+      window.open(
+        'https://wa.me/527771071589?text=' + encodeURIComponent(message),
+        '_blank',
+        'noopener'
+      );
+    });
+  </script>
+
+  <script src="../js/cart.js"></script>
+</body>
+</html>
