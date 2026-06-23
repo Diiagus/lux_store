@@ -111,7 +111,6 @@
     }
   </style>
   <link rel="stylesheet" href="../css/mobile.css">
-  <link rel="stylesheet" href="../css/cart.css">
 </head>
 <body>
 
@@ -124,7 +123,7 @@
       <ul class="nav-links">
         <li><a href="bano.html">Muebles de Baño</a></li>
         <li><a href="cocinas.html">Cocinas</a></li>
-        <li><a href="#">Cortinas</a></li>
+        <li><a href="#">Persianas</a></li>
         <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
         <li><a href="nuur.html">NUUR</a></li>
         <li><a href="colors.html" class="nav-colors">COLORS</a></li>
@@ -134,9 +133,6 @@
         </li>
       </ul>
       <div class="nav-actions">
-        <a href="#" class="nav-icon" aria-label="Mi cuenta">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </a>
         <a href="#" class="nav-icon" aria-label="Carrito">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         </a>
@@ -149,7 +145,7 @@
   <div class="nav-mobile-menu" id="mobile-menu">
     <a href="bano.html">Muebles de Baño</a>
     <a href="cocinas.html">Cocinas</a>
-    <a href="#">Cortinas</a>
+    <a href="#">Persianas</a>
     <a href="mesas-piedra.html">Mesas de Piedra</a>
     <a href="nuur.html">NUUR</a>
     <a href="colors.html">COLORS</a>
@@ -175,7 +171,21 @@
         <p class="mesa-card-price">$8,500 <span>MXN</span></p>
         <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20la%20Mesa%20Redonda%20Ascale%20de%20%248%2C500%20MXN.%20%C2%BFTienen%20disponibilidad%3F"
            target="_blank" class="btn-whatsapp">Solicitar información</a>
-        <button onclick="addToCart({id:'mesa-redonda-ascale',name:'Mesa Redonda Ascale',sub:'Piedra sinterizada · Ascale',price:8500,img:'../assets/products/mesas-piedra/MESA.jpeg'})" style="display:block;width:100%;padding:11px;background:#f5f5f7;color:#1d1d1f;border:none;border-radius:980px;font-size:14px;font-weight:500;text-align:center;cursor:pointer;margin-top:8px;font-family:-apple-system,sans-serif;transition:background .2s;" onmouseover="this.style.background='#e8e8ed'" onmouseout="this.style.background='#f5f5f7'">+ Agregar al carrito</button>
+        <button
+          type="button"
+          onclick="LuxCart.add({
+            id:'mesa-redonda-ascale',
+            name:'Mesa Redonda Ascale',
+            category:'Mesas de Piedra',
+            unitPrice:8500,
+            qty:1,
+            image:'../assets/products/mesas-piedra/MESA.jpeg',
+            details:'Piedra sinterizada Ascale · Base metálica blanca'
+          })"
+          style="display:block;width:100%;padding:11px;background:#f5f5f7;color:#1d1d1f;border:none;border-radius:980px;font-size:14px;font-weight:500;text-align:center;cursor:pointer;margin-top:8px;font-family:-apple-system,sans-serif;transition:background .2s;"
+          onmouseover="this.style.background='#e8e8ed'"
+          onmouseout="this.style.background='#f5f5f7'"
+        >+ Agregar al carrito</button>
       </div>
     </div>
 
@@ -199,7 +209,7 @@
           <h4>Catálogo</h4>
           <ul>
             <li><a href="bano.html">Muebles de Baño</a></li>
-            <li><a href="cocinas.html">Cocinas</a></li>
+            <li><a href="cocinas.html">Cocinas</a></li><li><a href="persianas.html">Persianas</a></li>
             <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
             <li><a href="nuur.html">NUUR</a></li>
             <li><a href="colors.html">COLORS</a></li>
@@ -216,14 +226,14 @@
         <div class="footer-col">
           <h4>Empresa</h4>
           <ul>
-            <li><a href="#">Aviso de privacidad</a></li>
-            <li><a href="#">Términos y condiciones</a></li>
-            <li><a href="#">Política de envíos</a></li>
+            <li><a href="legal.html#privacidad">Aviso de privacidad</a></li>
+            <li><a href="legal.html#terminos">Términos y condiciones</a></li>
+            <li><a href="legal.html#envios">Política de envíos</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">© 2025 Lux Concept Store MX. Todos los derechos reservados.</p>
+        <p class="footer-copy">© 2026 Lux Concept Store MX. Todos los derechos reservados.</p>
         <div class="footer-social">
           <a href="https://www.instagram.com/lux_conceptmx/" target="_blank" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
@@ -246,168 +256,6 @@
       mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
     }
   </script>
-
-  <!-- ══════════════ CARRITO ══════════════ -->
-  <button class="cart-bubble" id="cart-bubble-btn" onclick="openCart()" aria-label="Carrito">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
-      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-      <line x1="3" y1="6" x2="21" y2="6"/>
-      <path d="M16 10a4 4 0 0 1-8 0"/>
-    </svg>
-    <span class="cart-bubble-count" id="cart-count">0</span>
-  </button>
-
-  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-
-  <div class="cart-drawer" id="cart-drawer">
-    <div class="cart-header">
-      <h2>Tu carrito</h2>
-      <button class="cart-close" onclick="closeCart()">✕</button>
-    </div>
-
-    <!-- Vista: lista de items -->
-    <div class="cart-items" id="cart-items-list"></div>
-
-    <!-- Footer con total y botón -->
-    <div class="cart-footer" id="cart-footer" style="display:none">
-      <div class="cart-total-row">
-        <span class="cart-total-label">Subtotal estimado</span>
-        <span class="cart-total-amount" id="cart-total-amount">$0 MXN</span>
-      </div>
-      <button class="cart-checkout-btn" id="cart-checkout-btn" onclick="showCartForm()">
-        Solicitar cotización →
-      </button>
-
-      <!-- Formulario de cotización -->
-      <div class="cart-form" id="cart-form">
-        <p class="cart-form-title">Datos de contacto</p>
-        <p class="cart-form-sub">Te enviamos tu cotización por WhatsApp.</p>
-        <input type="text" id="cf-nombre" placeholder="Nombre completo" required>
-        <input type="tel" id="cf-telefono" placeholder="Teléfono (10 dígitos)" required>
-        <input type="text" id="cf-colonia" placeholder="Colonia / Municipio en Puebla" required>
-        <textarea id="cf-nota" placeholder="¿Algún detalle adicional? (opcional)"></textarea>
-        <button class="cart-form-send" onclick="enviarCotizacion()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          Enviar por WhatsApp
-        </button>
-        <button class="cart-form-back" onclick="hideCartForm()">← Volver al carrito</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ── Estado del carrito ──
-    let CART = JSON.parse(localStorage.getItem('lux_cart') || '[]');
-
-    function saveCart() { localStorage.setItem('lux_cart', JSON.stringify(CART)); }
-
-    function addToCart(item) {
-      const exists = CART.find(i => i.id === item.id);
-      if (exists) { exists.qty = (exists.qty || 1) + 1; }
-      else { CART.push({ ...item, qty: 1 }); }
-      saveCart();
-      renderCart();
-      openCart();
-    }
-
-    function removeFromCart(id) {
-      CART = CART.filter(i => i.id !== id);
-      saveCart();
-      renderCart();
-    }
-
-    function openCart() {
-      document.getElementById('cart-drawer').classList.add('open');
-      document.getElementById('cart-overlay').classList.add('on');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeCart() {
-      document.getElementById('cart-drawer').classList.remove('open');
-      document.getElementById('cart-overlay').classList.remove('on');
-      document.body.style.overflow = '';
-    }
-
-    function showCartForm() {
-      document.getElementById('cart-checkout-btn').style.display = 'none';
-      document.getElementById('cart-form').classList.add('on');
-    }
-
-    function hideCartForm() {
-      document.getElementById('cart-checkout-btn').style.display = 'block';
-      document.getElementById('cart-form').classList.remove('on');
-    }
-
-    function renderCart() {
-      const list = document.getElementById('cart-items-list');
-      const footer = document.getElementById('cart-footer');
-      const count = document.getElementById('cart-count');
-      const total = CART.reduce((s, i) => s + (i.price * (i.qty || 1)), 0);
-      const totalItems = CART.reduce((s, i) => s + (i.qty || 1), 0);
-
-      // Update bubble count
-      count.textContent = totalItems;
-      count.classList.toggle('visible', totalItems > 0);
-
-      if (CART.length === 0) {
-        list.innerHTML = `
-          <div class="cart-empty">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <path d="M16 10a4 4 0 0 1-8 0"/>
-            </svg>
-            <p>Tu carrito está vacío</p>
-            <span>Agrega productos para cotizar</span>
-          </div>`;
-        footer.style.display = 'none';
-      } else {
-        list.innerHTML = CART.map(i => `
-          <div class="cart-item">
-            <img class="cart-item-img" src="${i.img}" alt="${i.name}" onerror="this.style.background='#f5f5f7';this.src=''">
-            <div class="cart-item-info">
-              <p class="cart-item-name">${i.name}</p>
-              <p class="cart-item-sub">${i.sub || ''}</p>
-              <p class="cart-item-price">$${(i.price * (i.qty||1)).toLocaleString('es-MX')} MXN${i.qty > 1 ? ' <small style="font-weight:400;color:#6e6e73">×'+i.qty+'</small>' : ''}</p>
-            </div>
-            <button class="cart-item-remove" onclick="removeFromCart('${i.id}')">✕</button>
-          </div>`).join('');
-        document.getElementById('cart-total-amount').textContent = '$' + total.toLocaleString('es-MX') + ' MXN';
-        footer.style.display = 'block';
-      }
-    }
-
-    function enviarCotizacion() {
-      const nombre = document.getElementById('cf-nombre').value.trim();
-      const tel = document.getElementById('cf-telefono').value.trim();
-      const colonia = document.getElementById('cf-colonia').value.trim();
-      const nota = document.getElementById('cf-nota').value.trim();
-
-      if (!nombre || !tel || !colonia) {
-        alert('Por favor llena nombre, teléfono y colonia.');
-        return;
-      }
-
-      const itemsList = CART.map(i =>
-        `• ${i.name}${i.qty > 1 ? ' x'+i.qty : ''} — $${(i.price*(i.qty||1)).toLocaleString('es-MX')} MXN`
-      ).join('%0A');
-
-      const total = CART.reduce((s,i) => s + (i.price*(i.qty||1)), 0);
-
-      let msg = `🛒 *NUEVA COTIZACIÓN — Lux Concept*%0A%0A`;
-      msg += `👤 *Cliente:* ${nombre}%0A`;
-      msg += `📱 *Teléfono:* ${tel}%0A`;
-      msg += `📍 *Colonia:* ${colonia}%0A%0A`;
-      msg += `*Productos:*%0A${itemsList}%0A%0A`;
-      msg += `💰 *Total estimado:* $${total.toLocaleString('es-MX')} MXN%0A`;
-      if (nota) msg += `%0A📝 *Nota:* ${nota}`;
-
-      window.open('https://wa.me/527771071589?text=' + msg, '_blank');
-    }
-
-    // Init
-    renderCart();
-  </script>
-
+  <script src="../js/cart.js"></script>
 </body>
 </html>

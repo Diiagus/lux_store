@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="../favicon.svg">
-  <title>Cortinas — Lux Concept</title>
-  <meta name="description" content="Catálogo de cortinas Lux Concept en Puebla. Explora nuestros modelos y solicita una cotización a tu medida.">
+  <title>Persianas a medida en Puebla — Lux Concept</title>
+  <meta name="description" content="Persianas a medida en Puebla. Explora los modelos de Lux Concept y solicita una cotización según las medidas de tu ventana.">
   <link rel="stylesheet" href="../css/nav.css">
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/footer.css">
@@ -95,21 +95,28 @@
 
     .curtain-image-wrap {
       position: relative;
-      aspect-ratio: 4 / 5;
-      background: #f5f5f7;
+      aspect-ratio: 4 / 3;
+      background: #fff;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .curtain-image {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center;
       display: block;
-      transition: opacity .18s ease, transform .35s ease;
+      padding: 14px;
+      box-sizing: border-box;
+      background: #fff;
+      transition: opacity .18s ease;
     }
 
     .curtain-card:hover .curtain-image {
-      transform: scale(1.015);
+      transform: none;
     }
 
     .image-counter {
@@ -300,7 +307,20 @@
         padding: 30px 22px;
       }
     }
+  
+    .blind-info-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+      max-width:1240px;margin:0 auto 68px;padding:0 5%
+    }
+    .blind-info-card{
+      border:1px solid #e8e8e8;border-radius:16px;padding:18px;background:#fff
+    }
+    .blind-info-card strong{display:block;font-size:13px;margin-bottom:5px;color:#1d1d1f}
+    .blind-info-card span{display:block;font-size:12px;line-height:1.55;color:#6e6e73}
+    @media(max-width:760px){.blind-info-grid{grid-template-columns:1fr}}
+
   </style>
+  <link rel="canonical" href="https://luxstoremx.netlify.app/pages/persianas.html">
 </head>
 
 <body>
@@ -313,9 +333,8 @@
       <ul class="nav-links">
         <li><a href="bano.html">Muebles de Baño</a></li>
         <li><a href="cocinas.html">Cocinas</a></li>
-        <li><a href="cortinas.html">Cortinas</a></li>
+        <li><a href="persianas.html">Persianas</a></li>
         <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
-        <li><a href="nuur.html">NUUR</a></li>
         <li><a href="colors.html" class="nav-colors">COLORS</a></li>
         <li>
           <a
@@ -328,12 +347,6 @@
       </ul>
 
       <div class="nav-actions">
-        <a href="cuenta.html" class="nav-icon" aria-label="Mi cuenta">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </a>
 
         <a href="#" class="nav-icon" aria-label="Carrito">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
@@ -353,9 +366,8 @@
   <div class="nav-mobile-menu" id="mobile-menu">
     <a href="bano.html">Muebles de Baño</a>
     <a href="cocinas.html">Cocinas</a>
-    <a href="cortinas.html">Cortinas</a>
+    <a href="persianas.html">Persianas</a>
     <a href="mesas-piedra.html">Mesas de Piedra</a>
-    <a href="nuur.html">NUUR</a>
     <a href="colors.html">COLORS</a>
     <a
       href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
@@ -367,19 +379,19 @@
 
   <main>
     <section class="curtains-hero">
-      <small>Colección de cortinas</small>
-      <h1>Cortinas.</h1>
+      <small>Colección de persianas</small>
+      <h1>Persianas.</h1>
       <p>
-        Explora nuestros modelos y solicita una cotización de acuerdo con las medidas de tu ventana.
+        Explora nuestros modelos de persianas y solicita una cotización de acuerdo con las medidas de tu ventana.
       </p>
     </section>
 
     <section class="curtains-section">
       <div class="section-heading">
         <div>
-          <h2>Modelos disponibles</h2>
+          <h2>Modelos de persianas</h2>
           <p>
-            Selecciona el diseño que más te guste. Las cortinas se cotizan de acuerdo con las medidas y características de tu espacio.
+            Selecciona el diseño que más te guste. Cada persiana se cotiza de acuerdo con las medidas y características de tu espacio.
           </p>
         </div>
       </div>
@@ -392,7 +404,7 @@
               class="curtain-image"
               id="curtain-img-1"
               src="../assets/products/Cortinas/1/1.jpeg"
-              alt="Cortina 1"
+              alt="Persiana 1"
             >
             <span class="image-counter" id="counter-1">1 / 2</span>
             <div class="image-switch">
@@ -402,7 +414,7 @@
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
-            <h2 class="curtain-name">Cortina 1</h2>
+            <h2 class="curtain-name">Persiana 1</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
             <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%201.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
@@ -413,12 +425,12 @@
             <img
               class="curtain-image"
               src="../assets/products/Cortinas/2/1.jpeg"
-              alt="Cortina 2"
+              alt="Persiana 2"
             >
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
-            <h2 class="curtain-name">Cortina 2</h2>
+            <h2 class="curtain-name">Persiana 2</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
             <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%202.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
@@ -429,12 +441,12 @@
             <img
               class="curtain-image"
               src="../assets/products/Cortinas/3/1.jpeg"
-              alt="Cortina 3"
+              alt="Persiana 3"
             >
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
-            <h2 class="curtain-name">Cortina 3</h2>
+            <h2 class="curtain-name">Persiana 3</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
             <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%203.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
@@ -446,7 +458,7 @@
               class="curtain-image"
               id="curtain-img-4"
               src="../assets/products/Cortinas/4/1.jpeg"
-              alt="Cortina 4"
+              alt="Persiana 4"
             >
             <span class="image-counter" id="counter-4">1 / 2</span>
             <div class="image-switch">
@@ -456,7 +468,7 @@
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
-            <h2 class="curtain-name">Cortina 4</h2>
+            <h2 class="curtain-name">Persiana 4</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
             <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%204.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
@@ -468,7 +480,7 @@
               class="curtain-image"
               id="curtain-img-5"
               src="../assets/products/Cortinas/5/1.jpeg"
-              alt="Cortina 5"
+              alt="Persiana 5"
             >
             <span class="image-counter" id="counter-5">1 / 2</span>
             <div class="image-switch">
@@ -478,7 +490,7 @@
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
-            <h2 class="curtain-name">Cortina 5</h2>
+            <h2 class="curtain-name">Persiana 5</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
             <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%205.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
@@ -489,17 +501,33 @@
             <img
               class="curtain-image"
               src="../assets/products/Cortinas/6/1.jpeg"
-              alt="Cortina 6"
+              alt="Persiana 6"
             >
           </div>
           <div class="curtain-card-body">
             <p class="curtain-category">Colección Lux</p>
-            <h2 class="curtain-name">Cortina 6</h2>
+            <h2 class="curtain-name">Persiana 6</h2>
             <p class="curtain-desc">Modelo disponible bajo cotización personalizada.</p>
             <a class="quote-btn" target="_blank" rel="noopener" href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20la%20Cortina%206.%20%C2%BFPodr%C3%ADan%20ayudarme%3F">Solicitar cotización</a>
           </div>
         </article>
 
+      </div>
+    </section>
+
+
+    <section class="blind-info-grid" aria-label="Información de cotización">
+      <div class="blind-info-card">
+        <strong>Fabricación según medidas</strong>
+        <span>El precio se calcula con el ancho y alto de la ventana.</span>
+      </div>
+      <div class="blind-info-card">
+        <strong>Color y tela por confirmar</strong>
+        <span>La disponibilidad del tono y material se confirma al preparar la cotización.</span>
+      </div>
+      <div class="blind-info-card">
+        <strong>Medición e instalación</strong>
+        <span>El servicio y el costo de instalación se confirman según la ubicación y el tipo de montaje.</span>
       </div>
     </section>
 
@@ -545,9 +573,8 @@
           <ul>
             <li><a href="bano.html">Muebles de Baño</a></li>
             <li><a href="cocinas.html">Cocinas</a></li>
-            <li><a href="cortinas.html">Cortinas</a></li>
+            <li><a href="persianas.html">Persianas</a></li>
             <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
-            <li><a href="nuur.html">NUUR</a></li>
             <li><a href="colors.html">COLORS</a></li>
           </ul>
         </div>
@@ -605,7 +632,7 @@
 
       window.setTimeout(function () {
         image.src = '../assets/products/Cortinas/' + model + '/' + view + '.jpeg';
-        image.alt = 'Cortina ' + model + ' - Vista ' + view;
+        image.alt = 'Persiana ' + model + ' - Vista ' + view;
         image.style.opacity = '1';
       }, 120);
 
