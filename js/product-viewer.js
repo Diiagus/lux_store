@@ -79,11 +79,18 @@ function getDatosPieza(pieza) {
     };
   }
 
+  const ahorroConjunto =
+    Math.max(0, (modelo.precios.vanity + modelo.precios.ovalin) - modelo.precios.conjunto);
+
   return {
     titulo: modelo.nombre + ' + Ovalín',
-    desc: 'Conjunto de gabinete y ovalín Bowl. Selecciona el color, ensamble y forma de entrega.',
+    desc: ahorroConjunto > 0
+      ? 'Conjunto de gabinete y ovalín Bowl con precio especial. Selecciona el color, ensamble y forma de entrega.'
+      : 'Conjunto de gabinete y ovalín Bowl. Selecciona el color, ensamble y forma de entrega.',
     precio: precio,
-    nota: 'IVA incluido · Entrega en Puebla',
+    nota: ahorroConjunto > 0
+      ? 'Precio especial de conjunto · Ahorra $' + ahorroConjunto.toLocaleString('es-MX') + ' MXN · IVA incluido'
+      : 'IVA incluido · Entrega en Puebla',
     specs: specsMueble.concat([
       ['Ovalín',  'Bowl cerámico · Diámetro 32 cm'],
       ['Entrega', 'Desarmado, listo para armar']
