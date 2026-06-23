@@ -5,12 +5,12 @@
 <meta content="2026-06-23-custom-01" name="lux-build"/>
 <meta charset="utf-8"/>
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
-<meta content="Mesas de piedra sinterizada Ascale en Puebla — Diseño exclusivo, durabilidad sin igual. Mesa Redonda Ascale desde $8,500 MXN. Entrega en Puebla." name="description"/>
+<meta content="Mesas de piedra sinterizada Ascale en Puebla. Conoce Mesa Macchia Vecchia de 71 cm y Mesa Crotone Pulpis de 60 cm, con base de acero y pintura horneada." name="description"/>
 <meta content="mesas piedra puebla, mesa ascale puebla, piedra sinterizada, mesas diseño puebla" name="keywords"/>
 <meta content="Lux Concept Store MX" name="author"/>
 <meta content="index, follow" name="robots"/>
 <meta content="Mesas de Piedra Ascale — Lux Concept Store MX" property="og:title"/>
-<meta content="Superficies de piedra sinterizada Ascale. Desde $8,500 MXN. Entrega en Puebla." property="og:description"/>
+<meta content="Mesas Macchia Vecchia y Crotone Pulpis en piedra sinterizada Ascale, con base de acero y pintura horneada." property="og:description"/>
 <meta content="website" property="og:type"/>
 <meta content="es_MX" property="og:locale"/>
 <link href="../css/footer.css" rel="stylesheet"/>
@@ -56,8 +56,11 @@
     .mesa-card img {
       width: 100%;
       aspect-ratio: 4/3;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center;
       display: block;
+      padding: 12px;
+      background: #f5f5f7;
     }
     .mesa-card-body { padding: 20px 22px 24px; }
     .mesa-card-cat {
@@ -157,19 +160,63 @@
 </div>
 <!-- GRID -->
 <div class="mesas-grid">
-<div class="mesa-card" id="product-mesa-redonda-ascale" onclick="openStoneQuote()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openStoneQuote()}" role="button" tabindex="0">
-<img alt="Mesa redonda piedra sinterizada Ascale" src="../assets/products/mesas-piedra/MESA.jpeg"/>
-<div class="mesa-card-body">
-<p class="mesa-card-cat">Piedra sinterizada · Ascale</p>
-<p class="mesa-card-name">Mesa Redonda Ascale</p>
-<p class="mesa-card-desc">Superficie de piedra sinterizada con veta natural. Base metálica blanca. Acabado pulido de alta resistencia.</p>
-<p class="mesa-card-price">$6,500 <span>MXN</span></p>
-<a class="btn-whatsapp" href="#" onclick="event.preventDefault();event.stopPropagation();openStoneQuote()">Agregar al carrito</a>
+
+<div class="mesa-card"
+     id="product-mesa-macchia-vecchia"
+     onclick="openStoneQuote('macchia-vecchia')"
+     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openStoneQuote('macchia-vecchia')}"
+     role="button"
+     tabindex="0">
+  <img
+    alt="Mesa Macchia Vecchia Ascale de 71 centímetros de diámetro"
+    src="../assets/products/mesas-piedra/MESA.jpeg"
+  />
+  <div class="mesa-card-body">
+    <p class="mesa-card-cat">Piedra sinterizada · Ascale</p>
+    <p class="mesa-card-name">Mesa Macchia Vecchia · Ascale</p>
+    <p class="mesa-card-desc">
+      Mesa redonda con cubierta de piedra sinterizada modelo Macchia Vecchia,
+      marca Ascale, y base de acero con pintura horneada. Diámetro de 71 cm.
+    </p>
+    <p class="mesa-card-price">$6,500 <span>MXN</span></p>
+    <a
+      class="btn-whatsapp"
+      href="#"
+      onclick="event.preventDefault();event.stopPropagation();openStoneQuote('macchia-vecchia')">
+      Agregar al carrito
+    </a>
+  </div>
+</div>
+
+<div class="mesa-card"
+     id="product-mesa-crotone-pulpis"
+     onclick="openStoneQuote('crotone-pulpis')"
+     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openStoneQuote('crotone-pulpis')}"
+     role="button"
+     tabindex="0">
+  <img
+    alt="Mesa Crotone Pulpis Ascale de 60 centímetros de diámetro"
+    src="../assets/products/mesas-piedra/MESA2.jpeg"
+  />
+  <div class="mesa-card-body">
+    <p class="mesa-card-cat">Piedra sinterizada · Ascale</p>
+    <p class="mesa-card-name">Mesa Crotone Pulpis · Ascale</p>
+    <p class="mesa-card-desc">
+      Mesa redonda con cubierta de piedra sinterizada modelo Crotone Pulpis,
+      marca Ascale, y base de acero con pintura horneada. Diámetro de 60 cm.
+    </p>
+    <p class="mesa-card-price">$4,500 <span>MXN</span></p>
+    <a
+      class="btn-whatsapp"
+      href="#"
+      onclick="event.preventDefault();event.stopPropagation();openStoneQuote('crotone-pulpis')">
+      Agregar al carrito
+    </a>
+  </div>
+</div>
 
 </div>
-</div>
-</div>
-<p class="coming-soon">La medida, el acabado final, la disponibilidad y la entrega se confirman antes de aceptar el pedido.</p>
+<p class="coming-soon">La disponibilidad, el acabado final y la entrega se confirman antes de procesar la compra.</p>
 <!-- FOOTER -->
 <footer class="site-footer">
 <div class="footer-inner">
@@ -233,24 +280,55 @@
     }
   </script>
 <script>
-    function openStoneQuote() {
-      if (!window.LuxQuote) return;
-      LuxQuote.open({
-        id: 'mesa-redonda-ascale',
-        name: 'Mesa Redonda Ascale',
-        category: 'Mesas de Piedra',
-        price: 6500,
-        image: '../assets/products/mesas-piedra/MESA.jpeg',
-        details: 'Piedra sinterizada Ascale · Base metálica blanca',
-        description: 'Selecciona si recogerás la mesa o si necesitas envío a domicilio.',
-        colors: false,
-        assembly: false
-      });
+  const STONE_PRODUCTS = {
+    'macchia-vecchia': {
+      id: 'mesa-macchia-vecchia-ascale',
+      name: 'Mesa Macchia Vecchia · Ascale',
+      category: 'Mesas de Piedra',
+      price: 6500,
+      image: '../assets/products/mesas-piedra/MESA.jpeg',
+      details: 'Macchia Vecchia · Ascale · 71 cm de diámetro · Base de acero con pintura horneada',
+      description: 'Selecciona si recogerás la mesa en fábrica, en tienda o si necesitas envío a domicilio.',
+      colors: false,
+      assembly: false
+    },
+    'crotone-pulpis': {
+      id: 'mesa-crotone-pulpis-ascale',
+      name: 'Mesa Crotone Pulpis · Ascale',
+      category: 'Mesas de Piedra',
+      price: 4500,
+      image: '../assets/products/mesas-piedra/MESA2.jpeg',
+      details: 'Crotone Pulpis · Ascale · 60 cm de diámetro · Base de acero con pintura horneada',
+      description: 'Selecciona si recogerás la mesa en fábrica, en tienda o si necesitas envío a domicilio.',
+      colors: false,
+      assembly: false
     }
-    const requestedStoneProduct = new URLSearchParams(window.location.search).get('product');
-    if (requestedStoneProduct === 'mesa-redonda-ascale') {
-      window.addEventListener('load', openStoneQuote);
-    }
-</script><script src="../js/cart.js"></script><script src="../js/quote-panel.js"></script>
+  };
+
+  function openStoneQuote(productId) {
+    if (!window.LuxQuote) return;
+
+    const product = STONE_PRODUCTS[productId] || STONE_PRODUCTS['macchia-vecchia'];
+    LuxQuote.open(product);
+  }
+
+  const requestedStoneProduct =
+    new URLSearchParams(window.location.search).get('product');
+
+  const legacyStoneProducts = {
+    'mesa-redonda-ascale': 'macchia-vecchia',
+    'mesa-macchia-vecchia': 'macchia-vecchia',
+    'mesa-crotone-pulpis': 'crotone-pulpis'
+  };
+
+  const selectedStoneProduct =
+    legacyStoneProducts[requestedStoneProduct] || requestedStoneProduct;
+
+  if (STONE_PRODUCTS[selectedStoneProduct]) {
+    window.addEventListener('load', () => openStoneQuote(selectedStoneProduct));
+  }
+</script>
+<script src="../js/cart.js"></script>
+<script src="../js/quote-panel.js"></script>
 </body>
 </html>
