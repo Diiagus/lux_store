@@ -88,9 +88,9 @@
     <ul class="nav-links">
       <li><a href="bano.html">Muebles de Baño</a></li>
       <li><a href="cocinas.html">Cocinas</a></li>
-      <li><a href="#">Cortinas</a></li>
+      <li><a href="cortinas.html">Cortinas</a></li>
       <li><a href="mesas-piedra.html">Mesas de Piedra</a></li>
-      <li><a href="pages/nuur.html">NUUR</a></li>
+      <li><a href="nuur.html">NUUR</a></li>
       <li><a href="colors.html" class="nav-colors">COLORS</a></li>
       <li>
   <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" 
@@ -101,19 +101,22 @@
 </li>
     </ul>
     <div class="nav-actions">
-      <a href="#" class="nav-icon" aria-label="Mi cuenta">
+      <a href="cuenta.html" class="nav-icon" aria-label="Mi cuenta">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </a>
       <a href="#" class="nav-icon" aria-label="Carrito">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       </a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
   <div class="nav-mobile-menu" id="mobile-menu">
     <a href="bano.html">Muebles de Baño</a>
     <a href="cocinas.html">Cocinas</a>
-    <a href="#">Cortinas</a>
+    <a href="cortinas.html">Cortinas</a>
     <a href="mesas-piedra.html">Mesas de Piedra</a>
     <a href="nuur.html">NUUR</a>
     <a href="colors.html">COLORS</a>
@@ -414,7 +417,7 @@ const IMGS = {
     28:'../assets/tableros/3LAMINOVA/7Gama Grises/1WhiteOak.png',
     29:'../assets/tableros/3LAMINOVA/7Gama Grises/2RobleHypster.png',
     30:'../assets/tableros/3LAMINOVA/7Gama Grises/3SlipDevon.png',
-    31:'../assets/tableros/3LAMINOVA/7Gama Grises/4FresnoLoton.png',
+    31:'../assets/tableros/3LAMINOVA/7Gama Grises/4FresnoLuton.png',
     32:'../assets/tableros/3LAMINOVA/7Gama Grises/5TabacoCairo.png',
     33:'../assets/tableros/3LAMINOVA/7Gama Grises/6Fedha.png',
     34:'../assets/tableros/3LAMINOVA/7Gama Grises/7RovereGris.png',
@@ -462,7 +465,7 @@ const IMGS = {
     20:'../assets/tableros/5Navetta/3AcabadosSolidos/2Frosty.png',
     21:'../assets/tableros/5Navetta/3AcabadosSolidos/3Oxfort.png',
     22:'../assets/tableros/5Navetta/3AcabadosSolidos/4Blanco.png',
-    23:'../assets/tableros/5Navetta/3AcabadosSolidos/5Castaña.png',
+    23:'../assets/tableros/5Navetta/3AcabadosSolidos/5Casta#U00f1a.png',
     24:'../assets/tableros/5Navetta/3AcabadosSolidos/6Negro.png',
   },
   pelik: {
@@ -474,9 +477,9 @@ const IMGS = {
     8:'../assets/tableros/6Pelik/3METAL - NUEVOS/2Inox.png',
     9:'../assets/tableros/6Pelik/4SYNCHRO/1Bardolino.png',
     10:'../assets/tableros/6Pelik/4SYNCHRO/2Bellota.png',
-    11:'../assets/tableros/6Pelik/4SYNCHRO/3Castaño.png',
+    11:'../assets/tableros/6Pelik/4SYNCHRO/3Casta#U00f1o.png',
     12:'../assets/tableros/6Pelik/4SYNCHRO/4Panela.png',
-    13:'../assets/tableros/6Pelik/4SYNCHRO/5Nácar.png',
+    13:'../assets/tableros/6Pelik/4SYNCHRO/5N#U00e1car.png',
     14:'../assets/tableros/6Pelik/4SYNCHRO/6Macadamia.png',
     15:'../assets/tableros/6Pelik/4SYNCHRO/7Milan.png',
     16:'../assets/tableros/6Pelik/4SYNCHRO/8Fume.png',
@@ -495,7 +498,7 @@ const IMGS = {
     29:'../assets/tableros/6Pelik/6PORO/2Espresso.png',
     30:'../assets/tableros/6Pelik/6PORO/3Gales.png',
     31:'../assets/tableros/6Pelik/6PORO/4Caramelo.png',
-    32:'../assets/tableros/6Pelik/6PORO/5Coñac.png',
+    32:'../assets/tableros/6Pelik/6PORO/5Co#U00f1ac.png',
     33:'../assets/tableros/6Pelik/6PORO/6Duna.png',
     34:'../assets/tableros/6Pelik/6PORO/7Niebla.png',
     35:'../assets/tableros/6Pelik/6PORO/8Artiko.png',
@@ -931,14 +934,14 @@ renderBrand('decorlux');
         <div class="footer-col">
           <h4>Empresa</h4>
           <ul>
-            <li><a href="#">Aviso de privacidad</a></li>
-            <li><a href="#">Términos y condiciones</a></li>
-            <li><a href="#">Política de envíos</a></li>
+            <li><a href="legal.html#privacidad">Aviso de privacidad</a></li>
+            <li><a href="legal.html#terminos">Términos y condiciones</a></li>
+            <li><a href="legal.html#envios">Política de envíos</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">© 2025 Lux Concept Store MX. Todos los derechos reservados.</p>
+        <p class="footer-copy">© 2026 Lux Concept Store MX. Todos los derechos reservados.</p>
         <div class="footer-social">
           <a href="https://www.instagram.com/lux_conceptmx/" target="_blank" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
@@ -1090,11 +1093,11 @@ renderBrand('decorlux');
     }
 
     // Override pick() to also show the floating panel
-    const _origPick = pick;
-    function pick(brand, id) {
+    const _origPick = window.pick;
+    window.pick = function(brand, id) {
       _origPick(brand, id);
       const DATA_BRANDS = { decorlux: DATA.decorlux, crystal: DATA.crystal, laminova: DATA.laminova, tmatt: DATA.tmatt, navetta: DATA.navetta, pelik: DATA.pelik };
-      const c = DATA_BRANDS[brand].find(x => x.id === id);
+      const c = DATA_BRANDS[brand].colors.find(x => x.id === id);
       if (!c) return;
       const BRAND_NAMES = { decorlux:'Decorlux', crystal:'Crystal', laminova:'Laminova', tmatt:'Tmatt', navetta:'Navetta', pelik:'Pelik' };
       const img = IMGS[brand] && IMGS[brand][c.id];
@@ -1127,8 +1130,9 @@ renderBrand('decorlux');
         el.style.opacity = '1';
         el.style.transform = 'translateY(0)';
       });
-    }
+    };
   </script>
 
+  <script src="../js/cart.js"></script>
 </body>
 </html>
