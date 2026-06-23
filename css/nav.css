@@ -35,7 +35,7 @@ body {
   position: sticky;  /* Se pega arriba al hacer scroll */
   top: 0;
   z-index: 999;      /* Siempre visible encima de todo */
-  height: 70px;      /* Apple usa exactamente 48px */
+  height: 64px;      /* Apple usa exactamente 48px */
 
   /* Efecto vidrio esmerilado de Apple */
   background: rgba(255, 255, 255, 0.85);
@@ -60,7 +60,7 @@ body {
    LOGO
    ================================================ */
 .nav-logo img {
-  height: 80px;   /* Altura del logo */
+  height: 70px;   /* Altura compacta del logo */
   display: block;
   /* El logo negro se verá bien sobre el fondo blanco */
 }
@@ -77,7 +77,7 @@ body {
 
 .nav-links a {
   display: block;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--color-dark);
   text-decoration: none;

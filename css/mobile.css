@@ -27,7 +27,7 @@
 
   .nav-mobile-menu {
     position: fixed;
-    top: 70px;
+    top: 64px;
     left: 0;
     right: 0;
     background: rgba(255,255,255,0.97);
@@ -74,8 +74,8 @@
 @media (max-width: 768px) {
   .hero {
     grid-template-columns: 1fr;
-    padding: 100px 5% 60px;
-    gap: 40px;
+    padding: 30px 5% 48px;
+    gap: 28px;
     min-height: auto;
   }
   .hero-visual { order: -1; }
@@ -109,7 +109,7 @@
 @media (max-width: 480px) {
   .cat-tabs { padding: 0 4%; }
   .cat-tab { font-size: 13px; padding: 12px 14px; }
-  .brand-tabs { top: 70px; }
+  .brand-tabs { top: 64px; }
 }
 
 /* ── COLORS GRID MOBILE ── */
