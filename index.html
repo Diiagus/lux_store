@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="lux-build" content="2026-06-23-custom-01">
+  <meta name="lux-build" content="2026-06-24-macchia-campaign-01">
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="description" content="Lux Concept Store MX — Muebles de diseño fabricados en Puebla. Muebles de baño, cocinas, persianas, mesas de piedra y más. Entrega directa en Puebla, sin intermediarios.">
@@ -12,6 +12,8 @@
   <meta property="og:description" content="Muebles de diseño fabricados en Cuautlancingo. Entrega directa en Puebla. Tu espacio, elevado. Hecho para presumirse.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_MX">
+  <meta property="og:image" content="https://luxstoremx.netlify.app/assets/campaigns/macchia-vecchia-campaign.png">
+  <meta property="og:image:alt" content="Mesa Macchia Vecchia de piedra sinterizada Ascale">
   <link rel="stylesheet" href="css/footer.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lux Concept — Muebles · Puebla</title>
@@ -19,6 +21,114 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/mobile.css">
   <link rel="canonical" href="https://luxstoremx.netlify.app/">
+
+  <style>
+    /* CAMPAÑA PRINCIPAL — MACCHIA VECCHIA */
+    .macchia-campaign{
+      position:relative;
+      width:100%;
+      background:#eef5fb;
+      overflow:hidden;
+      border-bottom:1px solid rgba(29,29,31,.08);
+    }
+    .macchia-campaign-inner{
+      position:relative;
+      width:min(1100px,100%);
+      margin:0 auto;
+    }
+    .macchia-campaign-image{
+      display:block;
+      width:100%;
+      height:auto;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+    .macchia-campaign-hotspot{
+      position:absolute;
+      top:24.5%;
+      height:5.3%;
+      border-radius:999px;
+      z-index:2;
+      color:transparent;
+      font-size:0;
+      outline:none;
+    }
+    .macchia-campaign-hotspot.discover{
+      left:32.4%;
+      width:17.4%;
+    }
+    .macchia-campaign-hotspot.buy{
+      left:51.5%;
+      width:16.3%;
+    }
+    .macchia-campaign-hotspot:hover,
+    .macchia-campaign-hotspot:focus-visible{
+      box-shadow:0 0 0 3px rgba(0,122,255,.38);
+    }
+    .macchia-scroll-cue{
+      position:absolute;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      width:34px;
+      height:34px;
+      border:1px solid rgba(29,29,31,.18);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#6e6e73;
+      background:rgba(255,255,255,.58);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      text-decoration:none;
+      transition:transform .2s ease,background .2s ease;
+    }
+    .macchia-scroll-cue:hover{
+      transform:translateX(-50%) translateY(3px);
+      background:rgba(255,255,255,.88);
+    }
+    .product-discovery{
+      scroll-margin-top:72px;
+      padding-top:72px!important;
+      padding-bottom:72px!important;
+    }
+    .product-discovery .hero-eyebrow{
+      color:#86868b;
+    }
+    .product-discovery .hero-title{
+      font-size:clamp(42px,6vw,78px);
+      letter-spacing:-.045em;
+    }
+    .product-discovery .hero-title em{
+      font-style:normal;
+      font-weight:400;
+      color:#6e6e73;
+    }
+    @media(max-width:760px){
+      .macchia-campaign-hotspot{
+        top:24.2%;
+        height:5.8%;
+      }
+      .macchia-scroll-cue{
+        display:none;
+      }
+      .product-discovery{
+        padding-top:48px!important;
+      }
+    }
+    @media(max-width:480px){
+      .macchia-campaign-hotspot.discover{
+        left:31.5%;
+        width:18.5%;
+      }
+      .macchia-campaign-hotspot.buy{
+        left:51%;
+        width:17.5%;
+      }
+    }
+  </style>
+
 </head>
 <body>
 
@@ -63,21 +173,54 @@
     <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" target="_blank" class="nav-cta">Cotiza a tu medida</a>
   </div>
 
-  <!-- HERO -->
-  <section class="hero">
+
+  <!-- CAMPAÑA PRINCIPAL -->
+  <section class="macchia-campaign" aria-label="Campaña Mesa Macchia Vecchia">
+    <div class="macchia-campaign-inner">
+      <img
+        class="macchia-campaign-image"
+        src="assets/campaigns/macchia-vecchia-campaign.png"
+        alt="Mesa Macchia Vecchia de piedra sinterizada Ascale con base dorada y reflejo"
+        width="1100"
+        height="1376"
+        fetchpriority="high"
+      >
+      <a
+        class="macchia-campaign-hotspot discover"
+        href="pages/mesas-piedra.html#product-mesa-macchia-vecchia"
+        aria-label="Descubrir Mesa Macchia Vecchia">
+        Descubrir
+      </a>
+      <a
+        class="macchia-campaign-hotspot buy"
+        href="pages/mesas-piedra.html?product=macchia-vecchia"
+        aria-label="Comprar Mesa Macchia Vecchia">
+        Comprar
+      </a>
+      <a class="macchia-scroll-cue" href="#descubre-lux" aria-label="Bajar a Descubre Lux">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- PRODUCT DISCOVERY -->
+  <section class="hero product-discovery" id="descubre-lux">
     <div class="hero-text">
-      <p class="hero-eyebrow">Muebles · Entrega en Puebla</p>
-      <h1 class="hero-title">
-        Tu espacio, elevado.<br>
-        <em>Hecho para presumirse.</em>
-      </h1>
+      <p class="hero-eyebrow">Colección Lux · Entrega en Puebla</p>
+      <h2 class="hero-title">
+        Descubre Lux.<br>
+        <em>Piezas para transformar tu espacio.</em>
+      </h2>
       <p class="hero-subtitle">
-        Muebles fabricados con materiales de primera,
-        entregados listos para armar. Sin intermediarios,
-        directo a tu hogar en Puebla.
+        Explora muebles de baño, cocinas, mesas de piedra y persianas.
+        Cada pieza te lleva directamente a su producto o configurador.
       </p>
       <div class="hero-actions">
-        <a href="pages/bano.html" class="btn-primary">Ver catálogo</a>
+        <a href="pages/bano.html" class="btn-primary">Explorar colección</a>
         <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
            target="_blank" class="btn-secondary">Cotízalo a tu medida →</a>
       </div>
