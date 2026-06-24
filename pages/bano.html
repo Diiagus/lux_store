@@ -253,7 +253,7 @@
               <input type="radio" name="delivery" value="domicilio">
               <div class="delivery-option-info">
                 <p class="delivery-option-title">Envío a domicilio</p>
-                <p class="delivery-option-sub">$15.50 por km</p>
+                <p class="delivery-option-sub">$15.50 por km (ida y vuelta)</p>
               </div>
               <span class="delivery-option-price" id="delivery-price-tag">Calcular</span>
             </label>
@@ -405,8 +405,17 @@
       document.getElementById('opt-fabrica').classList.add('selected');
       document.getElementById('opt-showroom').classList.remove('selected');
       document.getElementById('opt-domicilio').classList.remove('selected');
-      deliveryMode = 'fabrica'; deliveryCost = 0;
+      const inheritedDelivery = getExistingHomeDeliveryForBath();
+
+      inheritedHomeDelivery = Boolean(inheritedDelivery);
+      inheritedDeliveryCost = Number(inheritedDelivery?.cost || 0);
+      inheritedDeliveryAddress = inheritedDelivery?.address || '';
+
+      deliveryMode = inheritedHomeDelivery ? 'domicilio' : 'fabrica';
+      deliveryCost = inheritedHomeDelivery ? inheritedDeliveryCost : 0;
+
       document.getElementById('map-section').style.display = 'none';
+      applyInheritedBathDelivery();
       document.getElementById('added-confirm').classList.remove('show');
       selectPiece('conjunto');
       window.scrollTo(0, 0);
@@ -455,9 +464,75 @@
 
     // ── DELIVERY ──
     let deliveryMode='fabrica', deliveryCost=0, mapInstance=null, userMarker=null;
+    let inheritedHomeDelivery=false;
+    let inheritedDeliveryCost=0;
+    let inheritedDeliveryAddress='';
+
+    function getExistingHomeDeliveryForBath() {
+      if (!window.LuxCart || typeof window.LuxCart.getCart !== 'function') return null;
+
+      const items = window.LuxCart.getCart().filter(item =>
+        item &&
+        (
+          item.deliveryMode === 'home' ||
+          item.deliveryMode === 'domicilio' ||
+          /Envío a domicilio/i.test(String(item.details || '')) ||
+          /Envío incluido en el pedido/i.test(String(item.details || ''))
+        )
+      );
+
+      if (!items.length) return null;
+
+      const costs = items.map(item => Number(item.shippingCost || 0)).filter(Boolean);
+      const addressItem = items.find(item => item.deliveryAddress);
+
+      return {
+        cost: costs.length ? Math.max(...costs) : 0,
+        address: addressItem ? String(addressItem.deliveryAddress || '') : ''
+      };
+    }
+
+    function applyInheritedBathDelivery() {
+      const block = document.querySelector('.delivery-block');
+      if (!block) return;
+
+      let box = document.getElementById('bath-inherited-delivery');
+
+      if (inheritedHomeDelivery) {
+        document.querySelectorAll('.delivery-option').forEach(option => {
+          option.style.display = 'none';
+        });
+
+        document.getElementById('map-section').style.display = 'none';
+
+        if (!box) {
+          box = document.createElement('div');
+          box.id = 'bath-inherited-delivery';
+          box.style.cssText =
+            'display:flex;flex-direction:column;gap:5px;padding:15px 17px;' +
+            'border:1px solid rgba(143,169,190,.34);border-radius:14px;' +
+            'background:rgba(231,240,250,.72);margin-top:8px;';
+          box.innerHTML =
+            '<strong style="font-size:14px">Entrega a domicilio heredada</strong>' +
+            '<span style="color:#6e6e73;font-size:12px;line-height:1.5">' +
+            'Este producto se enviará junto con los productos que ya tienes en el carrito.' +
+            '</span>';
+          block.appendChild(box);
+        }
+
+        box.style.display = 'flex';
+      } else {
+        document.querySelectorAll('.delivery-option').forEach(option => {
+          option.style.display = '';
+        });
+
+        if (box) box.style.display = 'none';
+      }
+    }
     const FABRICA=[19.0827,-98.2697], SHOWROOM=[19.0414,-98.2063];
 
     function setDelivery(mode) {
+      if (inheritedHomeDelivery) return;
       deliveryMode = mode;
       ['fabrica','showroom','domicilio'].forEach(m =>
         document.getElementById('opt-'+m).classList.toggle('selected', m===mode));
@@ -500,13 +575,13 @@
       mapInstance.setView([lat,lon],14);
       const dF=haversine(FABRICA[0],FABRICA[1],lat,lon);
       const dS=haversine(SHOWROOM[0],SHOWROOM[1],lat,lon);
-      //: ×2, más factor de carretera ×1.3
+      // Ida y vuelta: ×2, más factor de carretera ×1.3
       const km=Math.min(dF,dS)*1.3*2;
       deliveryCost=Math.round(km*15.50);
       document.getElementById('delivery-price-tag').textContent='$'+deliveryCost.toLocaleString();
       const r=document.getElementById('km-result');
       r.style.display='block';
-      r.innerHTML='📍 '+km.toFixed(1)+' km · Envío: <strong>$'+deliveryCost.toLocaleString()+' MXN</strong>';
+      r.innerHTML='📍 '+km.toFixed(1)+' km (ida y vuelta) · Envío: <strong>$'+deliveryCost.toLocaleString()+' MXN</strong>';
       updateTotal();
     }
 
@@ -519,12 +594,19 @@
     function updateTotal() {
       const base=window.currentBasePrice||2069;
       const asm=document.getElementById('check-assembly').checked?150:0;
-      const del=deliveryMode==='domicilio'?deliveryCost:0;
+      const del=
+        deliveryMode==='domicilio' && !inheritedHomeDelivery
+          ? deliveryCost
+          : 0;
       const tot=base+asm+del;
       document.getElementById('total-amount').innerHTML='$'+tot.toLocaleString()+' <span>MXN</span>';
       let b='Producto: $'+base.toLocaleString();
       if(asm) b+=' · Ensamble: $150';
-      if(del) b+=' · Envío: $'+del.toLocaleString();
+      if (deliveryMode === 'domicilio' && inheritedHomeDelivery) {
+        b += ' · Envío incluido en el pedido';
+      } else if(del) {
+        b += ' · Envío: $'+del.toLocaleString();
+      }
       b+=' · IVA incluido';
       document.getElementById('total-breakdown').textContent=b;
       document.getElementById('added-confirm').classList.remove('show');
@@ -534,13 +616,24 @@
     function agregarAlCarrito() {
       const m = MODELOS[modeloActual];
       const asm = document.getElementById('check-assembly').checked;
-      const total = window.currentBasePrice + (asm?150:0) + (deliveryMode==='domicilio'?deliveryCost:0);
+      const total =
+        window.currentBasePrice +
+        (asm ? 150 : 0) +
+        (
+          deliveryMode === 'domicilio' && !inheritedHomeDelivery
+            ? deliveryCost
+            : 0
+        );
 
       const piezaNombre = {conjunto:'Conjunto', vanity:'Solo mueble', ovalin:'Solo ovalín'}[piezaActual];
       let detalles = `Color: ${selectedColor.name}`;
       if (piezaActual !== 'ovalin') detalles += ` · ${piezaNombre}`;
       if (asm) detalles += ' · Ensamble incluido';
-      if (deliveryMode === 'domicilio') detalles += ` · Envío a domicilio: $${deliveryCost}`;
+      if (deliveryMode === 'domicilio') {
+        detalles += inheritedHomeDelivery
+          ? ' · Envío incluido en el pedido'
+          : ` · Envío a domicilio: $${deliveryCost}`;
+      }
       else if (deliveryMode === 'fabrica') detalles += ' · Recoger en fábrica';
       else if (deliveryMode === 'showroom') detalles += ' · Recoger en showroom';
 
@@ -551,7 +644,15 @@
         name: m.nombre + (piezaActual!=='conjunto' ? ' — '+piezaNombre : ''),
         category: 'Muebles de Baño',
         unitPrice: total,
+        baseUnitPrice: total,
         image: m.img,
+        deliveryMode: deliveryMode === 'domicilio' ? 'home' : deliveryMode,
+        shippingCost: deliveryMode === 'domicilio'
+          ? Number(deliveryCost || inheritedDeliveryCost || 0)
+          : 0,
+        shippingIncluded: deliveryMode === 'domicilio' && !inheritedHomeDelivery,
+        shippingSeparated: true,
+        deliveryAddress: inheritedDeliveryAddress || '',
         details: detalles
       });
 
@@ -576,6 +677,5 @@
     };
   </script>
 
-  <script src="../js/lux-fixes.js"></script>
 </body>
 </html>
