@@ -4,23 +4,130 @@
 
   const STORAGE_KEY = 'luxCart';
   const WHATSAPP_NUMBER = '527771071589';
+  const OLD_SHIPPING_IDS = ['lux-envio-unico', 'lux-shared-delivery'];
   let lastFocusedElement = null;
 
   const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, char => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
   })[char]);
 
+  function shippingInfo(item) {
+    const details = String(item?.details || '');
+    const match = details.match(/Envío a domicilio:\s*\$([\d,.]+)/i);
+    const parsed = Number(String(match?.[1] || '').replace(/,/g, '')) || 0;
+
+    return {
+      isHome:
+        item?.deliveryMode === 'home' ||
+        item?.deliveryMode === 'domicilio' ||
+        Boolean(match) ||
+        Number(item?.shippingCost || 0) > 0,
+      cost: Number(item?.shippingCost || parsed || 0)
+    };
+  }
+
+  function cleanDeliveryText(details) {
+    return String(details || '')
+      .replace(/\s*·?\s*Envío a domicilio:\s*\$[\d,.]+(?:\s*MXN)?/gi, '')
+      .replace(/\s*·?\s*Envío a domicilio\s*\(cargo único[^)]*\)/gi, '')
+      .replace(/\s*·?\s*Envío incluido en el pedido/gi, '')
+      .replace(/\s*·\s*·/g, ' · ')
+      .replace(/^\s*·\s*|\s*·\s*$/g, '')
+      .trim();
+  }
+
+  function normaliseCart(input) {
+    const cart = (Array.isArray(input) ? input : [])
+      .filter(item => !OLD_SHIPPING_IDS.includes(item?.id))
+      .map(item => ({ ...item }));
+
+    const homeItems = [];
+
+    cart.forEach(item => {
+      const info = shippingInfo(item);
+      const previousIncluded =
+        item.shippingIncluded === true ||
+        (!item.shippingSeparated && info.cost > 0);
+
+      let baseUnitPrice = Number(item.baseUnitPrice);
+
+      if (!Number.isFinite(baseUnitPrice)) {
+        baseUnitPrice = Number(item.unitPrice || 0);
+
+        if (info.isHome && info.cost && previousIncluded) {
+          baseUnitPrice = Math.max(0, baseUnitPrice - info.cost);
+        }
+      }
+
+      item.baseUnitPrice = baseUnitPrice;
+      item.unitPrice = baseUnitPrice;
+
+      if (info.isHome) {
+        item.deliveryMode = 'home';
+        item.shippingCost = info.cost;
+        homeItems.push(item);
+      } else {
+        item.shippingCost = 0;
+        item.shippingIncluded = false;
+      }
+    });
+
+    const sharedCost = homeItems.reduce(
+      (highest, item) => Math.max(highest, Number(item.shippingCost || 0)),
+      0
+    );
+
+    homeItems.forEach((item, index) => {
+      const clean = cleanDeliveryText(item.details);
+
+      item.shippingCost = sharedCost;
+      item.shippingIncluded = index === 0 && sharedCost > 0;
+      item.shippingSeparated = true;
+
+      if (item.shippingIncluded) {
+        item.details =
+          clean +
+          (clean ? ' · ' : '') +
+          `Envío a domicilio: $${sharedCost.toLocaleString('es-MX')} (cargo único por pedido)`;
+      } else {
+        item.details =
+          clean +
+          (clean ? ' · ' : '') +
+          'Envío incluido en el pedido';
+      }
+    });
+
+    return cart;
+  }
+
+  function productSubtotal(item) {
+    const quantity = Math.max(1, Number(item.qty || 1));
+    const base = Number(item.baseUnitPrice ?? item.unitPrice ?? 0);
+    const shipping = item.shippingIncluded
+      ? Number(item.shippingCost || 0)
+      : 0;
+
+    return base * quantity + shipping;
+  }
+
   function getCart() {
     try {
-      const value = JSON.parse(localStorage.getItem(STORAGE_KEY));
-      return Array.isArray(value) ? value : [];
+      const raw = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      const normalised = normaliseCart(Array.isArray(raw) ? raw : []);
+
+      if (JSON.stringify(raw || []) !== JSON.stringify(normalised)) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(normalised));
+      }
+
+      return normalised;
     } catch (_) {
       return [];
     }
   }
 
   function saveCart(cart) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    const normalised = normaliseCart(cart);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(normalised));
     renderBadge();
   }
 
@@ -30,18 +137,23 @@
 
   function getTotal() {
     return getCart().reduce((total, item) => {
-      return total + Number(item.unitPrice || 0) * Number(item.qty || 0);
+      return total + productSubtotal(item);
     }, 0);
   }
 
   function addToCart(item) {
     if (!item || !item.id || !item.name) return;
+
     const cart = getCart();
     const quantity = Math.max(1, Number(item.qty || 1));
-    const existing = cart.find(product => product.id === item.id);
+    const incoming = { ...item, qty: quantity };
+    const existing = cart.find(product => product.id === incoming.id);
 
-    if (existing) existing.qty = Number(existing.qty || 0) + quantity;
-    else cart.push(Object.assign({ qty: quantity }, item));
+    if (existing) {
+      existing.qty = Number(existing.qty || 0) + quantity;
+    } else {
+      cart.push(incoming);
+    }
 
     saveCart(cart);
     renderModal();
@@ -57,6 +169,7 @@
     const cart = getCart();
     const item = cart.find(product => product.id === id);
     if (!item) return;
+
     item.qty = Math.max(1, Number(qty || 1));
     saveCart(cart);
     renderModal();
@@ -69,6 +182,7 @@
 
   function renderBadge() {
     const count = getCount();
+
     document.querySelectorAll('.cart-badge').forEach(badge => {
       badge.textContent = count;
       badge.style.display = count > 0 ? 'flex' : 'none';
@@ -78,9 +192,11 @@
   function openModal() {
     const overlay = document.getElementById('lux-cart-overlay');
     if (!overlay) return;
+
     lastFocusedElement = document.activeElement;
     overlay.classList.add('open');
     overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = '';
     document.body.style.overflow = 'hidden';
     overlay.querySelector('.lux-cart-close')?.focus();
   }
@@ -88,9 +204,11 @@
   function closeModal() {
     const overlay = document.getElementById('lux-cart-overlay');
     if (!overlay) return;
+
     overlay.classList.remove('open');
     overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+
     if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
       lastFocusedElement.focus();
     }
@@ -99,7 +217,7 @@
   function itemMarkup(item) {
     const id = encodeURIComponent(item.id);
     const quantity = Math.max(1, Number(item.qty || 1));
-    const subtotal = Number(item.unitPrice || 0) * quantity;
+    const subtotal = productSubtotal(item);
     const image = String(item.image || '').replace(/["'()\\]/g, '\\$&');
 
     return `
@@ -128,6 +246,7 @@
     if (!body || !footer) return;
 
     const cart = getCart();
+
     if (cart.length === 0) {
       body.innerHTML = `
         <div class="lux-cart-empty">
@@ -141,6 +260,7 @@
 
     body.innerHTML = cart.map(itemMarkup).join('');
     footer.style.display = 'block';
+
     document.getElementById('lux-cart-total').innerHTML =
       `$${getTotal().toLocaleString('es-MX')} <span>MXN</span>`;
   }
@@ -150,18 +270,22 @@
     if (cart.length === 0) return;
 
     let message = '¡Hola! Quiero solicitar una cotización en Lux Concept Store MX 🛒\n\n';
+
     cart.forEach((item, index) => {
       const quantity = Number(item.qty || 1);
-      const subtotal = Number(item.unitPrice || 0) * quantity;
+      const subtotal = productSubtotal(item);
+
       message += `${index + 1}. ${item.name} (x${quantity})\n`;
       if (item.details) message += `   ${item.details}\n`;
       message += `   Subtotal estimado: $${subtotal.toLocaleString('es-MX')} MXN\n\n`;
     });
+
     message += `TOTAL ESTIMADO: $${getTotal().toLocaleString('es-MX')} MXN\n\n`;
     message += 'Quedo al pendiente de confirmar disponibilidad, entrega, instalación y forma de pago. ¡Gracias!';
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     const quoteWindow = window.open(url, '_blank', 'noopener,noreferrer');
+
     if (quoteWindow) quoteWindow.opener = null;
   }
 
@@ -178,6 +302,7 @@
     button.setAttribute('aria-controls', 'mobile-menu');
     button.setAttribute('aria-expanded', 'false');
     button.innerHTML = '<span></span><span></span><span></span>';
+
     actions.appendChild(button);
 
     const setOpen = open => {
@@ -186,8 +311,14 @@
       button.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
     };
 
-    button.addEventListener('click', () => setOpen(!mobileMenu.classList.contains('open')));
-    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+    button.addEventListener('click', () => {
+      setOpen(!mobileMenu.classList.contains('open'));
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape') setOpen(false);
     });
@@ -209,6 +340,7 @@
       #lux-cart-footer{display:none;padding:18px 22px 22px;border-top:1px solid #f0f0f0}.lux-cart-total-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}.lux-cart-total-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6e6e73}#lux-cart-total{font-size:24px;font-weight:600}#lux-cart-total span{font-size:13px;color:#6e6e73;font-weight:400}
       .lux-cart-checkout-btn{width:100%;padding:15px;border:0;border-radius:999px;background:#25d366;color:#fff;font:600 15px -apple-system,sans-serif;cursor:pointer}.lux-cart-checkout-btn:hover{background:#1eb858}.lux-cart-disclaimer{margin:10px 0 0;text-align:center;color:#86868b;font-size:11px;line-height:1.45}.lux-cart-clear{width:100%;margin-top:10px;border:0;background:none;color:#6e6e73;font-size:12px;cursor:pointer}.lux-cart-clear:hover{color:#ff3b30}
     `;
+
     document.head.appendChild(style);
 
     const overlay = document.createElement('div');
@@ -217,51 +349,73 @@
     overlay.setAttribute('aria-modal', 'true');
     overlay.setAttribute('aria-labelledby', 'lux-cart-title');
     overlay.setAttribute('aria-hidden', 'true');
+
     overlay.innerHTML = `
       <div class="lux-cart-panel">
-        <header class="lux-cart-head"><h3 id="lux-cart-title">Tu cotización</h3><button type="button" class="lux-cart-close" aria-label="Cerrar cotización">×</button></header>
+        <header class="lux-cart-head">
+          <h3 id="lux-cart-title">Tu cotización</h3>
+          <button type="button" class="lux-cart-close" aria-label="Cerrar cotización">×</button>
+        </header>
         <div id="lux-cart-body"></div>
         <footer id="lux-cart-footer">
-          <div class="lux-cart-total-row"><span class="lux-cart-total-label">Total estimado</span><span id="lux-cart-total">$0 <span>MXN</span></span></div>
+          <div class="lux-cart-total-row">
+            <span class="lux-cart-total-label">Total estimado</span>
+            <span id="lux-cart-total">$0 <span>MXN</span></span>
+          </div>
           <button type="button" class="lux-cart-checkout-btn">Solicitar cotización por WhatsApp</button>
           <p class="lux-cart-disclaimer">El total es estimado y está sujeto a disponibilidad, entrega e instalación.</p>
           <button type="button" class="lux-cart-clear">Vaciar cotización</button>
         </footer>
       </div>`;
+
     document.body.appendChild(overlay);
 
     overlay.querySelector('.lux-cart-close').addEventListener('click', closeModal);
     overlay.querySelector('.lux-cart-checkout-btn').addEventListener('click', checkout);
     overlay.querySelector('.lux-cart-clear').addEventListener('click', clearCart);
+
     overlay.addEventListener('click', event => {
       if (event.target === overlay) closeModal();
     });
+
     overlay.addEventListener('click', event => {
       const action = event.target.closest('[data-cart-action]');
       const item = event.target.closest('[data-cart-id]');
       if (!action || !item) return;
+
       const id = decodeURIComponent(item.dataset.cartId);
       const cartItem = getCart().find(product => product.id === id);
       if (!cartItem) return;
+
       if (action.dataset.cartAction === 'remove') removeFromCart(id);
-      if (action.dataset.cartAction === 'decrease') updateQty(id, Number(cartItem.qty) - 1);
-      if (action.dataset.cartAction === 'increase') updateQty(id, Number(cartItem.qty) + 1);
+      if (action.dataset.cartAction === 'decrease') {
+        updateQty(id, Number(cartItem.qty) - 1);
+      }
+      if (action.dataset.cartAction === 'increase') {
+        updateQty(id, Number(cartItem.qty) + 1);
+      }
     });
+
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+      if (event.key === 'Escape' && overlay.classList.contains('open')) {
+        closeModal();
+      }
     });
   }
 
   function wireCartIcons() {
     document.querySelectorAll('.nav-icon[aria-label="Carrito"]').forEach(icon => {
       let badge = icon.querySelector('.cart-badge');
+
       if (!badge) {
         badge = document.createElement('span');
         badge.className = 'cart-badge';
         badge.setAttribute('aria-hidden', 'true');
         icon.appendChild(badge);
       }
+
       icon.setAttribute('aria-haspopup', 'dialog');
+
       icon.addEventListener('click', event => {
         event.preventDefault();
         renderModal();
@@ -277,8 +431,11 @@
     renderBadge();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
   window.LuxCart = {
     add: addToCart,
