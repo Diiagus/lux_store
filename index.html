@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="lux-build" content="2026-06-24-macchia-campaign-02">
+  <meta name="lux-build" content="2026-06-24-macchia-exacto-03">
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="description" content="Lux Concept Store MX — Muebles de diseño fabricados en Puebla. Muebles de baño, cocinas, persianas, mesas de piedra y más. Entrega directa en Puebla, sin intermediarios.">
@@ -23,122 +23,216 @@
   <link rel="canonical" href="https://luxstoremx.netlify.app/">
 
   <style>
-    /* CAMPAÑA PRINCIPAL — MACCHIA VECCHIA */
-    .macchia-campaign{
-      position:relative;
+    html{scroll-behavior:smooth}
+
+    .macchia-exact{
       width:100%;
-      display:grid;
-      place-items:start center;
+      margin:0;
       overflow:hidden;
-      background:
-        radial-gradient(circle at 50% 24%, rgba(255,255,255,.72) 0, rgba(255,255,255,.22) 34%, transparent 62%),
-        linear-gradient(180deg,#d8e5f5 0%,#dce8f6 46%,#c5d0e2 100%);
+      background:#dce8f7;
       border-bottom:1px solid rgba(29,29,31,.08);
     }
-    .macchia-campaign-inner{
+    .macchia-exact-media{
       position:relative;
-      width:min(100%,calc((100svh - 64px) * .800285));
-      max-width:1122px;
-      aspect-ratio:1122 / 1402;
-      margin:0 auto;
-      flex:none;
+      width:100%;
+      margin:0;
     }
-    .macchia-campaign-image{
+    .macchia-exact-media picture,
+    .macchia-exact-media img{
       display:block;
       width:100%;
-      height:100%;
-      object-fit:contain;
-      user-select:none;
-      -webkit-user-drag:none;
+      height:auto;
     }
-    .macchia-campaign-hotspot{
+
+    .macchia-exact-link{
       position:absolute;
-      top:24.5%;
-      height:5.3%;
-      border-radius:999px;
-      z-index:2;
-      color:transparent;
+      z-index:3;
       font-size:0;
-      outline:none;
+      color:transparent;
+      border-radius:999px;
+      outline:none!important;
+      box-shadow:none!important;
+      -webkit-tap-highlight-color:transparent;
     }
-    .macchia-campaign-hotspot.discover{
-      left:32.4%;
-      width:17.4%;
+    .macchia-exact-link:focus,
+    .macchia-exact-link:focus-visible,
+    .macchia-exact-link:active{
+      outline:none!important;
+      box-shadow:none!important;
     }
-    .macchia-campaign-hotspot.buy{
-      left:51.5%;
-      width:16.3%;
+
+    /* Posiciones exactas sobre el banner horizontal */
+    .macchia-exact-discover{
+      left:7.4%;
+      top:62.0%;
+      width:10.1%;
+      height:7.4%;
     }
-    .macchia-campaign-hotspot:hover,
-    .macchia-campaign-hotspot:focus,
-    .macchia-campaign-hotspot:focus-visible{
-      outline:none;
-      box-shadow:none;
+    .macchia-exact-buy{
+      left:19.1%;
+      top:62.0%;
+      width:10.2%;
+      height:7.4%;
     }
-    .macchia-scroll-cue{
+    .macchia-exact-down{
       position:absolute;
       left:50%;
-      bottom:18px;
+      bottom:3.4%;
       transform:translateX(-50%);
+      color:#1d1d1f;
+      text-decoration:none;
+      display:flex;
       width:34px;
       height:34px;
-      border:1px solid rgba(29,29,31,.18);
-      border-radius:50%;
-      display:flex;
       align-items:center;
       justify-content:center;
-      color:#6e6e73;
-      background:rgba(255,255,255,.58);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      text-decoration:none;
-      transition:transform .2s ease,background .2s ease;
+      border-radius:50%;
+      -webkit-tap-highlight-color:transparent;
     }
-    .macchia-scroll-cue:hover{
-      transform:translateX(-50%) translateY(3px);
-      background:rgba(255,255,255,.88);
-    }
-    .product-discovery{
+
+    .lux-discovery{
       scroll-margin-top:72px;
-      padding-top:72px!important;
-      padding-bottom:72px!important;
+      background:#fff;
+      padding:58px 0 66px;
+      overflow:hidden;
     }
-    .product-discovery .hero-eyebrow{
+    .lux-discovery-inner{
+      width:min(1320px,calc(100% - 48px));
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr);
+      grid-template-areas:
+        "copy controls"
+        "copy track";
+      gap:20px 34px;
+      align-items:start;
+    }
+    .lux-discovery-copy{
+      grid-area:copy;
+      padding-top:16px;
+    }
+    .lux-discovery-kicker{
+      margin:0 0 8px;
       color:#86868b;
+      font-size:11px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
     }
-    .product-discovery .hero-title{
-      font-size:clamp(42px,6vw,78px);
-      letter-spacing:-.045em;
+    .lux-discovery-copy h2{
+      margin:0 0 12px;
+      font-size:clamp(34px,4vw,52px);
+      letter-spacing:-.04em;
+      line-height:1;
+      font-weight:600;
+      color:#1d1d1f;
     }
-    .product-discovery .hero-title em{
-      font-style:normal;
-      font-weight:400;
+    .lux-discovery-copy p:last-child{
+      margin:0;
       color:#6e6e73;
+      font-size:14px;
+      line-height:1.6;
+      max-width:240px;
     }
-    @media(max-width:760px){
-      .macchia-campaign-inner{
-        width:100%;
-        max-width:none;
-      }
-      .macchia-campaign-hotspot{
-        top:24.2%;
-        height:5.8%;
-      }
-      .macchia-scroll-cue{
-        display:none;
-      }
-      .product-discovery{
-        padding-top:48px!important;
-      }
+
+    .lux-discovery-controls{
+      grid-area:controls;
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
     }
-    @media(max-width:480px){
-      .macchia-campaign-hotspot.discover{
-        left:31.5%;
-        width:18.5%;
+    .lux-discovery-controls button{
+      width:42px;
+      height:42px;
+      border:1px solid #d2d2d7;
+      background:#fff;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      color:#1d1d1f;
+      transition:background .2s ease,transform .2s ease;
+    }
+    .lux-discovery-controls button:hover{
+      background:#f5f5f7;
+      transform:translateY(-1px);
+    }
+
+    .lux-category-track{
+      grid-area:track;
+      display:flex;
+      gap:18px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      scrollbar-width:none;
+      padding-bottom:4px;
+    }
+    .lux-category-track::-webkit-scrollbar{display:none}
+
+    .lux-category-card{
+      flex:0 0 220px;
+      scroll-snap-align:start;
+      border-radius:18px;
+      overflow:hidden;
+      background:#f5f5f7;
+      text-decoration:none;
+      color:#1d1d1f;
+      border:1px solid rgba(29,29,31,.06);
+      transition:transform .25s ease,box-shadow .25s ease;
+    }
+    .lux-category-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 14px 34px rgba(0,0,0,.08);
+    }
+    .lux-category-card img{
+      display:block;
+      width:100%;
+      aspect-ratio:1/1.05;
+      object-fit:cover;
+    }
+    .lux-category-card span{
+      display:block;
+      padding:13px 16px 15px;
+      text-align:center;
+      font-size:14px;
+      font-weight:500;
+    }
+
+    @media(max-width:900px){
+      .lux-discovery-inner{
+        grid-template-columns:1fr;
+        grid-template-areas:
+          "copy"
+          "controls"
+          "track";
       }
-      .macchia-campaign-hotspot.buy{
-        left:51%;
-        width:17.5%;
+      .lux-discovery-copy p:last-child{max-width:500px}
+      .lux-discovery-controls{justify-content:flex-start}
+    }
+
+    @media(max-width:700px){
+      .macchia-exact-discover{
+        left:32.1%;
+        top:24.4%;
+        width:17.8%;
+        height:5.6%;
+      }
+      .macchia-exact-buy{
+        left:51.2%;
+        top:24.4%;
+        width:17.2%;
+        height:5.6%;
+      }
+      .macchia-exact-down{display:none}
+
+      .lux-discovery{
+        padding:44px 0 54px;
+      }
+      .lux-discovery-inner{
+        width:min(100% - 28px,1320px);
+      }
+      .lux-category-card{
+        flex-basis:72vw;
+        max-width:300px;
       }
     }
   </style>
@@ -188,147 +282,116 @@
   </div>
 
 
-  <!-- CAMPAÑA PRINCIPAL -->
-  <section class="macchia-campaign" aria-label="Campaña Mesa Macchia Vecchia">
-    <div class="macchia-campaign-inner">
-      <img
-        class="macchia-campaign-image"
-        src="assets/campaigns/macchia-vecchia-campaign.png"
-        alt="Mesa Macchia Vecchia de piedra sinterizada Ascale con base dorada y reflejo"
-        width="1100"
-        height="1376"
-        fetchpriority="high"
-      >
+
+  <!-- CAMPAÑA PRINCIPAL EXACTA -->
+  <section class="macchia-exact" aria-label="Campaña Mesa Macchia Vecchia">
+    <div class="macchia-exact-media">
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/campaigns/macchia-hero-mobile.png">
+        <img
+          src="assets/campaigns/macchia-hero-desktop.jpg"
+          alt="Mesa Macchia Vecchia de piedra sinterizada Ascale"
+          fetchpriority="high"
+          width="1536"
+          height="659"
+        >
+      </picture>
+
       <a
-        class="macchia-campaign-hotspot discover"
+        class="macchia-exact-link macchia-exact-discover"
         href="pages/mesas-piedra.html#product-mesa-macchia-vecchia"
         aria-label="Descubrir Mesa Macchia Vecchia">
         Descubrir
       </a>
+
       <a
-        class="macchia-campaign-hotspot buy"
+        class="macchia-exact-link macchia-exact-buy"
         href="pages/mesas-piedra.html?product=macchia-vecchia"
         aria-label="Comprar Mesa Macchia Vecchia">
         Comprar
       </a>
-      <a class="macchia-scroll-cue" href="#descubre-lux" aria-label="Bajar a Descubre Lux">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+
+      <a class="macchia-exact-down" href="#descubre-lux" aria-label="Bajar a Descubre Lux">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
           <path d="M6 9l6 6 6-6"/>
         </svg>
       </a>
     </div>
   </section>
 
+  <!-- DESCUBRE LUX -->
+  <section class="lux-discovery" id="descubre-lux">
+    <div class="lux-discovery-inner">
+      <div class="lux-discovery-copy">
+        <p class="lux-discovery-kicker">Colecciones</p>
+        <h2>Descubre Lux</h2>
+        <p>Explora nuestras colecciones y encuentra piezas que transforman cada espacio.</p>
+      </div>
 
-  <!-- PRODUCT DISCOVERY -->
-  <section class="hero product-discovery" id="descubre-lux">
-    <div class="hero-text">
-      <p class="hero-eyebrow">Colección Lux · Entrega en Puebla</p>
-      <h2 class="hero-title">
-        Descubre Lux.<br>
-        <em>Piezas para transformar tu espacio.</em>
-      </h2>
-      <p class="hero-subtitle">
-        Explora muebles de baño, cocinas, mesas de piedra y persianas.
-        Cada pieza te lleva directamente a su producto o configurador.
-      </p>
-      <div class="hero-actions">
-        <a href="pages/bano.html" class="btn-primary">Explorar colección</a>
-        <a href="https://wa.me/527771071589?text=Hola%2C%20me%20interesa%20cotizar%20un%20mueble%20a%20medida.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
-           target="_blank" class="btn-secondary">Cotízalo a tu medida →</a>
+      <div class="lux-discovery-controls" aria-label="Controles del carrusel">
+        <button type="button" id="lux-carousel-prev" aria-label="Anterior">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <button type="button" id="lux-carousel-next" aria-label="Siguiente">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="lux-category-track" id="lux-category-track">
+        <a class="lux-category-card" href="pages/bano.html">
+          <img src="assets/campaigns/cards/bano.jpg" alt="Muebles de baño Lux">
+          <span>Muebles de Baño</span>
+        </a>
+
+        <a class="lux-category-card" href="pages/cocinas.html">
+          <img src="assets/campaigns/cards/cocinas.jpg" alt="Cocinas Lux">
+          <span>Cocinas</span>
+        </a>
+
+        <a class="lux-category-card" href="pages/persianas.html">
+          <img src="assets/campaigns/cards/persianas.jpg" alt="Persianas Lux">
+          <span>Persianas</span>
+        </a>
+
+        <a class="lux-category-card" href="pages/mesas-piedra.html">
+          <img src="assets/campaigns/cards/mesas.jpg" alt="Mesas de piedra Lux">
+          <span>Mesas de Piedra</span>
+        </a>
+
+        <a class="lux-category-card" href="pages/colors.html">
+          <img src="assets/campaigns/cards/colors.jpg" alt="Muestrario Colors">
+          <span>Colors</span>
+        </a>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hero-img-box" id="hero-carousel-link" role="link" tabindex="0" aria-label="Abrir producto destacado" style="cursor:pointer;">
-        <img id="hero-carousel-img"
-             src="assets/products/bano/gabinete.jpeg"
-             alt="Lux Concept — Producto"
-             style="transition: opacity 0.6s ease;">
-        <div class="hero-badge">
-          <span id="hero-badge-label">Disponible ahora</span>
-          <span id="hero-badge-name">Lux Vanity S · Blanco Frosty</span>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const HERO_SLIDES = [
-        { href: 'pages/bano.html?product=s', src: 'assets/products/bano/gabinete.jpeg', label: 'Disponible ahora', name: 'Lux Vanity S · Blanco Frosty' },
-        { href: 'pages/bano.html?product=m', src: 'assets/products/bano/gabinete2.jpeg', label: 'Disponible ahora', name: 'Lux Vanity M · 75×40×40 cm' },
-        { href: 'pages/bano.html?product=l', src: 'assets/products/bano/gabinete3.jpeg', label: 'Disponible ahora', name: 'Lux Vanity L · 75×50×40 cm' },
-        { href: 'pages/mesas-piedra.html?product=macchia-vecchia', src: 'assets/products/mesas-piedra/MESA.jpeg', label: 'Piedra sinterizada Ascale', name: 'Mesa Macchia Vecchia · 71 cm' },
-        { href: 'pages/mesas-piedra.html?product=crotone-pulpis', src: 'assets/products/mesas-piedra/MESA2.jpeg', label: 'Piedra sinterizada Ascale', name: 'Mesa Crotone Pulpis · 60 cm' },
-
-        { href: 'pages/cocinas.html?product=wine-rack', src: 'assets/products/cocinas/botellero/botellero.jpeg', label: 'Muebles de cocina', name: 'Lux Wine Rack · 50×180×30 cm' },
-        { href: 'pages/cocinas.html?product=cook-s', src: 'assets/products/cocinas/alacena1/alacena1.jpeg', label: 'Muebles de cocina', name: 'Lux Cook S · 60×50×30 cm' },
-        { href: 'pages/cocinas.html?product=cook-m', src: 'assets/products/cocinas/alacena2/alacena2.jpeg', label: 'Muebles de cocina', name: 'Lux Cook M · 80×50×30 cm' },
-        { href: 'pages/cocinas.html?product=cook-l', src: 'assets/products/cocinas/alacena3/alacena3.jpeg', label: 'Muebles de cocina', name: 'Lux Cook L · 100×70×30 cm' },
-
-        { href: 'pages/persianas.html#persiana-1', src: 'assets/products/Cortinas/1/1.jpeg', label: 'Cotización a medida', name: 'Persiana 1 · Colección Lux' },
-        { href: 'pages/persianas.html#persiana-2', src: 'assets/products/Cortinas/2/1.jpeg', label: 'Cotización a medida', name: 'Persiana 2 · Colección Lux' },
-        { href: 'pages/persianas.html#persiana-3', src: 'assets/products/Cortinas/3/1.jpeg', label: 'Cotización a medida', name: 'Persiana 3 · Colección Lux' },
-        { href: 'pages/persianas.html#persiana-4', src: 'assets/products/Cortinas/4/1.jpeg', label: 'Cotización a medida', name: 'Persiana 4 · Colección Lux' },
-        { href: 'pages/persianas.html#persiana-5', src: 'assets/products/Cortinas/5/1.jpeg', label: 'Cotización a medida', name: 'Persiana 5 · Colección Lux' },
-        { href: 'pages/persianas.html#persiana-6', src: 'assets/products/Cortinas/6/1.jpeg', label: 'Cotización a medida', name: 'Persiana 6 · Colección Lux' }
-      ];
-
-
-      const heroCarouselLink = document.getElementById('hero-carousel-link');
-
-      function openHeroProduct() {
-        const href = heroCarouselLink && heroCarouselLink.dataset.href;
-        if (href) window.location.href = href;
-      }
-
-      if (heroCarouselLink) {
-        heroCarouselLink.dataset.href = HERO_SLIDES[0].href;
-        heroCarouselLink.addEventListener('click', openHeroProduct);
-        heroCarouselLink.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            openHeroProduct();
-          }
-        });
-      }
-
-      let heroUsed = [];
-
-      function nextHeroSlide() {
-        if (heroUsed.length === HERO_SLIDES.length) heroUsed = [];
-
-        const available = HERO_SLIDES.filter((_, index) => !heroUsed.includes(index));
-        const selected = available[Math.floor(Math.random() * available.length)];
-        const index = HERO_SLIDES.indexOf(selected);
-        heroUsed.push(index);
-
-        const image = document.getElementById('hero-carousel-img');
-        image.style.opacity = '0';
-
-        setTimeout(() => {
-          const previousSrc = image.src;
-
-          image.onload = () => {
-            image.style.opacity = '1';
-            document.getElementById('hero-badge-label').textContent = selected.label;
-            document.getElementById('hero-badge-name').textContent = selected.name;
-            if (heroCarouselLink) heroCarouselLink.dataset.href = selected.href;
-          };
-
-          image.onerror = () => {
-            image.onerror = null;
-            image.src = previousSrc;
-            image.style.opacity = '1';
-          };
-
-          image.alt = selected.name;
-          image.src = selected.src;
-        }, 600);
-      }
-
-      setInterval(nextHeroSlide, 6000);
-    </script>
   </section>
+
+  <script>
+    (() => {
+      const track = document.getElementById('lux-category-track');
+      const previous = document.getElementById('lux-carousel-prev');
+      const next = document.getElementById('lux-carousel-next');
+
+      if (!track || !previous || !next) return;
+
+      const move = direction => {
+        const card = track.querySelector('.lux-category-card');
+        const distance = card ? card.getBoundingClientRect().width + 18 : 260;
+        track.scrollBy({ left: direction * distance, behavior: 'smooth' });
+      };
+
+      previous.addEventListener('click', () => move(-1));
+      next.addEventListener('click', () => move(1));
+    })();
+  </script>
+
   <!-- DIFERENCIADORES -->
   <style>
     .diferenciadores { background:#f5f5f7; border-top:1px solid #e8e8ed; padding:64px 5%; }
