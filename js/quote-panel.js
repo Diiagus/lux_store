@@ -26,8 +26,67 @@
     address: '',
     map: null,
     marker: null,
-    lastFocus: null
+    lastFocus: null,
+    inheritedHomeDelivery: false,
+    inheritedShippingCost: 0,
+    inheritedAddress: ''
   };
+
+
+  function getExistingHomeDelivery() {
+    if (!window.LuxCart || typeof window.LuxCart.getCart !== 'function') return null;
+
+    const items = window.LuxCart.getCart().filter(item =>
+      item &&
+      (
+        item.deliveryMode === 'home' ||
+        item.deliveryMode === 'domicilio' ||
+        /Envío a domicilio/i.test(String(item.details || '')) ||
+        /Envío incluido en el pedido/i.test(String(item.details || ''))
+      )
+    );
+
+    if (!items.length) return null;
+
+    const costs = items.map(item => Number(item.shippingCost || 0)).filter(Boolean);
+    const addressItem = items.find(item => item.deliveryAddress);
+
+    return {
+      cost: costs.length ? Math.max(...costs) : 0,
+      address: addressItem ? String(addressItem.deliveryAddress || '') : ''
+    };
+  }
+
+  function applyInheritedDeliveryUI() {
+    const options = document.querySelector('.lux-quote-delivery');
+    const address = document.getElementById('lux-quote-address');
+    let box = document.getElementById('lux-quote-inherited-delivery');
+
+    if (state.inheritedHomeDelivery) {
+      if (options) options.style.display = 'none';
+      if (address) address.classList.remove('visible');
+
+      if (!box && options) {
+        box = document.createElement('div');
+        box.id = 'lux-quote-inherited-delivery';
+        box.style.cssText =
+          'display:flex;flex-direction:column;gap:5px;padding:15px 17px;' +
+          'border:1px solid rgba(143,169,190,.34);border-radius:14px;' +
+          'background:rgba(231,240,250,.72);';
+        box.innerHTML =
+          '<strong style="font-size:14px">Entrega a domicilio heredada</strong>' +
+          '<span style="color:#6e6e73;font-size:12px;line-height:1.5">' +
+          'Este producto se enviará junto con los productos que ya tienes en el carrito.' +
+          '</span>';
+        options.parentNode.insertBefore(box, options);
+      }
+
+      if (box) box.style.display = 'flex';
+    } else {
+      if (options) options.style.display = '';
+      if (box) box.style.display = 'none';
+    }
+  }
 
   function markup() {
     if (document.getElementById('lux-quote-overlay')) return;
@@ -176,8 +235,22 @@
       delivery: 'factory',
       deliveryCost: 0,
       address: '',
-      lastFocus: document.activeElement
+      lastFocus: document.activeElement,
+      inheritedHomeDelivery: false,
+      inheritedShippingCost: 0,
+      inheritedAddress: ''
     };
+
+    const existingHomeDelivery = getExistingHomeDelivery();
+
+    if (existingHomeDelivery) {
+      state.inheritedHomeDelivery = true;
+      state.inheritedShippingCost = Number(existingHomeDelivery.cost || 0);
+      state.inheritedAddress = existingHomeDelivery.address || '';
+      state.delivery = 'home';
+      state.deliveryCost = state.inheritedShippingCost;
+      state.address = state.inheritedAddress;
+    }
 
     const overlay = document.getElementById('lux-quote-overlay');
     const image = document.getElementById('lux-quote-image');
@@ -199,15 +272,26 @@
     document.getElementById('lux-quote-assembly').checked = false;
 
     document.querySelectorAll('[data-delivery]').forEach(element => {
-      element.classList.toggle('selected', element.dataset.delivery === 'factory');
+      element.classList.toggle(
+        'selected',
+        state.inheritedHomeDelivery
+          ? element.dataset.delivery === 'home'
+          : element.dataset.delivery === 'factory'
+      );
     });
-    document.querySelector('input[value="factory"]').checked = true;
+
+    const selectedDelivery = document.querySelector(
+      `input[value="${state.inheritedHomeDelivery ? 'home' : 'factory'}"]`
+    );
+    if (selectedDelivery) selectedDelivery.checked = true;
 
     document.getElementById('lux-quote-address').classList.remove('visible');
-    document.getElementById('lux-quote-delivery-price').textContent = 'Calcular';
+    document.getElementById('lux-quote-delivery-price').textContent =
+      state.inheritedHomeDelivery ? 'Incluido' : 'Calcular';
     document.getElementById('lux-quote-result').classList.remove('visible');
     document.getElementById('lux-quote-address-input').value = '';
 
+    applyInheritedDeliveryUI();
     updateTotal();
 
     overlay.classList.add('open');
@@ -262,6 +346,7 @@
   }
 
   function selectDelivery(mode) {
+    if (state.inheritedHomeDelivery) return;
     state.delivery = mode;
     state.deliveryCost = 0;
     state.address = '';
@@ -426,7 +511,11 @@
     return (
       Number(state.config.price) +
       (state.config.assembly === false ? 0 : state.assembly ? 150 : 0) +
-      (state.delivery === 'home' ? state.deliveryCost : 0)
+      (
+        state.delivery === 'home' && !state.inheritedHomeDelivery
+          ? state.deliveryCost
+          : 0
+      )
     );
   }
 
@@ -442,7 +531,11 @@
     }
 
     if (state.delivery === 'home' && state.deliveryCost) {
-      parts.push(`Envío: $${state.deliveryCost.toLocaleString('es-MX')}`);
+      parts.push(
+        state.inheritedHomeDelivery
+          ? 'Envío incluido en el pedido'
+          : `Envío: $${state.deliveryCost.toLocaleString('es-MX')}`
+      );
     }
 
     parts.push('IVA incluido');
@@ -455,7 +548,11 @@
   }
 
   function validateConfiguration() {
-    if (state.delivery === 'home' && !state.deliveryCost) {
+    if (
+      state.delivery === 'home' &&
+      !state.inheritedHomeDelivery &&
+      !state.deliveryCost
+    ) {
       alert(
         'Calcula primero el costo de envío con tu dirección o selecciona una opción de recolección.'
       );
@@ -481,7 +578,11 @@
     if (state.delivery === 'store') details.push('Recoger en tienda');
 
     if (state.delivery === 'home') {
-      details.push('Envío a domicilio: $' + state.deliveryCost.toLocaleString('es-MX'));
+      details.push(
+        state.inheritedHomeDelivery
+          ? 'Envío incluido en el pedido'
+          : 'Envío a domicilio: $' + state.deliveryCost.toLocaleString('es-MX')
+      );
       if (state.address) details.push('Destino: ' + state.address);
     }
 
@@ -496,8 +597,16 @@
       name: config.name,
       category: config.category || 'Lux Concept',
       unitPrice: total(),
+      baseUnitPrice: total(),
       qty: 1,
       image: config.image,
+      deliveryMode: state.delivery,
+      shippingCost: state.delivery === 'home'
+        ? Number(state.deliveryCost || state.inheritedShippingCost || 0)
+        : 0,
+      shippingIncluded: state.delivery === 'home' && !state.inheritedHomeDelivery,
+      shippingSeparated: true,
+      deliveryAddress: state.address || state.inheritedAddress || '',
       details: [config.details, ...details].filter(Boolean).join(' · ')
     };
   }
