@@ -116,3 +116,485 @@
 @media (max-width: 600px) {
   .cgrid { grid-template-columns: repeat(2, 1fr); }
 }
+
+
+/* =========================================================
+   LUX CONCEPT — IDENTIDAD GLOBAL 2026
+   Aplicada a toda la tienda
+   ========================================================= */
+
+:root{
+  --lux-ice:#e7f0fa;
+  --lux-ice-deep:#dce8f6;
+  --lux-white:#ffffff;
+  --lux-ink:#1d1d1f;
+  --lux-ink-soft:#3a3a3c;
+  --lux-gray:#6e6e73;
+  --lux-gray-soft:#8a8a8f;
+  --lux-blue:#8fa9be;
+  --lux-blue-hover:#7e9ab1;
+  --lux-blue-pale:#edf4fa;
+  --lux-border:rgba(82,105,125,.18);
+  --lux-shadow:0 18px 50px rgba(75,100,125,.10);
+  --lux-radius:20px;
+  --lux-font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",
+             "Helvetica Neue","Segoe UI",Arial,sans-serif;
+}
+
+/* Base de toda la tienda */
+html{
+  scroll-behavior:smooth;
+  background:var(--lux-ice);
+}
+
+body,
+button,
+input,
+select,
+textarea{
+  font-family:var(--lux-font)!important;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+body{
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,255,255,.72),transparent 34%),
+    linear-gradient(180deg,var(--lux-ice) 0%,var(--lux-blue-pale) 100%)!important;
+  color:var(--lux-ink)!important;
+}
+
+main,
+.page-main,
+.catalog-page,
+.product-page,
+.colors-page,
+.persianas-page{
+  color:var(--lux-ink);
+}
+
+/* Navegación compartida */
+.nav{
+  background:rgba(255,255,255,.94)!important;
+  border-bottom:1px solid var(--lux-border)!important;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.nav-links a,
+.nav-mobile-menu a{
+  font-family:var(--lux-font)!important;
+  color:var(--lux-ink)!important;
+  font-weight:500!important;
+  letter-spacing:-.012em;
+}
+
+.nav-links a:hover,
+.nav-mobile-menu a:hover{
+  color:var(--lux-blue-hover)!important;
+}
+
+.nav-cta,
+.nav-mobile-menu .nav-cta{
+  background:var(--lux-blue)!important;
+  color:#fff!important;
+  border:none!important;
+  box-shadow:none!important;
+}
+
+.nav-cta:hover,
+.nav-mobile-menu .nav-cta:hover{
+  background:var(--lux-blue-hover)!important;
+  color:#fff!important;
+}
+
+/* Fondos principales */
+#vista-catalogo,
+.catalog-section,
+.catalog-grid,
+.mesas-section,
+.persianas-section,
+.colors-section,
+.cocinas-products,
+.product-section,
+.page-section{
+  background:transparent!important;
+}
+
+.catalog-hero,
+.page-hero,
+.products-hero,
+.mesas-hero,
+.colors-hero,
+.persianas-hero,
+.cocinas-hero,
+.hero-copy{
+  background:transparent!important;
+  border-color:var(--lux-border)!important;
+}
+
+/* Jerarquía tipográfica */
+h1,h2,h3,h4,
+.catalog-hero h1,
+.page-title,
+.product-title,
+.mesa-card-name,
+.catalog-card-name,
+.cook-card-name,
+.persiana-title{
+  font-family:var(--lux-font)!important;
+  color:var(--lux-ink)!important;
+  letter-spacing:-.04em!important;
+}
+
+h1,
+.catalog-hero h1,
+.page-title{
+  font-weight:600!important;
+}
+
+h2,h3,h4,
+.catalog-card-name,
+.mesa-card-name,
+.cook-card-name{
+  font-weight:600!important;
+}
+
+p,
+.page-subtitle,
+.catalog-hero p,
+.catalog-card-desc,
+.mesa-card-desc,
+.cook-card-desc,
+.product-description,
+.footer-brand p,
+.footer-copy,
+.delivery-option-sub,
+.extra-row-desc{
+  font-family:var(--lux-font)!important;
+  color:var(--lux-gray)!important;
+}
+
+/* Eyebrows, etiquetas y subtítulos */
+.eyebrow,
+.hero-eyebrow,
+.catalog-card-cat,
+.mesa-card-cat,
+.cook-card-cat,
+.product-category,
+.total-label,
+.lux-quote-eyebrow,
+.lux-cart-item-cat,
+.section-label,
+.brand-label{
+  color:var(--lux-gray)!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase;
+}
+
+/* Tarjetas */
+.catalog-card,
+.mesa-card,
+.cook-card,
+.product-card,
+.persiana-card,
+.color-card,
+.csw,
+.dif-card{
+  background:rgba(255,255,255,.90)!important;
+  border:1px solid var(--lux-border)!important;
+  border-radius:var(--lux-radius)!important;
+  box-shadow:none!important;
+}
+
+.catalog-card:hover,
+.mesa-card:hover,
+.cook-card:hover,
+.product-card:hover,
+.persiana-card:hover,
+.color-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--lux-shadow)!important;
+}
+
+.catalog-card-img,
+.mesa-card img,
+.cook-card-img,
+.product-image,
+.product-viewer,
+.color-preview{
+  background:rgba(255,255,255,.48)!important;
+}
+
+/* Botones generales */
+.btn-primary,
+.btn-ver,
+.btn-cart,
+.btn-whatsapp,
+.add-to-cart,
+.product-add,
+.cook-configure,
+.lux-quote-add,
+.lux-cart-checkout-btn,
+.map-search button,
+.lux-quote-search button,
+button[type="submit"]{
+  font-family:var(--lux-font)!important;
+  background:var(--lux-blue)!important;
+  color:#fff!important;
+  border:1px solid transparent!important;
+  border-radius:999px!important;
+  box-shadow:none!important;
+  font-weight:500!important;
+}
+
+.btn-primary:hover,
+.btn-ver:hover,
+.btn-cart:hover,
+.btn-whatsapp:hover,
+.add-to-cart:hover,
+.product-add:hover,
+.cook-configure:hover,
+.lux-quote-add:hover,
+.lux-cart-checkout-btn:hover,
+.map-search button:hover,
+.lux-quote-search button:hover,
+button[type="submit"]:hover{
+  background:var(--lux-blue-hover)!important;
+  color:#fff!important;
+}
+
+/* Botones secundarios y Pagar ahora */
+.btn-secondary,
+.btn-back,
+.lux-quote-pay,
+.btn-cart-pay,
+.lux-cart-clear,
+.filter-btn,
+.cat-tab{
+  font-family:var(--lux-font)!important;
+  background:rgba(255,255,255,.24)!important;
+  color:var(--lux-blue-hover)!important;
+  border:1px solid var(--lux-blue)!important;
+  border-radius:999px!important;
+  box-shadow:none!important;
+}
+
+.lux-quote-pay:hover,
+.btn-cart-pay:hover,
+.btn-secondary:hover,
+.btn-back:hover,
+.filter-btn:hover,
+.cat-tab:hover{
+  background:rgba(255,255,255,.58)!important;
+  color:var(--lux-ink)!important;
+}
+
+/* Mantener la acción de continuar comprando como botón principal */
+.btn-cart-continue{
+  background:var(--lux-blue)!important;
+  color:#fff!important;
+}
+
+/* Precios y totales */
+.catalog-card-price,
+.mesa-card-price,
+.cook-card-price,
+.product-price,
+.price-amount,
+.total-amount,
+.lux-quote-total-value,
+#lux-cart-total{
+  color:var(--lux-ink)!important;
+  font-family:var(--lux-font)!important;
+  letter-spacing:-.035em!important;
+}
+
+.total-block,
+.lux-quote-total,
+.delivery-km-result,
+.lux-cart-empty,
+.lux-quote-result{
+  background:rgba(255,255,255,.60)!important;
+  border:1px solid var(--lux-border)!important;
+}
+
+/* Formularios y opciones */
+input,
+select,
+textarea,
+.map-search input,
+.lux-quote-search input{
+  background:rgba(255,255,255,.82)!important;
+  color:var(--lux-ink)!important;
+  border:1px solid var(--lux-border)!important;
+  border-radius:12px!important;
+  outline:none!important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.map-search input:focus,
+.lux-quote-search input:focus{
+  border-color:var(--lux-blue)!important;
+  box-shadow:0 0 0 3px rgba(143,169,190,.20)!important;
+}
+
+input[type="checkbox"],
+input[type="radio"]{
+  accent-color:var(--lux-blue)!important;
+}
+
+.delivery-option,
+.lux-quote-delivery-option,
+.extra-row,
+.lux-quote-check{
+  background:rgba(255,255,255,.50)!important;
+  border-color:var(--lux-border)!important;
+}
+
+.delivery-option.selected,
+.lux-quote-delivery-option.selected{
+  background:rgba(255,255,255,.86)!important;
+  border-color:var(--lux-blue)!important;
+}
+
+/* Configurador compartido */
+.lux-quote-overlay{
+  background:rgba(55,70,90,.42)!important;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+.lux-quote-dialog{
+  background:linear-gradient(145deg,#fff,var(--lux-blue-pale))!important;
+  border:1px solid rgba(255,255,255,.85)!important;
+  border-radius:26px!important;
+}
+
+.lux-quote-media{
+  background:
+    radial-gradient(circle at 50% 30%,#fff,var(--lux-ice))!important;
+}
+
+.lux-quote-content{
+  background:transparent!important;
+}
+
+.lux-quote-title{
+  color:var(--lux-ink)!important;
+  font-family:var(--lux-font)!important;
+}
+
+.lux-quote-desc,
+.lux-quote-label,
+.lux-quote-note,
+.lux-quote-total-breakdown{
+  color:var(--lux-gray)!important;
+}
+
+/* Carrito */
+#lux-cart-overlay{
+  background:rgba(55,70,90,.42)!important;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.lux-cart-panel{
+  background:linear-gradient(180deg,#fff,var(--lux-blue-pale))!important;
+  color:var(--lux-ink)!important;
+  border-left:1px solid var(--lux-border)!important;
+}
+
+.lux-cart-head,
+#lux-cart-footer{
+  border-color:var(--lux-border)!important;
+}
+
+.lux-cart-item{
+  border-color:var(--lux-border)!important;
+}
+
+.lux-cart-item-img{
+  background-color:rgba(255,255,255,.65)!important;
+}
+
+.lux-cart-item-name,
+.lux-cart-item-price{
+  color:var(--lux-ink)!important;
+}
+
+.lux-cart-item-details,
+.lux-cart-disclaimer{
+  color:var(--lux-gray)!important;
+}
+
+/* COLORS */
+.csw,
+.color-swatch,
+.swatch{
+  border-color:rgba(82,105,125,.20)!important;
+}
+
+.swatch.active,
+.color-swatch.active{
+  box-shadow:0 0 0 2px var(--lux-blue)!important;
+  border-color:#fff!important;
+}
+
+/* Pie de página */
+.site-footer{
+  background:#f7fbff!important;
+  border-top:1px solid var(--lux-border)!important;
+}
+
+.footer-title,
+.footer-brand strong{
+  color:var(--lux-ink)!important;
+}
+
+.footer-col a{
+  color:var(--lux-gray)!important;
+}
+
+.footer-col a:hover{
+  color:var(--lux-blue-hover)!important;
+}
+
+/* Breadcrumbs y enlaces */
+.breadcrumb,
+.breadcrumb a{
+  color:var(--lux-gray)!important;
+}
+
+a{
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+
+/* Evitar bloques blancos duros en móvil */
+@media(max-width:768px){
+  body{
+    background:
+      linear-gradient(180deg,var(--lux-ice) 0%,var(--lux-blue-pale) 100%)!important;
+  }
+
+  .catalog-grid,
+  .mesas-grid,
+  .cook-grid,
+  .persianas-grid{
+    gap:18px!important;
+  }
+
+  .catalog-card,
+  .mesa-card,
+  .cook-card,
+  .persiana-card{
+    border-radius:18px!important;
+  }
+
+  .nav-mobile-menu{
+    background:rgba(247,251,255,.97)!important;
+  }
+}
