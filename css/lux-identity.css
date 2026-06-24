@@ -1,0 +1,237 @@
+/* =========================================================
+   LUX CONCEPT — IDENTIDAD VISUAL 2026
+   Apple × Zara Home × Bauhaus × Japón
+   ========================================================= */
+
+:root{
+  --lux-ice:#eaf2fb;
+  --lux-ice-deep:#dce8f7;
+  --lux-ink:#1d1d1f;
+  --lux-ink-soft:#343438;
+  --lux-gray:#6e6e73;
+  --lux-gray-light:#a1a1a6;
+  --lux-line:rgba(29,29,31,.10);
+  --lux-white:#ffffff;
+  --lux-blue:#8da9bf;
+  --lux-blue-hover:#7896ae;
+  --lux-shadow:0 22px 60px rgba(40,60,90,.10);
+  --lux-radius:22px;
+  --lux-font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",
+             "Helvetica Neue","Segoe UI",Arial,sans-serif;
+}
+
+/* Tipografía general del index */
+html,body,
+button,input,select,textarea{
+  font-family:var(--lux-font)!important;
+}
+
+body{
+  background:var(--lux-white);
+  color:var(--lux-ink);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+a,button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* Navegación */
+.nav{
+  background:rgba(255,255,255,.94)!important;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--lux-line)!important;
+}
+
+.nav-links a{
+  color:var(--lux-ink)!important;
+  font-weight:500!important;
+  letter-spacing:-.01em;
+}
+
+.nav-cta{
+  background:var(--lux-ink)!important;
+  color:var(--lux-white)!important;
+  box-shadow:none!important;
+}
+
+.nav-cta:hover{
+  background:var(--lux-ink-soft)!important;
+}
+
+/* Campaña principal */
+.macchia-exact{
+  background:
+    radial-gradient(circle at 50% 20%,rgba(255,255,255,.72),transparent 38%),
+    linear-gradient(135deg,var(--lux-ice) 0%,var(--lux-ice-deep) 100%)!important;
+}
+
+.macchia-exact-media{
+  background:transparent!important;
+}
+
+.macchia-exact-media img{
+  width:100%!important;
+  height:auto!important;
+  object-fit:cover;
+}
+
+/* Ocultar por completo cualquier foco azul visual en hotspots */
+.macchia-exact-link,
+.macchia-exact-link:hover,
+.macchia-exact-link:focus,
+.macchia-exact-link:focus-visible,
+.macchia-exact-link:active{
+  outline:0!important;
+  box-shadow:none!important;
+  border:0!important;
+}
+
+/* La accesibilidad visual se conserva con un halo muy discreto */
+.macchia-exact-link:focus-visible::after{
+  content:"";
+  position:absolute;
+  inset:-4px;
+  border-radius:999px;
+  border:1px solid rgba(29,29,31,.22);
+}
+
+/* Flecha */
+.macchia-exact-down{
+  color:var(--lux-ink)!important;
+  background:rgba(255,255,255,.35);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+/* Descubre Lux */
+.lux-discovery{
+  background:var(--lux-white)!important;
+}
+
+.lux-discovery-kicker{
+  color:var(--lux-gray)!important;
+  font-size:11px!important;
+  letter-spacing:.14em!important;
+  font-weight:500!important;
+}
+
+.lux-discovery-copy h2{
+  font-family:var(--lux-font)!important;
+  color:var(--lux-ink)!important;
+  font-weight:600!important;
+  letter-spacing:-.045em!important;
+}
+
+.lux-discovery-copy p:last-child{
+  color:var(--lux-gray)!important;
+  font-size:15px!important;
+  line-height:1.55!important;
+}
+
+.lux-discovery-controls button{
+  border:1px solid rgba(29,29,31,.16)!important;
+  background:var(--lux-white)!important;
+  color:var(--lux-ink)!important;
+  box-shadow:none!important;
+}
+
+.lux-discovery-controls button:hover{
+  background:#f5f5f7!important;
+}
+
+.lux-category-card{
+  border:1px solid rgba(29,29,31,.07)!important;
+  border-radius:var(--lux-radius)!important;
+  background:#f5f5f7!important;
+  box-shadow:none!important;
+}
+
+.lux-category-card:hover{
+  box-shadow:var(--lux-shadow)!important;
+}
+
+.lux-category-card span{
+  font-size:15px!important;
+  font-weight:500!important;
+  letter-spacing:-.015em!important;
+}
+
+/* Diferenciadores y bloques inferiores */
+.diferenciadores{
+  background:#f5f5f7!important;
+  border-top:1px solid var(--lux-line)!important;
+}
+
+.dif-eyebrow{
+  color:var(--lux-gray)!important;
+  letter-spacing:.14em!important;
+}
+
+.dif-title{
+  color:var(--lux-ink)!important;
+  font-weight:600!important;
+  letter-spacing:-.04em!important;
+}
+
+.dif-card{
+  border-radius:var(--lux-radius)!important;
+  box-shadow:none!important;
+  border:1px solid rgba(29,29,31,.06);
+}
+
+.dif-card h3{
+  color:var(--lux-ink)!important;
+  font-weight:600!important;
+  letter-spacing:-.02em!important;
+}
+
+.dif-card p{
+  color:var(--lux-gray)!important;
+}
+
+.dif-icon{
+  background:var(--lux-ink)!important;
+}
+
+/* Botones generales del index */
+.btn-primary{
+  background:var(--lux-blue)!important;
+  color:var(--lux-white)!important;
+  border:none!important;
+  box-shadow:none!important;
+}
+
+.btn-primary:hover{
+  background:var(--lux-blue-hover)!important;
+}
+
+.btn-secondary{
+  color:var(--lux-ink)!important;
+  border-color:rgba(29,29,31,.25)!important;
+  background:transparent!important;
+}
+
+/* Footer */
+.site-footer{
+  border-top:1px solid var(--lux-line)!important;
+}
+
+.footer-copy,
+.footer-col a,
+.footer-brand p{
+  color:var(--lux-gray)!important;
+}
+
+/* Responsive */
+@media(max-width:700px){
+  .lux-discovery-copy h2{
+    font-size:40px!important;
+  }
+
+  .lux-category-card{
+    border-radius:18px!important;
+  }
+}
