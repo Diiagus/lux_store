@@ -28,18 +28,32 @@
 
   function cleanDeliveryText(details) {
     return String(details || '')
-      .replace(/\s*·?\s*Envío a domicilio:\s*\$[\d,.]+(?:\s*MXN)?/gi, '')
-      .replace(/\s*·?\s*Envío a domicilio\s*\(cargo único[^)]*\)/gi, '')
-      .replace(/\s*·?\s*Envío incluido en el pedido/gi, '')
+      .replace(
+        /\s*·?\s*Envío a domicilio:\s*\$[\d,.]+(?:\s*MXN)?(?:\s*\(cargo único por pedido\))?/gi,
+        ''
+      )
+      .replace(
+        /(?:\s*·?\s*\(cargo único por pedido\))+/gi,
+        ''
+      )
+      .replace(
+        /(?:\s*·?\s*Envío incluido en el pedido)+/gi,
+        ''
+      )
       .replace(/\s*·\s*·/g, ' · ')
       .replace(/^\s*·\s*|\s*·\s*$/g, '')
+      .replace(/\s{2,}/g, ' ')
       .trim();
   }
 
   function normaliseCart(input) {
     const cart = (Array.isArray(input) ? input : [])
       .filter(item => !OLD_SHIPPING_IDS.includes(item?.id))
-      .map(item => ({ ...item }));
+      .map(item => {
+        const copy = { ...item };
+        copy.details = cleanDeliveryText(copy.details);
+        return copy;
+      });
 
     const homeItems = [];
 
@@ -85,15 +99,15 @@
       item.shippingSeparated = true;
 
       if (item.shippingIncluded) {
-        item.details =
-          clean +
-          (clean ? ' · ' : '') +
-          `Envío a domicilio: $${sharedCost.toLocaleString('es-MX')} (cargo único por pedido)`;
+        item.details = [
+          clean,
+          `Envío a domicilio: $${sharedCost.toLocaleString('es-MX')} (cargo único por pedido)`
+        ].filter(Boolean).join(' · ');
       } else {
-        item.details =
-          clean +
-          (clean ? ' · ' : '') +
-          'Envío incluido en el pedido';
+        item.details = [
+          clean,
+          'Envío incluido en el pedido'
+        ].filter(Boolean).join(' · ');
       }
     });
 
