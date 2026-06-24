@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="lux-build" content="2026-06-24-carousel-autoplay-fixed-02">
+  <meta name="lux-build" content="2026-06-24-carousel-map-shipping-01">
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="description" content="Lux Concept Store MX — Muebles de diseño fabricados en Puebla. Muebles de baño, cocinas, persianas, mesas de piedra y más. Entrega directa en Puebla, sin intermediarios.">
@@ -687,17 +687,6 @@
     }
   </style>
 
-
-  <style>
-    .lux-category-track{
-      scroll-snap-type:x mandatory;
-    }
-
-    .lux-category-card{
-      scroll-snap-align:start;
-    }
-  </style>
-
 </head>
 <body>
 
@@ -854,112 +843,7 @@
     </div>
   </section>
 
-  <script>
-    (() => {
-      const track = document.getElementById('lux-category-track');
-      const previous = document.getElementById('lux-carousel-prev');
-      const next = document.getElementById('lux-carousel-next');
-
-      if (!track || !previous || !next) return;
-
-      let timer = null;
-      let resumeTimer = null;
-      const interval = 3000;
-
-      const getStep = () => {
-        const card = track.querySelector('.lux-category-card');
-        if (!card) return 260;
-        const styles = getComputedStyle(track);
-        const gap = parseFloat(styles.columnGap || styles.gap) || 18;
-        return card.getBoundingClientRect().width + gap;
-      };
-
-      const getMaxScroll = () =>
-        Math.max(0, track.scrollWidth - track.clientWidth);
-
-      const goNext = () => {
-        const max = getMaxScroll();
-
-        if (max <= 4) {
-          return;
-        }
-
-        const step = getStep();
-        const destination = track.scrollLeft + step;
-
-        if (destination >= max - 6) {
-          track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          track.scrollBy({ left: step, behavior: 'smooth' });
-        }
-      };
-
-      const goPrevious = () => {
-        const max = getMaxScroll();
-
-        if (max <= 4) {
-          return;
-        }
-
-        const step = getStep();
-        const destination = track.scrollLeft - step;
-
-        if (destination <= 6) {
-          track.scrollTo({ left: max, behavior: 'smooth' });
-        } else {
-          track.scrollBy({ left: -step, behavior: 'smooth' });
-        }
-      };
-
-      const stop = () => {
-        if (timer) {
-          clearInterval(timer);
-          timer = null;
-        }
-      };
-
-      const start = () => {
-        stop();
-        if (document.hidden) return;
-        timer = setInterval(goNext, interval);
-      };
-
-      const pauseTemporarily = () => {
-        stop();
-
-        if (resumeTimer) {
-          clearTimeout(resumeTimer);
-        }
-
-        resumeTimer = setTimeout(start, 5000);
-      };
-
-      previous.addEventListener('click', () => {
-        goPrevious();
-        pauseTemporarily();
-      });
-
-      next.addEventListener('click', () => {
-        goNext();
-        pauseTemporarily();
-      });
-
-      track.addEventListener('pointerdown', pauseTemporarily);
-      track.addEventListener('touchstart', pauseTemporarily, { passive: true });
-      track.addEventListener('wheel', pauseTemporarily, { passive: true });
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) stop();
-        else start();
-      });
-
-      window.addEventListener('load', () => {
-        setTimeout(start, 700);
-      });
-
-      start();
-    })();
-  </script>
+  
 
   <!-- DIFERENCIADORES -->
   <style>
@@ -1101,5 +985,6 @@
     }
   </script>
   <script src="js/cart.js"></script>
+  <script src="js/lux-fixes.js"></script>
 </body>
 </html>
