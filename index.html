@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="lux-build" content="2026-06-24-real-carousel-autoplay-01">
+  <meta name="lux-build" content="2026-06-24-carousel-autoplay-fixed-02">
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="description" content="Lux Concept Store MX — Muebles de diseño fabricados en Puebla. Muebles de baño, cocinas, persianas, mesas de piedra y más. Entrega directa en Puebla, sin intermediarios.">
@@ -687,6 +687,17 @@
     }
   </style>
 
+
+  <style>
+    .lux-category-track{
+      scroll-snap-type:x mandatory;
+    }
+
+    .lux-category-card{
+      scroll-snap-align:start;
+    }
+  </style>
+
 </head>
 <body>
 
@@ -851,76 +862,102 @@
 
       if (!track || !previous || !next) return;
 
-      const prefersReducedMotion =
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      let autoplayTimer = null;
+      let timer = null;
       let resumeTimer = null;
-      const interval = 4200;
+      const interval = 3000;
 
-      const cardDistance = () => {
+      const getStep = () => {
         const card = track.querySelector('.lux-category-card');
         if (!card) return 260;
-        const gap = parseFloat(getComputedStyle(track).gap) || 18;
+        const styles = getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap) || 18;
         return card.getBoundingClientRect().width + gap;
       };
 
-      const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
+      const getMaxScroll = () =>
+        Math.max(0, track.scrollWidth - track.clientWidth);
 
-      const move = direction => {
-        const nextLeft = track.scrollLeft + direction * cardDistance();
+      const goNext = () => {
+        const max = getMaxScroll();
 
-        if (direction > 0 && nextLeft >= maxScroll() - 8) {
+        if (max <= 4) {
+          return;
+        }
+
+        const step = getStep();
+        const destination = track.scrollLeft + step;
+
+        if (destination >= max - 6) {
           track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else if (direction < 0 && nextLeft <= 8) {
-          track.scrollTo({ left: maxScroll(), behavior: 'smooth' });
         } else {
-          track.scrollBy({ left: direction * cardDistance(), behavior: 'smooth' });
+          track.scrollBy({ left: step, behavior: 'smooth' });
         }
       };
 
-      const stopAutoplay = () => {
-        if (autoplayTimer) clearInterval(autoplayTimer);
-        autoplayTimer = null;
+      const goPrevious = () => {
+        const max = getMaxScroll();
+
+        if (max <= 4) {
+          return;
+        }
+
+        const step = getStep();
+        const destination = track.scrollLeft - step;
+
+        if (destination <= 6) {
+          track.scrollTo({ left: max, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: -step, behavior: 'smooth' });
+        }
       };
 
-      const startAutoplay = () => {
-        stopAutoplay();
-        if (prefersReducedMotion || document.hidden) return;
-        autoplayTimer = setInterval(() => move(1), interval);
+      const stop = () => {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
       };
 
-      const pauseAndResume = () => {
-        stopAutoplay();
-        if (resumeTimer) clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(startAutoplay, 6500);
+      const start = () => {
+        stop();
+        if (document.hidden) return;
+        timer = setInterval(goNext, interval);
+      };
+
+      const pauseTemporarily = () => {
+        stop();
+
+        if (resumeTimer) {
+          clearTimeout(resumeTimer);
+        }
+
+        resumeTimer = setTimeout(start, 5000);
       };
 
       previous.addEventListener('click', () => {
-        move(-1);
-        pauseAndResume();
+        goPrevious();
+        pauseTemporarily();
       });
 
       next.addEventListener('click', () => {
-        move(1);
-        pauseAndResume();
+        goNext();
+        pauseTemporarily();
       });
 
-      track.addEventListener('pointerenter', stopAutoplay);
-      track.addEventListener('pointerleave', startAutoplay);
-      track.addEventListener('focusin', stopAutoplay);
-      track.addEventListener('focusout', startAutoplay);
-      track.addEventListener('touchstart', pauseAndResume, { passive: true });
-      track.addEventListener('scroll', () => {
-        if (!autoplayTimer) return;
-      }, { passive: true });
+      track.addEventListener('pointerdown', pauseTemporarily);
+      track.addEventListener('touchstart', pauseTemporarily, { passive: true });
+      track.addEventListener('wheel', pauseTemporarily, { passive: true });
 
       document.addEventListener('visibilitychange', () => {
-        if (document.hidden) stopAutoplay();
-        else startAutoplay();
+        if (document.hidden) stop();
+        else start();
       });
 
-      startAutoplay();
+      window.addEventListener('load', () => {
+        setTimeout(start, 700);
+      });
+
+      start();
     })();
   </script>
 
