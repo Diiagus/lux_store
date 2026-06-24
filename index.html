@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="lux-build" content="2026-06-24-macchia-campaign-01">
+  <meta name="lux-build" content="2026-06-24-macchia-campaign-02">
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="description" content="Lux Concept Store MX — Muebles de diseño fabricados en Puebla. Muebles de baño, cocinas, persianas, mesas de piedra y más. Entrega directa en Puebla, sin intermediarios.">
@@ -27,19 +27,27 @@
     .macchia-campaign{
       position:relative;
       width:100%;
-      background:#eef5fb;
+      display:grid;
+      place-items:start center;
       overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 24%, rgba(255,255,255,.72) 0, rgba(255,255,255,.22) 34%, transparent 62%),
+        linear-gradient(180deg,#d8e5f5 0%,#dce8f6 46%,#c5d0e2 100%);
       border-bottom:1px solid rgba(29,29,31,.08);
     }
     .macchia-campaign-inner{
       position:relative;
-      width:min(1100px,100%);
+      width:min(100%,calc((100svh - 64px) * .800285));
+      max-width:1122px;
+      aspect-ratio:1122 / 1402;
       margin:0 auto;
+      flex:none;
     }
     .macchia-campaign-image{
       display:block;
       width:100%;
-      height:auto;
+      height:100%;
+      object-fit:contain;
       user-select:none;
       -webkit-user-drag:none;
     }
@@ -62,8 +70,10 @@
       width:16.3%;
     }
     .macchia-campaign-hotspot:hover,
+    .macchia-campaign-hotspot:focus,
     .macchia-campaign-hotspot:focus-visible{
-      box-shadow:0 0 0 3px rgba(0,122,255,.38);
+      outline:none;
+      box-shadow:none;
     }
     .macchia-scroll-cue{
       position:absolute;
@@ -106,6 +116,10 @@
       color:#6e6e73;
     }
     @media(max-width:760px){
+      .macchia-campaign-inner{
+        width:100%;
+        max-width:none;
+      }
       .macchia-campaign-hotspot{
         top:24.2%;
         height:5.8%;
