@@ -154,7 +154,7 @@
                 <input type="radio" name="lux-delivery" value="home">
                 <span class="lux-quote-delivery-copy">
                   <strong>Envío a domicilio</strong>
-                  <span>$15.50 por km, considerando ida y vuelta</span>
+                  <span>El costo se calcula con tu ubicación</span>
                 </span>
                 <span class="lux-quote-delivery-price" id="lux-quote-delivery-price">Calcular</span>
               </label>
@@ -486,7 +486,7 @@
     const result = document.getElementById('lux-quote-result');
     result.classList.add('visible');
     result.innerHTML =
-      `Distancia estimada: <strong>${distance.toFixed(1)} km</strong> ida y vuelta · ` +
+      `<strong>${distance.toFixed(1)} km</strong> · ` +
       `Envío: <strong>$${state.deliveryCost.toLocaleString('es-MX')} MXN</strong>`;
 
     updateTotal();
