@@ -299,7 +299,6 @@ p,
 .product-card,
 .persiana-card,
 .color-card,
-.csw,
 .dif-card{
   background:rgba(255,255,255,.90)!important;
   border:1px solid var(--lux-border)!important;
@@ -597,4 +596,35 @@ a{
   .nav-mobile-menu{
     background:rgba(247,251,255,.97)!important;
   }
+}
+
+
+/* =========================================================
+   FIX COLORS — permite mostrar colores y texturas reales
+   ========================================================= */
+.csw{
+  width:100%!important;
+  border-radius:0!important;
+  border-left:0!important;
+  border-right:0!important;
+  border-top:0!important;
+  box-shadow:none!important;
+  background-color:transparent;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:center!important;
+}
+
+.cc{
+  overflow:hidden!important;
+  background:rgba(255,255,255,.90)!important;
+  border:1px solid var(--lux-border)!important;
+  border-radius:14px!important;
+}
+
+.dsw,
+.color-float-swatch{
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:center!important;
 }
