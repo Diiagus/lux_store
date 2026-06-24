@@ -253,7 +253,7 @@
               <input type="radio" name="delivery" value="domicilio">
               <div class="delivery-option-info">
                 <p class="delivery-option-title">Envío a domicilio</p>
-                <p class="delivery-option-sub">$15.50 por km (ida y vuelta)</p>
+                <p class="delivery-option-sub">El costo se calcula con tu ubicación</p>
               </div>
               <span class="delivery-option-price" id="delivery-price-tag">Calcular</span>
             </label>
@@ -581,7 +581,7 @@
       document.getElementById('delivery-price-tag').textContent='$'+deliveryCost.toLocaleString();
       const r=document.getElementById('km-result');
       r.style.display='block';
-      r.innerHTML='📍 '+km.toFixed(1)+' km (ida y vuelta) · Envío: <strong>$'+deliveryCost.toLocaleString()+' MXN</strong>';
+      r.innerHTML='<strong>'+km.toFixed(1)+' km</strong> · Envío: <strong>$'+deliveryCost.toLocaleString()+' MXN</strong>';
       updateTotal();
     }
 
